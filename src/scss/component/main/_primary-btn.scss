@@ -1,0 +1,123 @@
+// 要primary按鈕的截這段html
+// <div class="wrapper primary-ctn">
+//     <div class="btn-primary">
+//         <a href="">
+//             <div class="btn-text">
+//                 <p>View More</p>
+//             </div>
+//             <div class="btn-circle"></div>
+//             <div class="btn-line"></div>
+//             <div class="btn-arrow"></div>
+//             <span class="btn-inner"></span>
+//         </a>
+//     </div>
+// </div>
+
+div.wrapper.primary-ctn {
+    padding-top: 5px;
+    padding-left: 5px;
+    width: fit-content;
+
+    .btn-primary {
+        position: relative;
+        width: 315px;
+        height: 85px;
+        transition: all 0.5s;
+        overflow: hidden;
+        cursor: pointer;
+
+
+        a {
+            display: block;
+
+            .btn-text {
+                position: absolute;
+                top: 0px;
+                z-index: 1;
+
+                p {
+                    color: #533C1B;
+                    font-size: 32px;
+                    font-weight: 500;
+                }
+            }
+
+            .btn-circle {
+                position: absolute;
+                top: 15px;
+                left: 245px;
+                width: 68px;
+                height: 68px;
+                outline: 2px solid #533C1B;
+                border-radius: 50%;
+
+            }
+
+            .btn-line {
+                position: absolute;
+                top: 48px;
+                left: 20px;
+                width: 260px;
+                height: 2px;
+                background-color: #533C1B;
+
+            }
+
+            .btn-arrow {
+                position: absolute;
+                top: 44px;
+                left: 270px;
+                border-top: 2px solid #533C1B;
+                border-right: 2px solid #533C1B;
+                width: 10px;
+                height: 10px;
+                transform: rotate(45deg);
+
+            }
+        }
+
+        .btn-inner {
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 85px;
+            background-color: #fff;
+            z-index: 0;
+            animation: btnKeyframes 1350ms ease 800ms infinite;
+        }
+    }
+
+    &:hover {
+        a {
+            .btn-text {
+                p {
+                    color: $carmel-color;
+                }
+            }
+
+            .btn-circle {
+                outline-color: $carmel-color;
+            }
+
+            .btn-line {
+                background-color: $carmel-color;
+
+            }
+
+            .btn-arrow {
+                border-color: $carmel-color;
+            }
+        }
+
+    }
+}
+
+@keyframes btnKeyframes {
+    0% {
+        left: 0px;
+    }
+
+    100% {
+        left: 310px;
+    }
+}

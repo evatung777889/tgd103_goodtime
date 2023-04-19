@@ -1,0 +1,23 @@
+# dev
+src/css/style.css
+src/css/*.css
+src/css/style.css.map
+src/css/*.css.map
+src/css/*.css
+.vscode
+./.vscode/settings.json
+/.vscode/settings.json
+.vscode/settings.json
+php/connect.php
+
+# npm
+node_modules
+dist
+package-lock.json
+*.log
+*.gz
+
+# windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini

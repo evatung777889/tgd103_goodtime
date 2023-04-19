@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="po-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="item-name">訂單明細</p>
+                    <div class="b-detail_infobox" v-for="(podetail, index) in dataList" :key="index">
+                        <ul>
+                            <li>
+                                <p>訂單編號</p>
+                                <span>{{ podetail.PODID }}</span>
+                            </li>
+                            <li>
+                                <p>主訂單編號</p>
+                                <span>{{ podetail.ID }}</span>
+                            </li>
+                            <li>
+                                <p>訂單商品</p>
+                                <span>{{ podetail.PRODUCT_NAME }}</span>
+                            </li>
+                            <li>
+                                <p>商品編號</p>
+                                <span>{{ podetail.PRODUCTID }}</span>
+                            </li>
+                            <li>
+                                <p>商品規格</p>
+                                <span>{{ podetail.SPEC }}</span>
+                            </li>
+                            <li>
+                                <p>商品價格</p>
+                                <span>{{ podetail.PRICE }}</span>
+                            </li>
+                            <li>
+                                <p>商品數量</p>
+                                <span>{{ podetail.QTY }}</span>
+                            </li>
+                            <li>
+                                <p>訂單金額</p>
+                                <span>{{ podetail.PRICE * podetail.QTY }}</span>
+                            </li>
+                            <li>
+                                <p>運費</p>
+                                <span>{{ podetail.FREIGHT }}</span>
+                            </li>
+                            <li>
+                                <p>訂單總金額</p>
+                                <span>{{ podetail.PRICE * podetail.QTY + podetail.FREIGHT }}</span>
+                            </li>
+                            <li>
+                                <p>訂購會員</p>
+                                <span>{{ podetail.USERNAME }}</span>
+                            </li>
+                            <li>
+                                <p>會員編號</p>
+                                <span>{{ podetail.MEMBERID }}</span>
+                            </li>
+                            <li>
+                                <p>訂單備註</p>
+                                <span>{{ podetail.PO_NOTE }}</span>
+                            </li>
+                            <li>
+                                <p>客服訂單備註</p>
+                                <span>{{ podetail.CS_PO_NOTE }}</span>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn"><a :href="'b-po-id-detail.html?ID='+podetail.ID">同主單查詢</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const podetail = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    subidarr: ""
+                }
+            }, methods:{
+                geturl(){
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let getid = urlParams.get("PODID");
+                    this.subidarr = getid;
+                },
+                // wdata(){
+                //     console.log(this.dataList);
+                // },
+            },created(){
+
+                this.geturl();
+                
+                // 查詢資料
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/po-detail.php',
+                    responseType:'json',
+                    data: {
+                        subid: this.subidarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+            }
+        }).mount("#po-detail");
+    </script>
+</body>
+</html>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: rgb(34, 145, 48);
+            transition: all 0.3s;
+        }
+        .BBB{
+            background-color: rgb(185, 45, 68);
+            transition: all 0.3s;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(25, 107, 36);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(141, 35, 52);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-product" id="product">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">商品查詢</p>
+                    <p class="gray-text">*以下欄位如留空則預設為全部</p>
+                    <div class="product_search-bar" id="searchbar">
+                        <p style="font-weight: 800;
+                        letter-spacing: .2rem;">查詢條件</p>
+                        <ul>
+                            <li>
+                                <p>商品分類</p>
+                                <select name="product-kind" class="product-kind" v-model="kind" id="kind">
+                                    <option value="%" selected>商品種類選擇</option>
+                                    <option v-for="(b_product_type, index) in dataList2"  :value="b_product_type.PRODUCT_TYPE_NAME">{{ b_product_type.PRODUCT_TYPE_NAME }}</option>
+                                </select>   
+                            </li>
+                            <li>
+                                <p>銷售期間</p>
+                                <input type="date" id="starttime"  min="2020-01-01" max="2050-12-31" class="timeform" v-model="starttime">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="endtime"   min="2020-01-01" max="2050-12-31" class="timeform" v-model="endtime">
+                            </li>
+                            <li>
+                                <p>商品頁狀態</p>
+                                <form action="" class="po-confirm">
+                                    <input type="radio" name="time-area" value="%" v-model="status" id="status" checked><label class="time-area_label" for=""> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="status" id="status"><label class="time-area_label" for=""> 開啟</label>
+                                    <input type="radio" name="time-area" value="2" v-model="status" id="status"><label class="time-area_label" for=""> 關閉</label>
+                                </form>
+                            </li>
+                            <li>
+                                <p>隱藏賣場</p>
+                                <form action="" class="time-area">
+                                    <input type="radio" name="time-area" value="%" v-model="hide" id="hide" checked><label class="time-area_label" for=""> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="hide" id="hide"><label class="time-area_label" for=""> 未隱藏</label>
+                                    <input type="radio" name="time-area" value="2" v-model="hide" id="hide"><label class="time-area_label" for=""> 隱藏</label>
+                                </form>
+                            </li>
+                            <li>
+                                <p>商品編號</p>
+                                <input type="text" class="long-input" id="productid" v-model="productid">
+                            </li>
+                            <li>
+                                <p>商品名稱</p>
+                                <input type="text" class="long-input" id="productname" v-model="productname">
+                            </li>
+                            <!-- <li>
+                                <p>商品頁編號</p>
+                                <input type="text" class="long-input" id="productpage" v-model="productpage">
+                            </li> -->
+                        </ul>
+                        <div class="btn-group">
+                            <button class="search-btn" @click="axiosPost()">查詢</button>
+                            <button class="create-btn"><a href="b-product-create.html">新增</a></button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="info-box">
+                                    <p>商品列表</p>
+                                    <ul>
+                                        <li class="first-title">
+                                            <div>
+                                                <div><h6>商品主圖<br>商品頁編號</h6></div>
+                                                <div><h6>商品名稱<br>商品編號</h6></div>
+                                                <div><h6>銷售開始日<br>銷售結束日</h6></div>
+                                                <div><h6>商品頁狀態</h6></div>
+                                                <div><h6>隱藏賣場</h6></div>
+                                                <div><h6>商品定價</h6></div>
+                                                <div><h6>操作</h6></div>
+                                            </div> 
+                                        </li>
+                                        <li class="saleitems" v-for="(b_product, index) in dataList" :key="index">
+                                            <a :href="'b-product-detail.html?ID='+b_product.ID">
+                                                <div class="flex-box">
+                                                    <div>
+                                                        <div class="fakeimg" style="overflow: hidden;"><img :src="b_product.MAIN_PHOTO" alt="" style="width: 100%;"></div>
+                                                        <!-- <img :src="b_product.MAIN_PHOTO" alt=""> -->
+                                                        <!-- src="../img/product/1.png" -->
+                                                        <h6>{{ b_product.FK_PRODUCT_PAGE_ID }}</h6>
+                                                    </div>
+                                                    <div><h6>{{ b_product.PRODUCT_NAME }}<br>{{ b_product.ID }}</h6></div>
+                                                    <div><h6>{{ b_product.START }}<br>|<br>{{ b_product.END }}</h6></div>
+                                                    <div><h6>
+                                                        <!-- <input type="radio" v-model="mark[index]" value="1" :id="b_product.ID + 'y'" :name=b_product.ID><label class="time-area_label" :for="b_product.ID + 'y'">開啟</label>
+                                                        <br>
+                                                        <input type="radio" v-model="mark[index]" value="2" :id="b_product.ID + 'n'" :name=b_product.ID><label class="time-area_label" :for="b_product.ID + 'n'">關閉</label> -->
+                                                        <span v-for="(status, index) in mark[index]" :key="index">{{ status }}</span>
+                                                    </h6></div>
+                                                    <div><h6>
+                                                        <!-- <input type="radio" v-model="mark2[index]" value="1" :id="b_product.ID + 'y2'" :name="b_product.ID + 'h'"><label class="time-area_label" :for="b_product.ID + 'y2'">開啟</label>
+                                                        <br>
+                                                        <input type="radio" v-model="mark2[index]" value="2" :id="b_product.ID + 'n2'" :name="b_product.ID + 'h'"><label class="time-area_label" :for="b_product.ID + 'n2'">隱藏</label> -->
+                                                        <span v-for="(hide, index) in mark2[index]" :key="index">{{ hide }}</span>
+                                                    </h6></div>
+                                                    <div><h6>{{ b_product.PRICE }}</h6></div>
+                                                    <div>
+                                                        <button><i class="fa-solid fa-pen-nib"></i> 編輯商品</button>
+                                                        <button @click="deleteitem" :value="b_product.ID"><i class="fa-solid fa-trash-can"></i> 更改商品狀態</button>
+                                                    </div>
+                                                </div>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        //掛載資料庫
+        const po = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    mark: [],
+                    mark2: [],
+                    dataList2: [],
+                    productname: "",
+                    productid: "",
+                    productpage: "2",
+                    hide: "%",
+                    status: "1",
+                    kind: "%",
+                    starttime: "2020-01-01",
+                    endtime: "2050-12-31",
+
+                    idvalue: ""
+                }
+            }, methods:{
+                axiosPost() {
+                    // const string = `productname=${this.productname}&productid=${this.productid}&productpage=${this.productpage}&hide=${this.hide}&status=${this.status}&kind=${this.kind}&start=${this.starttime}&end=${this.endtime}`;
+                    // axios.post("../../php/backend/productsearch.php", string).then(res => {
+                    //     this.dataList = JSON.parse(res.data);
+                    //     console.log(res.data);
+                    //     // console.log(this.dataList);
+                    // }).catch(err => {
+                    //     console.log(err);
+                    // })
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/productsearch.php',
+                    responseType:'json',
+                    data: {
+                        productname: this.productname,
+                        productid: this.productid,
+                        productpage: this.productpage,
+                        status: this.status,
+                        kind: this.kind,
+                        hide: this.hide,
+                        start: this.starttime,
+                        end: this.endtime,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        // console.log(this.hide);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                deleteitem(e){
+
+                    e.preventDefault();
+
+                    let idvalue = e.target.value;
+                    // console.log(deletevalue);
+
+                    // let deleteid = e.target.parentNode.parentNode.firstChild.nextSibling.lastChild.lastChild
+                    // this.deleteid = deleteid;
+                    // console.log(this.entries(this.deleteid));
+                    // console.log(typeof this.deleteid);
+
+                    swal({
+                            icon: "warning",
+                            title: "更改商品狀態",
+                            text: "您確定要更改此商品狀態嗎?",
+                            buttons: {
+                            A: {
+                                text: "開啟商品",
+                                value: "1",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "關閉商品",
+                                visible: true,
+                                className:'BBB',
+                                value: "2"
+                            }
+                            }
+                        });
+                    document.querySelector(".swal-button--A").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-open.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                    document.querySelector(".swal-button--B").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-close.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                    
+                    // console.log(btnaaa);
+                    // btnaaa.addEventListener('click', function(e){
+                    //     console.log("aaa");
+                    // });
+                    // let btnbbb = document.getElementsByClassName("swal-button--BBB");
+                    // btnaaa.addEventListener('click', function(e){
+                    //     console.log("bbb");
+                    // })
+                }
+                // openpage(){
+                //     const string = `productname=${this.productname}&productid=${this.productid}&productpage=${this.productpage}&hide=${this.hide}&status=${this.status}&kind=${this.kind}&start=${starttime}&end=${endtime}`;
+                //     axios.post("../../php/backend/productsearch.php", string).then(res => {
+                //         this.dataList = res.data;
+                //         // console.log(res.data);
+                //     }).catch(err => {
+                //         console.log(err);
+                //     })
+                // }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/product.php").then(res => {
+                        // this.dataList = res.data;
+                        // console.log(this.dataList[0].ID);
+                        this.dataList = res.data
+                    //    this.dataList.forEach(key =>{
+                    //         for(const attr in key){
+                    //             if(attr === "PERIOD"){
+                    //                 key[attr] = key[attr].split(" - ");
+                    //                 this.dataList.key["start"] = key[attr][0];
+                    //                 this.dataList.key["end"] = key[attr][1];
+                    //                 console.log(key["start"], key["end"]);
+                    //             }
+                    //         }
+                    //     } );
+                        console.log(this.dataList);
+                        let mark_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mark_arr.push("開啟")
+                            }else{
+                                mark_arr.push("關閉")
+                            }
+                        }),
+
+                        this.mark = mark_arr;
+
+                        // console.log(this.mark);
+
+
+                        let mark2_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.HIDE == "1"){
+                                mark2_arr.push("開啟")
+                            }else{
+                                mark2_arr.push("關閉")
+                            }
+                        })
+                        // console.log(mark_arr);
+
+                        this.mark2 = mark2_arr;
+
+                    }).catch(err => {
+                        console.log(err);       
+                    });
+
+
+                    axios.get("../../php/backend/product-searchbar-fix.php").then(res => {
+                        this.dataList2 = res.data;
+                        // console.log(this.dataList[0].ID);
+                        console.log(this.dataList2);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+            }
+        }).mount("#product");
+        
+
+    </script>
+</body>
+</html>

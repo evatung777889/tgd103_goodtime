@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOS</title>
+    <script src="../source/vue.global.js"></script>
+    <script src="../source/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="App">
+        帳號
+        <input type="text" id="acc" v-model="accText"><br>
+        密碼
+        <input type="pwd" id="pwd" v-model="pwdText"><br>
+        acc要傳{{accText}}給後端<br>
+        pwd要傳{{pwdText}}給後端<br>
+        <button @click="axiosGet">Axios-GET</button>
+        <button @click="axiosPost">Axios-POST(string)</button>
+        <button @click="axiosPostObj">Axios-POST(object)</button>
+        {{dataList}}
+    </div>
+    <script>
+        const createApp = Vue.createApp({
+            data() {
+                return {
+                    accText: "",
+                    pwdText: "",
+                    dataList: []
+                }
+            }, methods: {
+                axiosGet() { // 查詢資料
+                    axios.get("../../.vscode/api/b-member.php").then(res => {
+                        this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }, axiosPost() { // 更新資料 string MD5 php 
+                    // acc == input的id / aaa == user填入的資料
+                    const string = `acc=${this.accText}&pwd=${this.pwdText}`;
+                    axios.post("./select.php", string).then(res => {
+                        this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }, axiosPostObj() {
+                    axios.post("./select.php", { acc: this.accText, pwd: this.pwdText }).then(res => {
+                        this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }
+            }
+        }).mount("#App");
+    </script>
+</body>
+
+</html>

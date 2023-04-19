@@ -1,0 +1,397 @@
+.store__wrapper{
+    font-family: $our-font;
+    width: 80%;
+    margin: 0 auto;
+
+    @include rwd(768px){
+        // width: 90%;
+    }
+
+    // ==== 麵包屑 ====
+    .crumb{
+        margin-top: 80px;
+
+    }
+
+    // ==== banner輪播圖 ====
+    .swiper{
+        width: 100%;
+        --swiper-navigation-size: 0;
+
+        .swiper-slide{
+            display: flex;
+
+            img{
+                width: 100%;
+                display: block;
+                margin: 0 auto;
+                object-fit: cover;
+            }    
+        }
+
+        .swiper-button-next{
+
+            i.fa-solid.fa-circle-arrow-right {
+                font-weight: 900;
+                color: #c09351;
+                font-size: 30px;
+                background-color: #fff;
+                border-radius: 50%;
+            }
+    
+        }
+
+        .swiper-button-prev{
+
+            i.fa-solid.fa-circle-arrow-left {
+                font-weight: 900;
+                color: #c09351;
+                font-size: 30px;
+                background-color: #fff;
+                border-radius: 50%;
+            }
+        }
+
+        .swiper-pagination-bullet-active{
+            background-color: $primary2-color;
+        }
+    }
+       
+
+    // === 文字標題 ====
+    .banner{
+        position: static;
+
+        .banner__textarea,
+        .banner-textarea{
+            background-color: transparent;
+            position: static;
+        }
+
+        .banner__eng{
+            padding: 2rem 4.2rem 0;
+
+            @include rwd(1024px){
+                font-size: $h3;
+            }
+
+            @include rwd(768px){
+                font-size: 28px;
+                padding-left: 3%;
+            }
+
+            @include rwd(428px){
+                font-size: 20px;
+                padding: 2rem 1.2rem 0;
+            }
+        }
+
+        .banner__zh{
+            padding-left: 11vw;
+            padding-right: 0;
+
+            @include rwd(1024px){
+                font-size: $h4;
+            }
+
+            @include rwd(768px){
+                font-size: $h5;
+                padding-left: 3%;
+            }
+
+            @include rwd(428px){
+                font-size: 20px;
+            }
+
+            &::before {
+                content: "";
+                // 黑色底線長度調整
+                width: 11vw;
+                margin-right: 1.8rem;
+
+                @include rwd(1240px){
+                    margin-left: 0.5rem;
+                }
+
+                @include rwd(1200px){
+                    margin-left: 1rem;
+                }
+
+                @include rwd(1150px){
+                    margin-left: 1.8rem;
+                }
+
+                @include rwd(1100px){
+                    margin-left: 2.2rem;
+                }
+
+                @include rwd(1070px){
+                    margin-left: 2.8rem;
+                }
+
+                @include rwd(1024px){
+                    margin-left: 1rem;
+                    border-bottom: solid 2px $font-color;
+                }
+
+                @include rwd(980px){
+                    margin-left: 1.5rem;
+                }
+
+                @include rwd(900px){
+                    margin-left: 2rem;
+                }
+
+                @include rwd(850px){
+                    margin-left: 2.5rem;
+                } 
+                
+                @include rwd(800px){
+                    margin-left: 3.5rem;
+                }
+
+                @include rwd(700px){
+                    margin-left: 4rem;
+                    width: 12vw;
+                }
+
+                @include rwd(650px){
+                    width: 13vw;
+                }
+
+                @include rwd(600px){
+                    width: 15vw;
+                }
+
+                @include rwd(550px){
+                    margin-left: 4.5rem;
+                    margin-right: 1rem;
+                }
+
+                @include rwd(428px){
+                    margin-right: 0.8rem;
+                    border-bottom: solid 1.5px $font-color;
+                }
+            }
+        }
+    }
+
+    // ==== 商品導覽列 ====
+    .product__nav{
+        margin-top: 5%;
+        padding-bottom: 1%;
+        border-bottom: 1px solid #888888;
+
+        .tab{
+            display: flex;
+
+            button{
+                cursor: pointer;
+                margin-left: 5%;
+                font-size: $p;
+                border: 0;
+                outline: 0;
+                background-color: #fff;
+                transition: 0.3s;
+
+                @include rwd(768px){
+                    font-size: 14px;
+                    margin-left: 0;
+                }
+
+                @include rwd(450px){
+                    margin-left: 4%;
+                    padding: 0;
+                    font-size: $small;
+                }
+
+                @include rwd(375px){
+                    display: none;
+                }
+
+                &:first-child{
+                    margin-left: 3%;
+
+                    @include rwd(768px){
+                        margin-left: 0;
+                    }
+                }
+
+                &:hover{
+                    color: $spotlight-color;
+                }
+
+                &.active{
+                    color: $spotlight-color;
+                    font-weight: $fw7;
+                }
+            }
+
+            select{
+                margin-left: auto;
+                outline: 0;
+                border: 0;
+                cursor: pointer;
+                font-size: 14px;
+
+                option{
+                    font-size: 14px;
+                }
+
+                @include rwd(450px){
+                    font-size: $small;
+                }
+
+                @include rwd(375px){
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+    }
+
+    // ==== 商品陳列區 ====
+    .product__display{
+
+        ul#products{
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            align-items: stretch;
+            // padding: 10px;
+            // border: 1px solid blue;
+            margin-top: 3%;
+            margin-bottom: 30%;
+            
+            li{
+                // margin: 5% 2% 0 2%;
+                width: 25%;
+                margin-top: 5%;
+                // border: 1px solid blue;
+               
+
+                @include rwd(1024px){
+                    width: 33%;
+                }
+
+                @include rwd(768px){
+                    width: 50%;
+                }
+
+
+                a{
+                    text-decoration: none;
+                    display: block;
+                    overflow: hidden;
+                    // border: 1px solid red;
+                    
+
+                    &:hover .shop__pic{
+                        transform: scale(1.05);
+                    }
+
+
+                    .shop__pic{
+                        position: relative;
+                        transition: .3s ease;
+
+                        img{
+                            width: 90%;
+                            display: block;
+                            margin: 0 auto;
+                        }
+
+                        .shop__type{
+                            position: absolute;
+                            top: 3%;
+                            left: 5%;
+                        
+                            width: 60px;
+                            line-height: 1.6;
+                            color: white;
+                            background-color: $spotlight-color;
+                            padding-left: 2%;
+                            font-size: $small;                        
+                        }
+
+                        .countdown{
+                            position: absolute;
+                            top: 20%;
+                            left: 5%;
+                        
+                            width: 60px;
+                            line-height: 1.6;
+                            color: white;
+                            background-color: #CFB58F;
+                            padding-left: 2%;
+                            font-size: $small;
+                        
+                        }
+                    }
+
+                    .shop__text{
+                        padding-right: 15px;
+                        padding-left: 15px;
+
+                        small{
+                            display: block;
+                            margin-top: 5px;
+                            font-size: 14px;
+                            color: #B3B3B3;
+
+                            @include rwd(768px){
+                                font-size: $small;
+                            }
+                            
+                            @include rwd(428px){
+                                font-size: $small;
+                            }
+                        }
+    
+                        h6{
+                            font-size: $p;
+                            color: $secondary4-color;
+                            font-weight: $fw7;
+                            margin-top: 10px;
+
+                            @include rwd(768px){
+                                font-size: 14px;
+                            }
+
+                            @include rwd(375px){
+                                font-size: $small;
+                            }
+    
+                            & + h6{ 
+                                // 價格
+                                font-size: $h6;
+                                line-height: 1.6;
+                                color: #C09351;
+                                text-align: right;
+
+                                @include rwd(768px){
+                                    font-size: $p;
+                                }
+
+                                @include rwd(428px){
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+    
+                    }
+
+                }
+
+                .hidden{
+                    display: none;
+                }
+
+            }
+
+        }
+    }
+
+
+
+    
+}

@@ -1,0 +1,230 @@
+.warpper-news-detail {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 80px;
+    font-family: $our-font;
+
+    // 麵包屑
+    .breadcrumb {
+        li {
+            &:nth-child(3) {
+                &::before {
+                    content: "";
+                    height: .6rem;
+                    border-left: solid 1px $font-color;
+                    display: inline-block;
+                    margin: 0 .5rem;
+                }
+            }
+        }
+
+        li a {
+            color: $font-color;
+        }
+
+        li:last-child a {
+            color: $lakeGreen-color;
+        }
+
+        @include rwd(768px) {
+            padding: 10px 7%;
+        }
+    }
+
+    // 消息區 
+    .detail-information {
+        line-height: 2;
+    }
+
+    .detail-information small {
+        font-size: $p;
+        color: $sub-DKgray-color;
+        margin-left: 95px;
+
+        @include rwd(768px) {
+            margin-left: 85px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+            margin-left: 35px;
+        }
+    }
+
+    .detail-information h3 {
+        font-size: $h3;
+        font-weight: bold;
+        margin-left: 75px;
+
+        @include rwd(768px) {
+            font-size: 22px;
+            margin-left: 65px;
+            margin-bottom: 10px;
+        }
+
+        @include rwd(428px) {
+            font-size: 16px;
+            margin-left: 25px;
+        }
+    }
+
+    .detail-information img {
+        width: 85%;
+        height: 400px;
+        display: block;
+        margin: 0 auto;
+
+        @include rwd(768px) {
+            width: 80%;
+            height: 280px;
+        }
+
+        @include rwd(428px) {
+            width: 85%;
+            height: 156px;
+            margin: 0 4%;
+        }
+
+    }
+
+    .detail-information h4 {
+        font-size: 16px;
+        width: fit-content;
+        padding-top: 60px;
+        margin: 0 auto;
+        width: 85%;
+
+        @include rwd(768px) {
+            font-size: 14px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+            width: 80%;
+            margin: 0 7%;
+        }
+    }
+
+    .change-next-page {
+        @include rwd(428px) {
+            width: 80%;
+            margin: 0 5%;
+        }
+    }
+
+    .change-next-page ul {
+        //換頁 
+        display: flex;
+        margin: 70px auto;
+        align-items: center;
+        justify-content: space-around;
+
+        &::before {
+            content: "";
+            width: 3px;
+            height: 103px;
+            background-color: $font-color;
+            transform: rotate(-90deg) translate(0px, 155px);
+
+            @include rwd(768px) {
+                width: 2px;
+                transform: rotate(-90deg) translate(-1px, 155px);
+            }
+
+            @include rwd(428px) {
+                height: 33px;
+                transform: rotate(-90deg) translate(-1px, 67px);
+            }
+        }
+
+        &::after {
+            content: "";
+            width: 3px;
+            height: 103px;
+            background-color: $font-color;
+            transform: rotate(-90deg) translate(0px, -155px);
+
+            @include rwd(768px) {
+                width: 2px;
+                transform: rotate(-90deg) translate(-1px, -155px);
+            }
+
+            @include rwd(428px) {
+                height: 33px;
+                transform: rotate(-90deg) translate(-1px, -47px);
+            }
+        }
+    }
+
+    .change-next-page li {
+
+        &.arrow-left {
+            border: solid $font-color;
+            border-width: 0px 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(135deg);
+            margin-bottom: 6.1px;
+            margin-right: 163px;
+
+            @include rwd(768px) {
+                padding: 2px;
+                margin-bottom: 1.5px;
+                margin-right: 102px;
+                margin-left: 65px;
+            }
+
+            @include rwd(428px) {
+                margin-bottom: 0.5px;
+                margin-right: 30px;
+                margin-left: 30px;
+            }
+        }
+
+        &.arrow-right {
+            border: solid $font-color;
+            border-width: 0px 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            margin-bottom: 6.1px;
+            margin-left: 163px;
+            transform: rotate(-45deg);
+
+            @include rwd(768px) {
+                padding: 2px;
+                margin-bottom: 1.5px;
+                margin-left: 102px;
+                margin-right: 65px;
+            }
+
+            @include rwd(428px) {
+                margin-bottom: 0.5px;
+                margin-left: 30px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .change-next-page a {
+        font-size: 24px;
+        letter-spacing: 0.2rem;
+        color: #261C0D;
+
+        @include rwd(768px) {
+            font-size: 14px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+            letter-spacing: normal;
+        }
+    }
+}
+
+ul.no_line::before{
+    visibility: hidden;
+}
+ul.no_linel::after{
+    visibility: hidden;
+}

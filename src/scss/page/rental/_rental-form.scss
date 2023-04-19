@@ -1,0 +1,559 @@
+// _mobile.scss 
+$width_428: 428px;
+$width_465: 465px;
+$width_540: 540px;
+$width_768: 768px;
+$width_900: 900px;
+$width_1280: 1280px;
+
+@mixin width_428() {
+    @media all and (max-width: $width_428) {
+        @content;
+    }
+}
+
+@mixin width_465() {
+    @media all and (max-width: $width_465) {
+        @content;
+    }
+}
+
+@mixin width_540() {
+    @media all and (max-width: $width_540) {
+        @content;
+    }
+}
+
+@mixin width_768() {
+    @media all and (max-width: $width_768) {
+        @content;
+    }
+}
+
+@mixin width_900() {
+    @media all and (max-width: $width_900) {
+        @content;
+    }
+}
+
+@mixin width_1280() {
+    @media all and (max-width: $width_1280) {
+        @content;
+    }
+}
+
+ul.rental_join_form____breadcrumb {
+
+    display: flex;
+    min-width: 95%;
+    padding: 10px 2%;
+    position: relative;
+    z-index: 1;
+    color: $font-color;
+    margin-top: 80px;
+    margin-left: 40px;
+
+    @include width_768 {
+        margin-top: 70px;
+    }
+
+    @include width_428 {
+        margin-left: 0;
+    }
+
+    li {
+        &:nth-child(1) {
+            &::before {
+                content: "";
+                height: .6rem;
+                display: inline-block;
+                margin: 0 .5rem;
+            }
+
+            a {
+                color: $font-color;
+            }
+        }
+
+        &:nth-child(2) {
+            &::before {
+                content: "";
+                height: .6rem;
+                border-left: solid 1px $font-color;
+                display: inline-block;
+                margin: 0 .5rem;
+            }
+
+            a {
+                color: $font-color;
+            }
+        }
+
+        &:nth-child(3) {
+            &::before {
+                content: "";
+                height: .6rem;
+                border-left: solid 1px $font-color;
+                display: inline-block;
+                margin: 0 .5rem;
+
+            }
+
+            a {
+                color: $lakeGreen-color;
+            }
+        }
+    }
+
+    a {
+        font-size: $small;
+        line-height: 18px;
+    }
+}
+
+.rental_join_form__banner {
+    position: relative;
+
+    .banner__img,
+    .banner-img {
+        height: 400px;
+        box-shadow: inset 0 0 0 1000px rgb(0 0 0 / 35%);
+        background-image: url("../img/rental_join_form/rentalForm_banner.jpg");
+
+
+        @include width_1280 {
+            background-image: url("../img/rental_join_form/rentalForm_banner_rwd1280.jpg");
+            background-repeat: no-repeat;
+            height: 400px;
+        }
+
+        @include width_900 {
+            background-image: url("../img/rental_join_form/rentalForm_banner_rwd900.jpg");
+            background-repeat: no-repeat;
+            height: 300px;
+        }
+
+        @include width_428 {
+            height: 200px;
+            background-image: url("../img/rental_join_form/rentalForm_banner_rwd428.jpg");
+            background-repeat: no-repeat;
+        }
+
+
+    }
+
+    .banner__textarea,
+    .banner-textarea {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(256, 256, 256, .7);
+
+        @include width_768 {
+            right: 43px;
+        }
+
+
+        @include rwd(760px) {
+            right: 28px;
+        }
+
+        @include rwd(560px) {
+            right: 0;
+        }
+    }
+
+    .banner__eng,
+    .banner-eng {
+        font-size: $h1;
+        font-weight: bold;
+        color: $brown-color;
+        letter-spacing: .8rem;
+        padding: 2rem 4rem 1rem;
+        line-height: 1.2;
+
+        @include width_900 {
+            font-size: 28px;
+            padding: 1rem 2rem 1rem;
+        }
+
+
+        @include rwd(560px) {
+            font-size: 24px;
+        }
+
+        @include rwd(480px) {
+            padding: 20px 0 10px 80px;
+        }
+
+        @include width_428 {
+            font-size: 20px;
+            padding: 1rem 1rem 1rem;
+        }
+    }
+
+    .banner__zh,
+    .banner-zh {
+        &::before {
+            content: "";
+            // 黑色底線長度調整
+            width: 18vw;
+            border-bottom: solid 3px $font-color;
+            display: inline-block;
+            margin-right: 0.8rem;
+        }
+
+        font-size: $h3;
+        font-weight: bold;
+        color: $carmel-color;
+        padding-bottom: 1.5rem;
+        display: block;
+        padding-left: 20vw;
+        padding-right: 5.2rem;
+        letter-spacing: .68rem;
+
+        @include width_900 {
+            font-size: 28px;
+            padding-right: 3.2rem;
+        }
+
+
+        @include rwd(560px) {
+            font-size: 22px;
+        }
+
+        @include width_428 {
+            font-size: 20px;
+            padding-right: 0.2rem;
+            padding-bottom: 1rem;
+        }
+    }
+
+}
+
+main.rental_join_form {
+    width: 630px;
+    margin: auto;
+    margin-top: 80px;
+
+    @include width_768 {
+        max-width: 80%;
+    }
+    
+    .Join__form {
+
+        div.unit,
+        div.place,
+        div.nature__activity,
+        div.ornamental__nature,
+        div.other__demands,
+        div.activity__name__out,
+        div.principal__name__out,
+        div.applicant__unit__out,
+        div.Contact__name,
+        div.Contact__phone {
+            display: flex;
+        }
+
+        div.place {
+            margin-top: 50px;
+        }
+
+        div.nature__activity,
+        div.activity__name__out,
+        div.applicant__unit__out,
+        div.principal__name__out {
+            margin-bottom: 50px;
+        }
+
+        div.block {
+            display: flex;
+            flex-wrap: wrap;
+            height: 70px;
+
+            @include width_428 {
+                margin-bottom: 30px;
+            }
+        }
+
+        .activity__name__out input,
+        .applicant__unit__out input,
+        .principal__name__out input,
+        .Contact__name input,
+        .Contact__phone input {
+            width: 500px;
+            height: 30px;
+            border-color: #878787;
+            border-bottom: solid;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 1px;
+            border-left-width: 0px;
+            outline: 0;
+            font-size: $p;
+
+            &:focus {
+                border-color: $brown-color;
+                box-shadow: 0px 1px 0px $brown-color;
+            }
+        }
+
+        div.Contact__name {
+            margin: 50px 0;
+        }
+
+        button.file_upload {
+            margin-left: 15px;
+        }
+
+        .activity__name__out label,
+        .applicant__unit__out label,
+        .principal__name__out label,
+        div.word,
+        .Contact__name label,
+        .Contact__phone label {
+            min-width: 110px;
+        }
+
+        .activity__name__out label,
+        .applicant__unit__out label,
+        .principal__name__out label,
+        .Contact__name label,
+        .Contact__phone label {
+            padding-top: 7px
+        }
+
+        .unit div.unit__spacing,
+        .place div.place__spacing,
+        .nature__activity div.nature__activity__spacing,
+        .ornamental__nature div.ornamental__nature__spacing,
+        .other__demands div.other__demands__spacing {
+            margin-right: 10px;
+        }
+
+        .nature__activity div.nature__activity__spacing {
+            margin-bottom: 10px;
+        }
+
+        .nature__activity div.block {
+            width: 450px;
+
+            @include width_540 {
+                margin-bottom: 10px;
+            }
+
+            @include width_465 {
+                margin-bottom: 50px;
+            }
+
+            @include width_428 {
+                margin-bottom: 80px;
+            }
+        }
+
+
+        .file-box__out {
+            background-color: rgb(239, 239, 239);
+            width: 430px;
+            height: 60px;
+            position: relative;
+
+            @include width_768 {
+                width: 100%;
+            }
+        }
+
+        div.file-box {
+            max-width: 58%;
+            padding-top: 14px;
+            padding-left: 16px;
+        }
+
+        .date_pick div {
+            margin-bottom: 50px;
+        }
+
+        .date_pick label {
+            margin-right: 13px;
+
+        }
+
+        .date_pick input {
+            width: 315px;
+            font-size: $p;
+
+            @include width_540 {
+                margin-top: 20px;
+            }
+        }
+
+
+        /*檔案名稱*/
+        .file-box input.filename {
+            width: 140%;
+            height: 30px;
+            padding-left: 8px;
+
+            background-color: #ffffff;
+            border: none;
+            border-radius: 5px;
+
+            color: #666666;
+
+        }
+
+        /*選取檔案按鈕*/
+        input.button {
+            width: 82px;
+            height: 30px;
+            padding-left: 13px;
+
+            background-color: $brown-color;
+            border: 0;
+            border-radius: 0 5px 5px 0;
+
+            position: absolute;
+            top: 14px;
+            right: 5%;
+
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /*隱藏原按鈕*/
+        input.file {
+            width: 100%;
+            height: 60px;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            filter: alpha(opacity=0);
+            opacity: 0;
+
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .Opinion textarea.Opinion__text {
+            width: 600px;
+            margin-top: 20px;
+            resize: none;
+            font-size: 16px;
+
+            @include width_768 {
+                width: 100%;
+            }
+
+            &:focus {
+                outline-color: $brown-color;
+            }
+        }
+
+        .btn__ctn,
+        .btn-ctn {
+            width: fit-content;
+            margin: 0 auto;
+
+            .button {
+                font-size: $h6;
+                margin-top: 40px;
+                padding: 20px 75px 20px 90px;
+                outline: 0;
+                border: solid .8px $brown-color;
+                background-color: $brown-color;
+                border-radius: 3px;
+                letter-spacing: 15px;
+                transition: all 0.3s;
+                position: relative;
+
+                &::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 2;
+                    transition: all .3s;
+                    transform: scaleX(0);
+                    background-color: #fff;
+                    transform-origin: 0% 50%;
+                }
+
+                span {
+                    color: #fff;
+                    position: relative;
+                    z-index: 3;
+                }
+
+                &:hover {
+
+                    span {
+                        color: $brown-color;
+                    }
+
+                    &::before {
+                        background-color: #fff;
+                        transform: scaleX(1);
+                    }
+                }
+
+
+            }
+        }
+
+
+
+        p#checktext1,
+        p#checktext2,
+        p#checktext3,
+        p#checktext4,
+        p#checktext5,
+        p#checktext6 {
+            font-size: 12px;
+            color: red;
+            letter-spacing: 2px;
+
+        }
+
+        p#checktext_1,
+        p#checktext_2,
+        p#checktext_3,
+        p#checktext_4,
+        p#checktext_5,
+        p#checktext_6 {
+            color: green;
+            letter-spacing: 2px;
+            font-size: 12px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

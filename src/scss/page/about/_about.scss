@@ -1,0 +1,1011 @@
+// _mobile.scss 
+$width_428: 428px;
+$width_768: 768px;
+
+@mixin width_428() {
+    @media all and (max-width: $width_428) {
+        @content;
+    }
+}
+
+@mixin width_768() {
+    @media all and (max-width: $width_768) {
+        @content;
+    }
+}
+
+@mixin rwd($breakpoint) {
+    @media all and (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+//css
+
+
+.aboutAs_wrapper {
+    font-family: $our-font;
+    color: $font-color;
+    // width: fit-content;
+    margin: 0 auto;
+}
+
+main.aboutAs {
+    max-width: calc(100vw - 120px);
+    margin: 0 auto;
+
+    @include width_768 {
+        margin: auto;
+    }
+
+
+    @include width_428 {
+        max-width: 85vw;
+    }
+
+    .breadcrumb {
+        display: flex;
+        min-width: 100%;
+        padding: 10px 3%;
+        position: relative;
+        z-index: 1;
+        margin: 90px auto 0;
+        // box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 50%);
+
+        li {
+            &:nth-child(even) {
+                &::before {
+                    content: "";
+                    height: .6rem;
+                    border-left: solid 1px $font-color;
+                    display: inline-block;
+                    margin: 0 .5rem;
+                }
+
+                a {
+                    color: $lakeGreen-color;
+                }
+            }
+        }
+
+        a {
+            font-size: $small;
+            line-height: 18px;
+            color: $font-color;
+        }
+    }
+
+
+    section.banner {
+        max-width: fit-content;
+        margin: 0 auto;
+
+        @include width_768 {
+            margin: auto;
+        }
+
+        .banner__word__img {
+            display: flex;
+            max-width: 100%;
+            height: 310px;
+
+            @include rwd(900px) {
+                height: 240px;
+            }
+
+            @include width_768 {
+                height: 180px;
+
+            }
+
+            @include rwd(500px) {
+                height: 130px;
+
+            }
+        }
+
+        .banner__word {
+            width: 800px;
+
+            @include rwd(640px) {
+                width: 100vw;
+            }
+
+        }
+
+        h1.banner__zh {
+            font-size: $h1;
+            color: $brown-color;
+            font-weight: bold;
+            padding: 30px;
+
+
+            @include rwd(1236px) {
+                padding: 30px 46px;
+            }
+
+            @include rwd(1100px) {
+                font-size: 38px;
+            }
+
+            @include rwd(900px) {
+                font-size: 30px;
+            }
+
+            @include rwd(780px) {
+                font-size: 28px;
+                padding: 30px 41px;
+            }
+
+
+            @include width_768 {
+                font-size: 28px;
+                padding: 41px 30px 30px 21px;
+            }
+
+            @include rwd(716px) {
+                font-size: 24px;
+                padding: 30px 0px 6px 23px;
+            }
+
+            @include rwd(580px) {
+                padding: 30px 0px 6px 5px;
+            }
+
+            @include rwd(500px) {
+                padding: 15px 0px 6px 5px;
+            }
+
+            @include rwd(450px) {
+                font-size: 22px;
+            }
+
+            @include width_428 {
+                padding: 0;
+                font-size: 18px;
+                margin: 30px 0 10px 10px;
+                letter-spacing: 5px;
+            }
+
+            &::before {
+                display: none;
+            }
+        }
+
+        h2.banner__en {
+            font-size: $h2;
+            color: $carmel-color;
+            font-weight: bold;
+            margin-left: 125px;
+            line-height: 2;
+            position: relative;
+
+
+            @include rwd(1236px) {
+                margin-left: 50px;
+            }
+
+            @include rwd(1100px) {
+                font-size: 28px;
+                margin-left: 78px;
+            }
+
+            @include rwd(900px) {
+                font-size: 22px;
+            }
+
+            @include width_768 {
+                font-size: 20px;
+                margin-left: 25px;
+            }
+
+            @include rwd(716px) {
+                font-size: 20px;
+                margin-left: 45px;
+            }
+
+            @include rwd(610px) {
+                font-size: 20px;
+                margin: 20px 0 20px 25px;
+
+            }
+
+            @include rwd(580px) {
+                margin: 20px 0 20px 5px;
+
+            }
+
+            @include rwd(500px) {
+                margin: 0px 0 20px 5px;
+            }
+
+            @include rwd(450px) {
+                font-size: 18px;
+
+            }
+
+
+            @include width_428 {
+                padding: 0;
+                font-size: 16px;
+                margin-left: 10px;
+            }
+
+
+            &::after {
+                content: "";
+                border-bottom: 2px solid black;
+                display: block;
+                width: 190%;
+                position: absolute;
+                left: -60px;
+                margin-top: 20px;
+                z-index: -1;
+
+                @include rwd(1236px) {
+                    left: -5px;
+                }
+
+                @include rwd(1100px) {
+                    left: -32px;
+                }
+
+                @include width_768 {
+                    display: block;
+                    border-bottom: 1px solid black;
+                    width: 100%;
+                    left: 0px;
+                    margin-top: 10px;
+                }
+
+                @include rwd(716px) {
+                    width: 185%;
+                    left: -17px;
+                }
+
+                @include rwd(550px) {
+                    width: 115%;
+                    left: 5px;
+                }
+
+
+                @include rwd(428px) {
+                    width: 155%;
+                }
+            }
+        }
+
+        h3.banner__slogn__zh {
+            font-size: $h5;
+            color: #261C0D;
+            font-weight: bold;
+            margin-left: 290px;
+            line-height: 1.6;
+            margin-top: 50px;
+
+            @include rwd(1236px) {
+                margin-left: 200px;
+            }
+
+            @include rwd(1100px) {
+                margin-left: 160px;
+                font-size: 20px;
+            }
+
+            @include rwd(935px) {
+                display: none;
+            }
+
+            span {
+                margin-left: 95px;
+            }
+        }
+
+        .banner__img {
+            box-shadow: none;
+            height: 0;
+            background-position: 0;
+
+            .banner__img__1-1 {
+                display: none;
+
+                @include rwd(550px) {
+                    display: block;
+                }
+
+            }
+
+            .banner__img__3 {
+                @include rwd(640px) {
+                    display: none;
+                }
+            }
+
+            .banner__img__1,
+            .banner__img__2 {
+                @include rwd(550px) {
+                    display: none;
+                }
+            }
+
+            @include rwd(550px) {
+                img {
+                    max-width: 0%;
+                    width: 60vw;
+                }
+            }
+
+            @include rwd(500px) {
+
+                width: 40vw;
+            }
+
+            @include rwd(420px) {
+
+                width: 30vw;
+            }
+        }
+
+
+
+        .banner__img ul {
+            display: flex;
+            margin-right: 40px;
+
+            @include width_768 {
+                margin: 0;
+            }
+        }
+
+        .banner__img img {
+            max-width: 90%;
+
+            @include width_428 {
+                max-width: none;
+                margin-left: 50px;
+                width: 30vw;
+            }
+
+            @include rwd(422px) {
+
+                margin-left: 0;
+            }
+        }
+
+    }
+
+    div.banner__slogn {
+        margin-top: 20px;
+    }
+
+    h2.banner__slogn_en {
+        color: $lakeGreen-color;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 64px;
+        font-family: $our-font2;
+        line-height: 2.5;
+        position: relative;
+
+        @include rwd(1100px) {
+            font-size: 44px;
+            line-height: 0;
+        }
+
+        @include width_768 {
+            line-height: 1.2;
+            font-size: 40px;
+
+        }
+
+        @include rwd(716px) {
+            font-size: 38px;
+        }
+
+        @include rwd(450px) {
+            font-size: 30px;
+        }
+
+        @include width_428 {
+            font-size: 28px;
+            margin-top: 40px;
+
+        }
+    }
+
+    .about__goodtime,
+    .getting__here {
+
+        @include width_768 {
+            max-width: 100%;
+
+        }
+    }
+
+    .about__goodtime__title,
+    .getting__here__title,
+    .contact__us__title {
+        margin: 5% 6%;
+    }
+
+    .about__goodtime__title__eng,
+    .getting__here__title__eng,
+    .contact__us__title__eng {
+        font-size: $h3;
+        color: $brown-color;
+        font-weight: bold;
+        margin-top: 100px;
+
+        @include rwd(900px) {
+            font-size: 26px;
+        }
+
+        @include width_768 {
+            font-size: 22px;
+        }
+
+        @include rwd(450px) {
+            font-size: 20px;
+        }
+
+        @include width_428 {
+            font-size: 16px;
+            margin-top: 50px;
+
+        }
+
+    }
+
+    .about__goodtime__title__zh,
+    .gcontact__us__title__zh {
+        font-size: $h4;
+        color: $carmel-color;
+        position: relative;
+        display: block;
+        margin-left: 180px;
+        font-weight: bold;
+
+        @include rwd(900px) {
+            font-size: 26px;
+        }
+
+        @include width_768 {
+            font-size: 20px;
+            margin-left: 120px;
+        }
+
+        @include rwd(450px) {
+            margin-left: 105px;
+        }
+
+        @include width_428 {
+            font-size: 16px;
+            margin-left: 83px;
+            margin-bottom: 20px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: -17%;
+            background: $brown-color;
+            width: 16%;
+            height: 2px;
+
+            @include width_768 {
+                top: 47%;
+            }
+        }
+    }
+
+
+    .about__goodtime__para1para2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+
+        @include width_428 {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+
+        img {
+            max-width: 100%;
+
+            @include rwd(900px) {
+                max-width: 90%;
+            }
+        }
+
+        p {
+            line-height: 2;
+        }
+
+        @include width_768 {
+
+            img {
+                padding: 10px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+
+        @include rwd(716px) {
+            img {
+                padding: 0;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        @include rwd(651px) {
+            display: block;
+
+            img {
+                display: none;
+            }
+        }
+
+        @include width_428 {
+            p {
+                font-size: 12px;
+            }
+
+            img {
+                display: none;
+            }
+        }
+
+        div.about__goodtime__para1 {
+
+            p {
+                margin: 50px;
+                margin-bottom: 100px;
+            }
+
+            @include width_768 {
+                p {
+                    margin: 70px 0 80px 40px;
+                }
+            }
+
+            @include rwd(736px) {
+                p {
+                    margin: 50px 0 50px 10px;
+                }
+            }
+
+            @include rwd(716px) {
+                p {
+                    margin: 50px 40px 50px 20px;
+                }
+            }
+
+            @include rwd(650px) {
+                p {
+                    margin: 50px 40px 50px 60px;
+                }
+            }
+
+            @include rwd(458px) {
+                p {
+                    margin: 50px 40px 50px 30px;
+                }
+            }
+
+            @include width_428 {
+                img.about__goodtime__para1_img1 {
+                    display: none;
+                }
+
+                p {
+                    margin: 30px;
+                }
+
+            }
+
+        }
+
+        div.about__goodtime__para2 {
+
+            p {
+                margin: 30px 40px 0 40px;
+            }
+
+            @include rwd(768px) {
+                p {
+                    margin: 30px 0 0 14px;
+                }
+            }
+
+            @include rwd(650px) {
+                p {
+                    margin: 30px 0 0 60px;
+                }
+            }
+
+            @include rwd(458px) {
+                p {
+                    margin: 30px 0 0 30px;
+                }
+            }
+
+            @include width_428 {
+                img .about__goodtime__para1_img2 {
+                    display: none;
+                }
+
+                p {
+                    margin: 30px;
+                }
+            }
+        }
+
+    }
+
+    .about__goodtime__para3 {
+        img {
+            margin: 50px auto 0px;
+            display: block;
+            max-width: 89%;
+
+            @include width_768 {
+                margin-top: 30px;
+                max-width: 100%;
+            }
+        }
+
+        p {
+            line-height: 2.5;
+            margin: 30px auto 10px;
+            max-width: 80%;
+
+            @include width_768 {
+                font-size: 14px;
+                margin: 10px auto 10px;
+                padding-left: 10px;
+                width: 100%;
+
+            }
+
+            @include rwd(458px) {
+                padding: 0;
+            }
+
+
+            @include width_428 {
+                font-size: 12px;
+                max-width: 100%;
+                padding: 0;
+                line-height: 2;
+            }
+        }
+    }
+
+    img.about__goodtime__para1_img2,
+    img.about__goodtime__para2_img2 {
+        display: none;
+        margin-top: 30px;
+
+        @include rwd(651px) {
+            display: block;
+        }
+
+        @include width_428 {
+            display: block;
+            margin-top: 0;
+        }
+    }
+
+
+
+
+    .getting__here__title__zh {
+        font-size: $h4;
+        color: $carmel-color;
+        position: relative;
+        display: block;
+        margin-left: 250px;
+        font-weight: bold;
+        margin-bottom: 50px;
+
+        @include width_768 {
+            font-size: 20px;
+            margin-left: 170px;
+
+        }
+
+        @include width_428 {
+            font-size: 16px;
+            margin-left: 120px;
+
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: -21%;
+            background: $brown-color;
+            width: 20%;
+            height: 2px;
+
+            @include width_768 {
+                top: 43%;
+
+            }
+        }
+    }
+
+
+
+    .getting__here__map {
+
+        width: 80%;
+        margin: auto;
+
+        #map {
+            height: 380px;
+
+            h1,
+            h2 {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .para {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin-top: 120px;
+        grid-template-rows: auto;
+        max-width: fit-content;
+        margin: 50px auto;
+
+        @include width_428 {
+
+            display: contents;
+        }
+
+        div.para__a {
+            text-align: center;
+            line-height: 2;
+            margin-bottom: 15px;
+
+            @include width_428 {
+                margin-top: 50px;
+            }
+
+            i.fa-solid {
+                font-size: $h3;
+                color: $brown-color;
+            }
+
+            p {
+                color: $carmel-color;
+
+                @include width_428 {
+                    margin: 0px;
+                    padding: 0;
+                }
+            }
+        }
+
+        div.para__bus {
+            grid-column: 1/2;
+            grid-row: 1/2;
+
+            div.para__b {
+                padding: 0 39px;
+                line-height: 2;
+                margin-bottom: 70px;
+
+                @include width_768 {
+                    font-size: 14px;
+                    padding: 0 14px;
+
+                }
+            }
+        }
+
+        div.para__train {
+            grid-column: 2/2;
+            grid-row: 1/2;
+
+            div.para__b {
+                padding-left: 85px;
+                line-height: 2;
+
+                @include width_768 {
+                    font-size: 14px;
+                    padding-left: 40px;
+
+                }
+
+                @include width_428 {
+                    margin: 0;
+                    padding: 0 14px;
+                }
+            }
+        }
+
+        div.para__car {
+            grid-column: 1/2;
+            grid-row: 2/2;
+
+            div.para__b {
+                padding-left: 35px;
+                line-height: 2;
+
+                @include width_768 {
+                    font-size: 14px;
+                    padding-left: 16px;
+
+
+                }
+
+                @include width_428 {
+                    margin: 0;
+                    padding: 0 14px;
+                }
+            }
+        }
+
+        div.para__parking {
+            grid-column: 2/2;
+            grid-row: 2/2;
+
+            div.para__b {
+                padding-left: 85px;
+                line-height: 2;
+
+                @include width_768 {
+                    font-size: 14px;
+                    padding-left: 42px;
+                }
+
+                @include width_428 {
+                    margin: 0;
+                    padding: 0 14px;
+                }
+            }
+        }
+    }
+
+    .contact__us__title__zh {
+        font-size: $h4;
+        color: $carmel-color;
+        position: relative;
+        display: block;
+        margin-left: 215px;
+        font-weight: bold;
+        margin-bottom: 50px;
+
+        @include width_768 {
+            font-size: 20px;
+            margin-left: 145px;
+        }
+
+        @include width_428 {
+            font-size: 16px;
+            margin-left: 105px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: -15%;
+            background: $brown-color;
+            width: 14%;
+            height: 2px;
+
+            @include width_428 {
+                top: 43%;
+                left: -37%;
+                width: 34%;
+            }
+        }
+    }
+
+    .contact__us__form {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        margin: auto;
+
+        @include width_768 {
+            max-width: 90%;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            height: 30px;
+            margin-bottom: 15px;
+            color: $brown-color;
+        }
+
+        .email input {
+            border: 2px solid red;
+        }
+
+        textarea {
+            resize: none;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .btn__ctn,
+        .btn-ctn {
+            width: fit-content;
+            margin: 0 auto;
+
+            .button {
+                font-size: $h6;
+                margin-top: 40px;
+                padding: 20px 75px 20px 90px;
+                outline: 0;
+                border: solid .8px $brown-color;
+                background-color: $brown-color;
+                border-radius: 3px;
+                letter-spacing: 15px;
+                transition: all 0.3s;
+                position: relative;
+
+                @include width_428 {
+                    font-size: 16px;
+                    padding: 20px 75px;
+                }
+
+                @include rwd(380px) {
+                    padding: 20px 80px;
+                }
+
+                &::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 2;
+                    transition: all .3s;
+                    transform: scaleX(0);
+                    background-color: #fff;
+                    transform-origin: 0% 50%;
+                }
+
+                span {
+                    color: #fff;
+                    position: relative;
+                    z-index: 3;
+
+                    @include width_428 {
+                        padding-left: 5px;
+                    }
+                }
+
+                &:hover {
+
+                    span {
+                        color: $brown-color;
+                    }
+
+                    &::before {
+                        background-color: #fff;
+                        transform: scaleX(1);
+                    }
+                }
+            }
+        }
+    }
+}

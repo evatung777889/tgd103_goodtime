@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>展覽管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: rgb(34, 145, 48);
+            transition: all 0.3s;
+        }
+        .BBB{
+            background-color: rgb(185, 45, 68);
+            transition: all 0.3s;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(25, 107, 36);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(141, 35, 52);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-event" id="event">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">展覽查詢</p>
+                    <p class="gray-text">*以下欄位如留空則預設為全部</p>
+                    <div class="search-bar">
+                        <p style="font-weight: 800;
+                        letter-spacing: .2rem;">查詢條件</p>
+                        <ul>                
+                            <li>
+                                <p>時間區間</p>
+                                <input type="date" id="expostart"  min="2020-01-01" max="2050-12-31" class="timeform" v-model="expostart">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="expoend"   min="2020-01-01" max="2050-12-31" class="timeform" v-model="expoend">
+                            </li>
+                            <li>
+                                <p>展覽頁狀態</p>
+                                <form action="" class="po-confirm">
+                                    <input type="radio" name="time-area" value="%" v-model="expostatus" id="expostatus" checked><label class="time-area_label" for=""> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="expostatus" id="expostatus"><label class="time-area_label" for=""> 刊登</label>
+                                    <input type="radio" name="time-area" value="2" v-model="expostatus" id="expostatus"><label class="time-area_label" for=""> 下架</label>
+                                </form>
+                            </li>
+                            <li>
+                                <p>展覽編號</p>
+                                <input type="text" class="long-input" id="expoid" v-model="expoid">
+                            </li>
+                            <li>
+                                <p>展覽標題</p>
+                                <input type="text" class="long-input" id="exponame" v-model="exponame">
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="search-btn"@click="axiosPost()">查詢</button>
+                            <button class="create-btn"><a href="b-event-create.html">新增</a></button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="info-box">
+                                    <p>展覽列表</p>
+                                    <ul>
+                                        <li class="first-title">
+                                            <div>
+                                                <div><h6>展覽主圖<br>展覽編號</h6></div>
+                                                <div><h6>展覽標題</h6></div>
+                                                <div><h6>展覽期間</h6></div>
+                                                <div><h6>新增日期<br>最後編輯日期</h6></div>
+                                                <div><h6>成人價格<br>優待價格<br>團體價格</h6></div>
+                                                <div><h6>操作</h6></div>
+                                            </div> 
+                                        </li>
+                                        <li class="" v-for="(b_event, index) in dataList" :key="index">
+                                            <a :href="'b-event-detail.html?ID='+b_event.ID">
+                                                <div class="flex-box">
+                                                    <div><div class="fakeimg" style="overflow: hidden;"><img :src="b_event.MAIN_PHOTO" alt="" style="width: 100%;"></div><h6>{{ b_event.ID }}</h6></div>
+                                                    <div><h6>{{ b_event.TITLE }}</h6></div>
+                                                    <div><h6>{{ b_event.START_DATE }}<br>|<br>{{ b_event.END_DATE }}</h6></div>
+                                                    <div><h6>{{ b_event.CREATE_DATE }}<br>{{ b_event.EDIT_DATE }}</h6></div>
+                                                    <div><h6>{{ b_event.ADULT_PRICE }}<br>{{ b_event.CONC_PRICE }}<br>{{ b_event.GROUP_PRICE }}</h6></div>
+                                                    <div>
+                                                        <button><i class="fa-solid fa-pen-nib"></i> 編輯展覽資訊</button>
+                                                        <button @click="deleteitem" :value="b_event.ID"><i class="fa-solid fa-trash-can"></i> 更改展覽狀態</button>
+                                                    </div>
+                                                </div>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        //掛載資料庫
+        const expo = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    mark: [],
+                    exponame: "",
+                    expoid: "",
+                    expostatus: "1",
+                    expostart: "2020-01-01",
+                    expoend: "2050-12-31",
+                    expoend: "2050-12-31",
+
+                    idvalue: ""
+                }
+            }, methods:{
+                axiosPost() {
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/exposearch.php',
+                    responseType:'json',
+                    data: {
+                        exponame: this.exponame,
+                        expoid: this.expoid,
+                        expostatus: this.expostatus,
+                        expostart: this.expostart,
+                        expoend: this.expoend,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                deleteitem(e){
+
+                    e.preventDefault();
+
+                    let idvalue = e.target.value;
+
+                    swal({
+                            icon: "warning",
+                            title: "更改展覽狀態",
+                            text: "您確定要更改此展覽狀態嗎?",
+                            buttons: {
+                            A: {
+                                text: "上架",
+                                value: "1",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "下架",
+                                visible: true,
+                                className:'BBB',
+                                value: "2"
+                            }
+                            }
+                        });
+                    document.querySelector(".swal-button--A").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/event-open.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                    document.querySelector(".swal-button--B").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/event-close.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/expo.php").then(res => {
+                        this.dataList = res.data;
+                        console.log(this.dataList);
+
+                        let mark_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mark_arr.push("1")
+                            }else{
+                                mark_arr.push("2")
+                            }
+                        })
+                        console.log(mark_arr);
+
+                        this.mark = mark_arr;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+            }
+        }).mount("#event");
+    </script>
+</body>
+</html>

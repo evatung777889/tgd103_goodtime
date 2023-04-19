@@ -1,0 +1,157 @@
+.b-rental{
+    min-width: 1280px;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+.b-rental p{
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-rental h6{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-rental h5{
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-rental .text{
+    display: inline-block;
+    margin-left: 40px;
+    font-size: 20px;
+}
+.b-product .gray-text{
+    display: inline-block;
+    margin-left: 20px;
+    color: #666;
+    font-size: 20px;
+}
+.b-rental .sub-text{
+    display: inline-block;
+    margin-left: 80px;
+    padding-left: 10px;
+    color: #333;
+    border-left: 4px solid #333;
+}
+.b-rental .info-box{
+    background-color: #ccc;
+    margin-bottom: 60px;
+    p{
+        width: 100%;
+        padding: 10px 30px;
+        background-color: #333;
+        color: #fff;
+    }
+    ul{
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 30px;
+        .first-title{
+            display: flex;
+            width: 90%;
+            margin-left: 5%;
+            margin-bottom: 0px;
+            border: none;
+            background-color: #ccc;
+            height: 70px;
+            div{
+                display: flex;
+                width: 100%;
+                div{
+                    h6{
+                        width: 100%;
+                        line-height: 30px;
+                        text-align: center;
+                    }          
+                }
+                
+            }
+        }
+        li{
+            display: flex;
+            width: 90%;
+            height: 190px;
+            margin-left: 5%;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+            outline: 2px #333 solid;
+            &:first-child{
+                outline: 0px #333 solid;
+            }
+            a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-decoration: none;
+                cursor: pointer;
+                .flex-box{
+                    display: flex;
+                    border-color: #ccc;
+                    height: 80px;
+                    width: 100%;
+                    .fakeimg{
+                        width: 80px;
+                        height: 80px;
+                        margin: 20px auto;
+                        border: none;
+                    }
+                    div{
+                        width: 20%; //表單格子大小
+                        text-align: center;
+                        border: 1px solid #333;
+                        height: 190px;
+                        h6{
+                            height: 100%;
+                            line-height: 20px;
+                            padding: 5px;
+                        }
+                        input{
+                            margin-top: 10px;
+                        }
+                        button{
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: #ccc;
+                            padding: 8px 16px;
+                            margin: 0 auto;
+                            border: #ccc 2px solid;
+                            border-radius: 4px;
+                            background-color: #fff;
+                            margin-top: 10px;
+                            transition: all 0.3s;
+                            &:hover{
+                                border: #333 2px solid;
+                                color: #333;
+                            }
+                        }
+                        .form-button{
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: #ccc;
+                            padding: 6px 16px;
+                            margin: 0 auto;
+                            border: #ccc 2px solid;
+                            border-radius: 4px;
+                            background-color: #fff;
+                            margin-top: 10px;
+                            transition: all 0.3s;
+                            &:hover{
+                                border: #333 2px solid;
+                                color: #333;
+                            }
+                        }
+                    }
+                }
+            }
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+}

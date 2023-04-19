@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="rentalformdetail">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">場地表單明細</p>
+                    <div class="b-detail_infobox" v-for="(rentalformdetail, index) in dataList" :key="index" style="padding-bottom: 30px;">
+                        <ul>
+                            <li>
+                                <p>申請編號</p>
+                                <span>{{ rentalformdetail.ID }}</span>
+                            </li>
+                            <li>
+                                <p>展覽名稱</p>
+                                <span>{{ rentalformdetail.EVENT_NAME }}</span>
+                            </li>
+                            <li>
+                                <p>申請人</p>
+                                <span>{{ rentalformdetail.PRINCIPAL_NAME }}</span>
+                            </li>
+                            <li>
+                                <p>申請單位</p>
+                                <span>{{ rentalformdetail.UNIT_TYPE }}</span>
+                            </li>
+                            <li>
+                                <p>連絡人</p>
+                                <span>{{ rentalformdetail.CONTACT_NAME }}</span>
+                            </li>
+                            <li>
+                                <p>聯絡人電話</p>
+                                <span>{{ rentalformdetail.CONTACT_PHONE }}</span>
+                            </li>
+                            <li>
+                                <p>申請場館</p>
+                                <span>{{ rentalformdetail.LOCATION }}</span>
+                            </li>
+                            <li>
+                                <p>開始日期</p>
+                                <span>{{ rentalformdetail.START_DATE }}</span>
+                            </li>
+                            <li>
+                                <p>結束日期</p>
+                                <span>{{ rentalformdetail.END_DATE }}</span>
+                            </li>
+                            <li>
+                                <p>展覽類型</p>
+                                <span>{{ rentalformdetail.NATURE_ACT }}</span>
+                            </li>
+                            <li>
+                                <p>展覽公開</p>
+                                <span>{{ rentalformdetail.ORNAMENTAL_ACT }}</span>
+                            </li>
+                            <li>
+                                <p>展方需求</p>
+                                <span>{{ rentalformdetail.OTHER_DEMANDS }}</span>
+                            </li>
+                            <li>
+                                <p>其他備註</p>
+                                <span>{{ rentalformdetail.FEEDBACK }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const rentalformdetail = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    idarr: ""
+                }
+            }, methods:{
+                geturl(){
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let getid = urlParams.get("ID");
+                    this.idarr = getid;
+                },
+            }, created(){
+
+                this.geturl();
+                
+                // 查詢資料
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/rentalform-detail.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+            }
+        }).mount("#rentalformdetail");
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/*
+<select class="pay">
+    <option value="">信用卡(VISA/Master/JCB)</option>
+</select>
+*/
+
+.pay{
+    outline: none;
+    width: 90%;
+    height: 30px;
+    border: 1px solid $secondary5-color;
+    padding-left: 2px;
+    color: $secondary4-color;
+    border-radius: 3px;
+
+}

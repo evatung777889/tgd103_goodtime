@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .showbtn{
+            display: inline-block;
+        }
+        .hidebtn{
+            display: none !important; 
+        }
+        .hideselectbox{
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="location-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">場地明細</p>
+                    <div class="b-detail_infobox" v-for="(locationdetail, index) in dataList" :key="index">
+                        <ul>
+                            <li>
+                                <p>場地主圖</p>
+                                <input type="file" accept=".png, .jpg, .jpeg" disabled id="locationpic" class="hideselectbox"></input>
+                                <img id="mainpic" :src="locationdetail.MAIN_PHOTO" alt="" >
+                                <button class="change-btn" @click="changeimg">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideimg" id="mianimgbtn">確認更改與預覽圖片</button>
+                            </li>
+                            <li>
+                                <p>場地編號</p>
+                                <span>{{ locationdetail.ID }}</span>
+                            </li>
+                            <li>
+                                <p>場地名稱</p>
+                                <input v-model="locationname" disabled maxlength="45" class="long-input"></input>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>場地概述</p>
+                                <textarea v-model="locationdesc" disabled maxlength="256" class="large-textarea"></textarea>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>場地位置</p>
+                                <span>{{ locationdetail.LOCATED }}</span>
+                            </li>
+                            <li>
+                                <p>預約狀態</p>
+                                <input type="radio" v-model="locationstatus" disabled name="locationstatus" value="1" id="locationstatus1"></input>
+                                <label class="time-area_label" for="locationstatus1">開啟</label>
+                                <input type="radio" v-model="locationstatus" disabled name="locationstatus" value="2" id="locationstatus2"></input>
+                                <label class="time-area_label" for="locationstatus2">關閉</label>
+                                <button class="change-btn" @click="changeradio">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideradio">確認</button>
+                            </li>
+                            <li>
+                                <p>單日定價</p>
+                                <input v-model="locationprice" disabled maxlength="10" class="long-input"></input>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>場地設備</p>
+                                <textarea v-model="locationdevice" disabled maxlength="256" class="large-textarea"></textarea>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>場地空間</p>
+                                <textarea v-model="locationparea" disabled maxlength="256" class="large-textarea"></textarea>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>場地規範</p>
+                                <textarea v-model="locationrule" disabled maxlength="128" class="large-textarea"></textarea>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn" @click="submit">儲存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const newdetail = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    idarr: "",
+
+                    locationname: "",
+                    locationdesc: "",
+                    locationstatus: "",
+                    locationprice: "",
+                    locationdevice: "",
+                    locationparea: "",
+                    locationrule: "",
+                    locationpic: "",
+
+                    file: ""
+                }
+            }, methods:{
+                geturl(){
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let getid = urlParams.get("ID");
+                    this.idarr = getid;
+                },
+                // wdata(){
+                //     console.log(this.dataList);
+                // },
+                change(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeradio(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+                    let input2 = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                    }
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeimg(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                        input.classList.remove("hideselectbox")
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                hide(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideradio(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    let input2 = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                        input2.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideimg(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.locationpic = picbox;
+                    // console.log(this.newspic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#mainpic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                },
+                submit(){
+
+                    this.geturl();    
+
+                    let str = this.locationpic;
+                    let substr = "rental";
+                    console.log(this.locationpic)
+                    let test = console.log(str.includes(substr));
+                    if(test = true){
+                        let cut = this.locationpic.split("/");
+                        let laststring = cut[cut.length - 1]
+                        this.locationpic = laststring;
+                    }else{
+                    }
+
+
+                    let file = document.getElementById("mianimgbtn").previousSibling.previousSibling.previousSibling.files[0];
+
+                    console.log(this.file)
+
+                    this.file = file;
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/loaction-upload.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    })
+
+
+                    // 資料庫product
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/location-detail-submit.php',
+                    responseType:'json',
+                    data: {
+                        locationname: this.locationname,
+                        locationdesc: this.locationdesc,
+                        locationstatus: this.locationstatus,
+                        locationprice: this.locationprice,
+                        locationdevice: this.locationdevice,
+                        locationparea: this.locationparea,
+                        locationrule: this.locationrule,
+                        locationpic: this.locationpic,
+
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    location.reload();
+                }
+            }, created(){
+
+                this.geturl();
+                
+                // 查詢資料
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/location-detail.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        this.locationname = this.dataList[0].NAME;
+                        this.locationdesc = this.dataList[0].DESC;
+                        this.locationstatus = this.dataList[0].STATUS;
+                        this.locationprice = this.dataList[0].PRICE;
+                        this.locationdevice = this.dataList[0].DEVICE;
+                        this.locationparea = this.dataList[0].AREA;
+                        this.locationrule = this.dataList[0].RULE;
+                        this.locationpic = this.dataList[0].MAIN_PHOTO;
+
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+            }
+        }).mount("#location-detail");
+    </script>
+</body>
+</html>

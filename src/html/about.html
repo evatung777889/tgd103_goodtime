@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>關於韶光 - 韶光文創園區</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/about_googlemap.js"></script>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div class="aboutAs_wrapper">
+      <header id="header"></header>
+      <main class="aboutAs">
+        <ul class="breadcrumb">
+          <li><a href="./index.html">首頁</a></li>
+          <li><a href="./about.html">關於韶光</a></li>
+        </ul>
+        <!---------------------------------Banner------------------------------------->
+        <section class="banner">
+          <div class="banner__word__img">
+            <!--文字標題區塊-->
+            <div class="banner__word">
+              <h1 class="banner__zh">韶光文創園區</h1>
+              <h2 class="banner__en">Good Time Creative Park</h2>
+              <h3 class="banner__slogn__zh">
+                體會午後悠閒慵懶<br /><span>享受人生黃金時光</span>
+              </h3>
+            </div>
+            <!--圖片區塊-->
+            <div class="banner__img">
+              <ul>
+                <li class="banner__img__1">
+                  <img src="../img/about/about_banner_img1.png" alt="" />
+                </li>
+                <li class="banner__img__1-1">
+                  <img src="../img/about/about_banner_rwd_img3.jpg" alt="" />
+                </li>
+                <li class="banner__img__2">
+                  <img src="../img/about/about_banner_img2.png" alt="" />
+                </li>
+                <li class="banner__img__3">
+                  <img src="../img/about/about_banner_img3.png" alt="" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="banner__slogn">
+            <h2 class="banner__slogn_en">Carpe diem. Seize the day.</h2>
+          </div>
+        </section>
+        <!---------------------------------關於韶光區塊--------------------------------->
+        <section class="about__goodtime">
+          <div class="about__goodtime__title">
+            <!--關於韶光標題-->
+            <div class="about__goodtime__title__eng">ABOUT US</div>
+            <div class="about__goodtime__title__zh">關於韶光</div>
+          </div>
+          <div>
+            <!--第一段文案-->
+            <div class="about__goodtime__para1para2">
+              <div
+                class="about__goodtime__para1"
+                data-aos="fade-up"
+                data-aos-duration="1500"
+              >
+                <img
+                  class="about__goodtime__para1_img2"
+                  src="../img/about/about_us_rwd_img2.jpg"
+                  alt=""
+                />
+                <p>
+                  韶光文創園區成立的初衷<br />
+                  來自一份「溫暖」的心意<br />
+                  希望來此的遊客能體會單純美好的幸福<br />
+                  並在駐足的過程中<br />
+                  創造只屬於自己的溫馨時光與回憶
+                </p>
+                <img
+                  class="about__goodtime__para1_img1"
+                  src="../img/about/about_us_img1.jpg"
+                  alt=""
+                />
+              </div>
+              <!--第二段文案-->
+              <div
+                class="about__goodtime__para2"
+                data-aos="fade-up"
+                data-aos-duration="1500"
+              >
+                <img
+                  class="about__goodtime__para2_img1"
+                  src="../img/about/about_us_img2.jpg"
+                  alt=""
+                />
+                <img
+                  class="about__goodtime__para2_img2"
+                  src="../img/about/about_us_rwd_img1.jpg"
+                  alt=""
+                />
+                <p>
+                  我們致力於服務展方及熱愛展覽的民眾<br />
+                  希望以便捷的方式讓展方無負擔的舉辦展覽<br />
+                  並減少與第三方無謂的溝通成本<br />
+                  同時也能讓民眾盡興的參觀展覽及園區
+                  <br />以達推廣展覽的目的
+                </p>
+              </div>
+            </div>
+            <!--第三段文案-->
+            <div
+              class="about__goodtime__para3"
+              data-aos="fade-up"
+              data-aos-duration="1200"
+            >
+              <img src="../img/about/about_us_img3.png" alt="" />
+              <p>
+                以打造溫暖為前提，從品牌進駐、展覽活動、假日市集、展場租借衍生不同的理念並付諸行動，
+                藉以提供民眾更多元的服務與體驗，期盼在我們用心耕耘之下，
+                讓韶光不僅是一個文創天地，更是能提升文學素養、並療癒大眾心靈的幸福園區
+              </p>
+            </div>
+          </div>
+        </section>
+        <!---------------------------------交通資訊區塊--------------------------------->
+        <section class="getting__here">
+          <!--交通資訊標題-->
+          <div class="getting__here__title">
+            <div class="getting__here__title__eng">GETTING HERE</div>
+            <div class="getting__here__title__zh">交通資訊</div>
+          </div>
+          <!--google地圖-->
+          <div class="getting__here__map">
+            <div id="map"></div>
+          </div>
+
+          <div class="para">
+            <!--公車-->
+            <div class="para__bus">
+              <div class="para__a">
+                <i class="fa-solid fa-bus-simple"></i>
+                <p>公車</p>
+              </div>
+              <div class="para__b">
+                搭乘521、685、685(經吉林路)、復興幹線<br />
+                至捷運南京復興站下車，步行約3分鐘即可抵達
+              </div>
+            </div>
+            <!--捷運-->
+            <div class="para__train">
+              <div class="para__a">
+                <i class="fa-solid fa-train-subway"></i>
+                <p>捷運</p>
+              </div>
+              <div class="para__b">
+                搭乘捷運至南京復興站（8號出口）<br />
+                沿南京東路三段步行約5分鐘即可抵達
+              </div>
+            </div>
+            <!--自行開車-->
+            <div class="para__car">
+              <div class="para__a">
+                <i class="fa-solid fa-car"></i>
+                <p>自行開車</p>
+              </div>
+              <div class="para__b">
+                行駛國道一號於23B圓山交流道下<br />
+                →松江路行駛4公里<br />
+                →左轉民權東路二段行駛1.2公里<br />
+                →右轉進入復興北路行駛 1.2 公里<br />
+                →右轉進入南京東路三段<br />
+                →抵達韶光文創園區
+              </div>
+            </div>
+            <!--停車場資訊-->
+            <div class="para__parking" id="para__parking">
+              <div class="para__a">
+                <i class="fa-solid fa-square-parking"></i>
+                <p>停車資訊</p>
+              </div>
+              <div class="para__b">
+                安婷停車場俠隱場<br />
+                地址：台北市中山區遼寧街139號<br />
+                連絡電話：02-2542-0819<br /><br />
+                嘟嘟房富邦遼寧大樓站<br />
+                地址：台北市中山區遼寧街177號<br />
+                電話：02-2655-0818
+              </div>
+            </div>
+          </div>
+        </section>
+        <!---------------------------------表單--------------------------------->
+        <section class="contact__us">
+          <!--表單標題-->
+          <div class="contact__us__title">
+            <div class="contact__us__title__eng">CONTACT US</div>
+            <div class="contact__us__title__zh">聯絡我們</div>
+          </div>
+          <div class="contact__us__form">
+            <label for="name">姓名</label>
+            <input
+              type="text"
+              placeholder="請輸入您的姓名"
+              name="name"
+              v-model="name"
+            />
+            <label for="tel">電話</label>
+            <input
+              type="tel"
+              placeholder="請輸入您的聯絡電話"
+              name="phone"
+              v-model="phone"
+              maxlength="10"
+            />
+            <label for="email">Email</label>
+            <input
+              type="email"
+              placeholder="請輸入您的電子信箱"
+              name="email"
+              v-model="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+            <textarea
+              name="Opinion"
+              id="mote"
+              cols="30"
+              rows="10"
+              placeholder="請留下您的寶貴意見"
+              v-model="Opinion"
+            ></textarea>
+            <div class="btn__ctn">
+              <button id="goApplyForm" class="button" @click="contactUsSend">
+                <span>確認送出</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+
+    <script>
+      //初始化地圖資訊
+
+      function initMap() {
+        var map;
+        var markers = [];
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 25.0521962, lng: 121.5434836 },
+          zoom: 16,
+          mapTypeControl: false,
+        });
+        initMaker(map);
+      }
+
+      function initMaker(map) {
+        // 韶光
+        var marker1 = new google.maps.Marker({
+          position: { lat: 25.052128, lng: 121.5432529 }, // 定位
+          map: map,
+          title: "韶光",
+          icon: "../img/about/map_logo.png",
+        });
+        marker1.setMap(map);
+
+        var contentString1 =
+          "<h1>韶光文創園區</h1><h2>台北市中山區南京東路三段219號</h2>";
+        var infowindow1 = new google.maps.InfoWindow({
+          content: contentString1,
+        });
+
+        marker1.addListener("click", function () {
+          infowindow1.open(map, marker1); //設定滑入 marker 打開資訊視窗事件
+        });
+
+        //捷運
+        var marker2 = new google.maps.Marker({
+          position: { lat: 25.05203922405905, lng: 121.54362348556857 },
+          map: map,
+          title: "捷運八號出口",
+          animation: google.maps.Animation.BOUNCE,
+        });
+        marker2.setMap(map);
+        var contentString2 = "<h1>南京復興站（8號出口)</h1>";
+        var infowindow2 = new google.maps.InfoWindow({
+          content: contentString2,
+        });
+        marker2.addListener("click", function () {
+          infowindow2.open(map, marker2); //設定滑入 marker 打開資訊視窗事件
+        });
+
+        //安婷停車場俠隱場
+        var marker3 = new google.maps.Marker({
+          position: { lat: 25.052438673596615, lng: 121.54216362548864 },
+          map: map,
+          title: "安婷停車場俠隱場",
+          animation: google.maps.Animation.BOUNCE,
+        });
+        marker3.setMap(map);
+        var contentString3 =
+          "<h1>安婷停車場俠隱場</h1><br><h2>台北市中山區遼寧街139號</h2>";
+        var infowindow3 = new google.maps.InfoWindow({
+          content: contentString3,
+        });
+        marker3.addListener("click", function () {
+          infowindow3.open(map, marker3); //設定滑入 marker 打開資訊視窗事件
+        });
+
+        //嘟嘟房
+        var marker4 = new google.maps.Marker({
+          position: { lat: 25.053335111012046, lng: 121.54217016781794 },
+          map: map,
+          title: "嘟嘟房",
+          animation: google.maps.Animation.BOUNCE,
+        });
+        marker3.setMap(map);
+        var contentString4 =
+          "<h1>嘟嘟房富邦遼寧大樓站</h1><br><h2>台北市中山區遼寧街177號</h2>";
+        var infowindow4 = new google.maps.InfoWindow({
+          content: contentString4,
+        });
+        marker4.addListener("click", function () {
+          infowindow4.open(map, marker4); //設定滑入 marker 打開資訊視窗事件
+        });
+
+        //關閉地圖上所有商家
+        var noPoi = [
+          {
+            featureType: "poi",
+            stylers: [{ visibility: "off" }],
+          },
+        ];
+
+        map.setOptions({ styles: noPoi });
+      }
+
+      /*-----------------動畫載入------------------*/
+      AOS.init();
+
+      $(() => {
+        $("#header").load("topbar.html");
+        $("#footer").load("footer.html");
+      });
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlVqXpwGS1pXBy7kNJqh6dDXEtrZka2LA&callback=initMap"
+    ></script>
+
+    <script>
+      const contactUsApp = Vue.createApp({
+        data() {
+          return {
+            name:"",
+            phone:"",
+            email:"",
+            Opinion:"",
+          };
+        },
+        methods: {
+          contactUsSend() {
+            if (this.name == "") {
+              alert("請輸入您的姓名");
+              return false;
+            }
+
+            if (this.phone == "") {
+              alert("請輸入您的電話");
+              return false;
+            }
+
+            if (this.email == "") {
+              alert("請輸入您的信箱");
+              return false;
+            }
+
+            if (this.Opinion == "") {
+              alert("請輸入您的意見回饋");
+              return false;
+            }
+
+            // axios.post('url') = 我們要獲取的API，會回傳一個 Promise 物件
+            axios
+              .post("../../php/frontend/contactUs.php", {
+                name: this.name,
+                phone: this.phone,
+                email: this.email,
+                Opinion: this.Opinion,
+              })
+
+              // then :處理 Promise返回的結果
+              .then((res) => {
+                if (res.status === 200) {
+                  alert("送出成功");
+                  // console.log(res);
+                  window.location.href = "../html/about.html";
+
+                } else {
+                  alert(res.data);
+                }
+              })
+              //catch:抓取Promise 上異常
+              .catch((err) => console.log("[about error]", err));
+          },
+        },
+      }).mount(".contact__us");
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .showbtn{
+            display: inline-block;
+        }
+        .hidebtn{
+            display: none !important; 
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="product-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="item-name">商品明細</p>
+                    <div class="b-detail_infobox" v-for="(productdetail, index) in dataList" :key="index">
+                        <ul>
+                            <li>
+                                <p>商品主圖</p>
+                                <input type="file" ref="aaa" accept=".png, .jpg, .jpeg" disabled id="productpic"></input>
+                                <img id="mainpic" :src="productdetail.MAIN_PHOTO" alt="" >
+                                <button class="change-btn" @click="changeimg">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideimg" id="mianimgbtn">確認更改與預覽圖片</button>
+                            </li>
+                            <li>
+                                <p>商品頁編號</p>
+                                <span>{{ productdetail.FK_PRODUCT_PAGE_ID }}</span>
+                            </li>
+                            <li>
+                                <p>商品編號</p>
+                                <span>{{ productdetail.ID }}</span>
+                            </li>
+                            <li>
+                                <p>商品名稱</p>
+                                <input v-model="productname" disabled class="long-input"></input>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>銷售期間</p>
+                                <input type="date" id="start" name="trip-start" v-model="start" min="2020-01-01" max="2050-12-31" class="timeform">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="end" name="trip-start"  v-model="end" min="2020-01-01" max="2050-12-31" class="timeform">
+                            </li>
+                            <li>
+                                <p>商品頁狀態</p>
+                                <input type="radio" v-model="status" disabled name="status" value="1" id="status1"></input>
+                                <label class="time-area_label" for="status1">開啟</label>
+                                <input type="radio" v-model="status" disabled name="status" value="2" id="status2"></input>
+                                <label class="time-area_label" for="status2">關閉</label>
+                                <button class="change-btn" @click="changeradio">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideradio">確認</button>
+                            </li>
+                            <li>
+                                <p>商品定價</p>
+                                <input v-model="productprice" disabled class="long-input"></input>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>隱藏賣場</p>
+                                <input type="radio" v-model="hided" disabled name="hide" value="1" id="hide1"></input>
+                                <label class="time-area_label" for="hide1">開啟</label>
+                                <input type="radio" v-model="hided" disabled name="hide" value="2" id="hide2"></input>
+                                <label class="time-area_label" for="hide2">關閉</label>
+                                <button class="change-btn" @click="changeradio">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideradio">確認</button>
+                            </li>
+                            <li>
+                                <p>展場</p>
+                                <select name="product-expo" class="product-expo" v-model="expo" id="expo" disabled>
+                                    <option v-for="(expo, index) in dataList7"  :value="expo.ID">{{ expo.TITLE }}</option>
+                                </select>   
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>產品規格</p>
+                                <input v-model="size1" disabled class="long-input" style="display: block; margin-top: 10px;"></input>
+                                <input v-model="size2" disabled class="long-input" style="display: block; margin-top: 10px;"></input>
+                                <input v-model="size3" disabled class="long-input" style="display: block; margin-top: 10px;"></input>
+                                <button class="change-btn" @click="changethree">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hidethree">確認</button>
+                            </li>
+                            <li>
+                                <p>商品分類</p>
+                                <!-- <input type="" v-model="producttype" disabled></input> -->
+                                <select name="product-kind" class="long-input" v-model="kind" id="kind" disabled>
+                                    <option v-for="(b_product_type, index) in dataList3"  :value="b_product_type.ID">{{ b_product_type.PRODUCT_TYPE_NAME }}</option>
+                                </select>   
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>貨運方式</p>
+                                <span>宅配</span>
+                            </li>
+                            <li>
+                                <p>庫存數量</p>
+                                <input v-model="stock" disabled class="long-input"></input>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>商品描述</p>
+                                <textarea v-model="featured" disabled class="large-textarea"></textarea>
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                            <li>
+                                <p>商品圖</p>
+                                <input type="file" accept=".png, .jpg, .jpeg" disabled id="productimg" class="hideselectbox" style="display: block;"></input>
+                                <img id="img1" v-for="(b_product_img1, index) in dataList4" :src="b_product_img1.PATH" alt="" >
+                                <button class="change-btn" @click="changeimg1">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideimg1" id="imgbtn1">確認更改與預覽圖片</button>
+
+                                <input type="file" accept=".png, .jpg, .jpeg" disabled id="productimg2" class="hideselectbox" style="display: block;"></input>
+                                <img id="img2" v-for="(b_product_img2, index) in dataList5" :src="b_product_img2.PATH" alt="" >
+                                <button class="change-btn" @click="changeimg2">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideimg2" id="imgbtn2">確認更改與預覽圖片</button>
+
+                                <input type="file" accept=".png, .jpg, .jpeg" disabled id="productimg3" class="hideselectbox" style="display: block;"></input>
+                                <img id="img3" v-for="(b_product_img3, index) in dataList6" :src="b_product_img3.PATH" alt="" >
+                                <button class="change-btn" @click="changeimg3">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hideimg3" id="imgbtn3">確認更改與預覽圖片</button>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn" @click="submit">儲存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const productdetail = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList2: [],
+                    dataList3: [],
+                    dataList4: [],
+                    dataList5: [],
+                    dataList6: [],
+                    dataList7: [],
+                    idarr: "",
+                    productname: "",
+                    productprice: "",
+                    title: "",
+                    producttype: "",
+                    stock: "",
+                    desc: "",
+                    start: "",
+                    end: "",
+                    status: "",
+                    hided: "",
+                    kind: "",
+                    featured: "",
+                    productpic: "",
+                    // table product_spec資料承接
+                    size1: "",
+                    size2: "",
+                    size3: "",
+                    // table product_pic資料承接
+                    productimg1: "",
+                    productimg2: "",
+                    productimg3: "",
+
+                    expo: "",
+
+                    file: '',
+                    file1: '',
+                    file2: '',
+                    file3: ''
+                }
+            }, methods:{
+                geturl(){
+                    // var url = location.href;
+                    // if(url.indexOf('?') !=-1 )
+                    // {
+                    //     var arr = url.split('?');
+                    //     var id = arr[1];  
+                    // }
+
+                    // const test = document.getElementById("test");
+                    // test.innerHTML = "" + id + "";
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let getid = urlParams.get("ID");
+                    // console.log(id);
+                    this.idarr = getid;
+                },
+                // wdata(){
+                //     console.log(this.dataList);
+                // },
+                change(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeradio(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+                    let input2 = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                    }
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeimg(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                        send.classList.toggle("hidebtn");
+                    }
+                },
+                changethree(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling;
+                    let input2 = changebtn.previousSibling.previousSibling;
+                    let input3 = changebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                        input2.removeAttribute('disabled');
+                        input3.removeAttribute('disabled');
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeimg1(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                        send.classList.toggle("hidebtn");
+                    }
+                },
+                changeimg2(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                        send.classList.toggle("hidebtn");
+                    }
+                },
+                changeimg3(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                        send.classList.toggle("hidebtn");
+                    }
+                },
+                hide(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideradio(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    let input2 = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                        input2.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideimg(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productpic = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#mainpic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    console.log(input);
+                },
+                hidethree(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling;
+                    let input2 = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let input3 = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                        input2.removeAttribute('disabled');
+                        input3.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                        input2.setAttribute('disabled','disabled');
+                        input3.setAttribute('disabled','disabled');
+                    }
+                },
+                hideimg1(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productimg1 = picbox;
+                    console.log(pic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#img1').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                    // console.log(picfile);
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                },
+                hideimg2(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productimg2 = picbox;
+                    console.log(pic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#img2').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                    // console.log(picfile);
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                },
+                hideimg3(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productimg3 = picbox;
+                    console.log(pic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#img3').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                    // console.log(picfile);
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                },
+                submit(){
+console.log("test submit");
+                    this.geturl();
+
+                    // str = this.productpic.split("/").shift();
+                    // str = this.productpic;
+                    // console.log(this.productpic);
+
+                    // 字串清除多餘字
+                    let str = this.productpic;
+                    let substr = "product";
+                    let test = console.log(str.includes(substr));
+                    if(test = true){
+                        let cut = this.productpic.split("/");
+                        let laststring = cut[cut.length - 1]
+                        this.productpic = laststring;
+                    }else{
+                    }
+
+                    let str1 = this.productimg1;
+                    let test1 = console.log(str1.includes(substr));
+                    if(test1 = true){
+                        let cut = this.productimg1.split("/");
+                        let laststring = cut[cut.length - 1]
+                        this.productimg1 = laststring;
+                    }else{
+                    }
+
+                    let str2 = this.productimg2;
+                    let test2 = console.log(str2.includes(substr));
+                    if(test = true){
+                        let cut = this.productimg2.split("/");
+                        let laststring = cut[cut.length - 1]
+                        this.productimg2 = laststring;
+                    }else{
+                    }
+
+                    console.log(this.productimg2)
+
+                    let str3 = this.productimg3;
+                    let test3 = console.log(str3.includes(substr));
+                    if(test = true){
+                        let cut = this.productimg3.split("/");
+                        let laststring = cut[cut.length - 1]
+                        this.productimg3 = laststring;
+                    }else{
+                    }
+
+                    // 上傳與暫存
+
+                    let file = document.getElementById("mianimgbtn").previousSibling.previousSibling.previousSibling.files[0];
+
+                    console.log(this.file)
+
+                    this.file = file;
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/test.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    })
+
+
+                    let file1 = document.getElementById("imgbtn1").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+
+                    this.file1 = file1;
+                    let formData1 = new FormData();
+                    formData.append('file', this.file1);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/test1.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    })
+
+
+                    let file2 = document.getElementById("imgbtn2").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+
+                    this.file2 = file2;
+                    let formData2 = new FormData();
+                    formData.append('file', this.file2);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/test2.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    })
+
+
+                    let file3 = document.getElementById("imgbtn3").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.files[0];
+
+                    console.log(file3)
+
+                    this.file3 = file3;
+                    let formData3 = new FormData();
+                    formData.append('file', this.file3);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/test3.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    })
+
+                    // 資料庫product
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-submit.php',
+                    responseType:'json',
+                    data: {
+                        productname: this.productname,
+                        productprice: this.productprice,
+                        // title: this.title,
+                        // producttype: this.producttype,
+                        stock: this.stock,
+                        start: this.start,
+                        end: this.end,
+                        status: this.status,
+                        hided: this.hided,
+                        kind: this.kind,
+                        featured: this.featured,
+                        productpic: this.productpic,
+                        expo: this.expo,
+                        // desc: this.desc,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        // console.log(this.expo);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    // 資料庫product_spec
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-spec-submit.php',
+                    responseType:'json',
+                    data: {
+                        size1: this.size1,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-spec-submit2.php',
+                    responseType:'json',
+                    data: {
+                        size2: this.size2,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-spec-submit3.php',
+                    responseType:'json',
+                    data: {
+                        size3: this.size3,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    // 資料庫product_pic
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic-submit.php',
+                    responseType:'json',
+                    data: {
+                        productimg1: this.productimg1,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic-submit2.php',
+                    responseType:'json',
+                    data: {
+                        productimg2: this.productimg2,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic-submit3.php',
+                    responseType:'json',
+                    data: {
+                        productimg3: this.productimg3,
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    location.reload(); //重整網頁
+                }
+            },created(){
+
+                this.geturl();
+                
+                // 查詢資料
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        this.productname = this.dataList[0].PRODUCT_NAME;
+                        this.productprice = this.dataList[0].PRICE;
+                        this.title = this.dataList[0].TITLE;
+                        this.producttype = this.dataList[0].PRODUCT_TYPE_NAME;
+                        this.stock = this.dataList[0].STOCK_QTY;
+                        this.desc = this.dataList[0].PRODUCT_DETAIL_DESC;
+                        this.start = this.dataList[0].START;
+                        this.end = this.dataList[0].END;
+                        this.status = this.dataList[0].STATUS;
+                        this.hided = this.dataList[0].HIDE;
+                        this.kind = this.dataList[0].FK_PRODUCT_TYPE_ID;
+                        this.featured = this.dataList[0].FEATURED;
+                        this.expo = this.dataList[0].FK_EXPO_ID;
+                        this.productpic = this.dataList[0].MAIN_PHOTO;
+
+                        // let status_arr = [];
+                        // res.data.forEach((item, i) => {
+                        //     if(item.STATUS == "1"){
+                        //         status_arr.push("y")
+                        //     }else{
+                        //         status_arr.push("n")
+                        //     }
+                        // })
+                        // console.log(status_arr);
+
+                        // this.status = status_arr;
+
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-size.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList2 = res.data;
+                        this.size1 = this.dataList2[0].SPEC;
+                        this.size2 = this.dataList2[1].SPEC;
+                        this.size3 = this.dataList2[2].SPEC;
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-type.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList3 = res.data;
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList4 = res.data;
+                        this.productimg1 = this.dataList4[0].PATH;
+                        console.log(this.dataList4);
+                        // console.log(this.idarr);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic2.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList5 = res.data;
+                        this.productimg2 = this.dataList5[0].PATH;
+                        console.log(this.dataList5);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-pic3.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList6 = res.data;
+                        this.productimg3 = this.dataList6[0].PATH;
+                        console.log(this.dataList6);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-detail-expo.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList7 = res.data;
+                        console.log(this.dataList7);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+            }
+        }).mount("#product-detail");
+    </script>
+    <script>
+
+        // console.log(id);
+        // let changebtn = document.querySelector(".change-btn");
+        // console.log(changebtn);
+        // for(let i=0; i<changebtn.length; i++){
+        //     changebtn[i].onclick = function(){
+        //         console.log('yes');
+        //     }
+        // }
+
+    </script>
+</body>
+</html>

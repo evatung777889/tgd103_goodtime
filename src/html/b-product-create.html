@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: yellowgreen;
+        }
+        .BBB{
+            background-color: cornflowerblue;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(130, 173, 43);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(89, 131, 211);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="product-create">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="item-name">新增商品</p>
+                    <div class="b-detail_infobox">
+                        <ul>
+                            <li>
+                                <p>商品主圖</p>
+                                <input type="file" accept=".png, .jpg, .jpeg" id="productpic"></input>
+                                <img id="mainpic" src="../img/default/default.jpg" alt="" >
+                                <button class="change-btn hidebtn" @click="checkimg">確認與預覽圖片</button>
+                            </li>
+                            <li>
+                                <p>商品頁編號</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>商品編號</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>商品名稱</p>
+                                <input type="text" class="long-input" id="productname" v-model="productname" maxlength="100">
+                            </li>
+                            <li>
+                                <p>銷售期間</p>
+                                <input type="date" name="trip-start" min="2022-01-01" max="2050-12-31" class="timeform" v-model="startdate">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" name="trip-start" min="2022-01-01" max="2050-12-31" class="timeform" v-model="enddate">
+                            </li>
+                            <li>
+                                <p>商品頁狀態</p>
+                                <input type="radio" v-model="productpage" name="productpage" value="1" id="productpage1"></input>
+                                <label class="time-area_label" for="productpage1">開啟</label>
+                                <input type="radio" v-model="productpage" name="productpage" value="2" id="productpage2"></input>
+                                <label class="time-area_label" for="productpage2">關閉</label>
+                            </li>
+                            <li>
+                                <p>商品定價</p>
+                                <input type="text" class="long-input" id="productprice" v-model="productprice" maxlength="10">
+                            </li>
+                            <li>
+                                <p>隱藏賣場</p>
+                                <input type="radio" name="hide" id="hide1" v-model="hide" value="1">
+                                <label class="time-area_label" for="hide1">開啟</label>
+                                <input type="radio" name="hide" id="hide2" v-model="hide" value="2">
+                                <label class="time-area_label" for="hide2">開啟</label>
+                            </li>
+                            <li>
+                                <p>展場</p>
+                                <select name="eventname" class="long-input" v-model="eventname" id="eventname">
+                                    <option v-for="(eventname, index) in dataList2" :value="eventname.ID">{{ eventname.TITLE }}</option>
+                                </select>   
+                            </li>
+                            <!-- <li>
+                                <p>展場編號</p>
+                                <input type="text" class="long-input" id="eventnum" v-model="eventnum">
+                            </li> -->
+                            <li>
+                                <p>產品規格</p>
+                                <input type="text" class="long-input" id="productstyle" v-model="productspec1" style="display: block; margin-top: 10px;">
+                                <input type="text" class="long-input" id="productstyle" v-model="productspec2" style="display: block; margin-top: 10px;">
+                                <input type="text" class="long-input" id="productstyle" v-model="productspec3" style="display: block; margin-top: 10px;">
+                            </li>
+                            <li>
+                                <p>商品分類</p>
+                                <select name="producttype" class="long-input" v-model="producttype" id="producttype">
+                                    <option v-for="(producttype, index) in dataList3" :value="producttype.ID">{{ producttype.PRODUCT_TYPE_NAME }}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>貨運方式</p>
+                                <span>宅配到府</span>
+                            </li>
+                            <li>
+                                <p>庫存數量</p>
+                                <input type="text" class="long-input" id="productnum" v-model="productnum">
+                            </li>
+                            <li>
+                                <p>名稱資料</p>
+                                <input type="text" class="large-input" id="productinfo1" v-model="productinfo1">
+                            </li>
+                            <li>
+                                <p>規格資料</p>
+                                <input type="text" class="large-input" id="productinfo2" v-model="productinfo2">
+                            </li>
+                            <li>
+                                <p>特色資料</p>
+                                <textarea class="large-textarea" id="productinfo3" v-model="productinfo3"></textarea>
+                            </li>
+                            <li>
+                                <p>商品描述</p>
+                                <textarea class="large-textarea" id="productdetail" v-model="productdetail"></textarea>
+                            </li>
+                            <li>
+                                <p>商品圖</p>
+                                <input type="file" accept=".png, .jpg, .jpeg" id="productpic1"></input>
+                                <img id="subpic1" src="../img/default/default.jpg" alt="" >
+                                <button class="change-btn hidebtn" @click="checkpic1">確認與預覽圖片</button>
+                                <input type="file" accept=".png, .jpg, .jpeg" id="productpic2"></input>
+                                <img id="subpic2" src="../img/default/default.jpg" alt="" >
+                                <button class="change-btn hidebtn" @click="checkpic2">確認與預覽圖片</button>
+                                <input type="file" accept=".png, .jpg, .jpeg" id="productpic3"></input>
+                                <img id="subpic3" src="../img/default/default.jpg" alt="" >
+                                <button class="change-btn hidebtn" @click="checkpic3">確認與預覽圖片</button>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn" @click="axiosPost()">上架</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+
+        const productcreate = Vue.createApp({
+            data() {
+                return {
+                    productpic:"",
+                    productname:"",
+                    startdate:"",
+                    enddate:"",
+                    productpage:"",
+                    productprice:"",
+                    hide:"",
+                    eventname:"",
+                    productnum:"",
+                    productdetail:"",
+                    producttype: "",
+
+                    productspec1: "",
+                    productspec2: "",
+                    productspec3: "",
+
+                    productinfo1: "",
+                    productinfo2: "",
+                    productinfo3: "",
+                    dataList: [],
+                    dataList2: [],
+                    dataList3: [],
+
+                    file: '',
+                    newid: "",
+
+                    productpic1:"",
+                    productpic2:"",
+                    productpic3:"",
+                    file1: '',
+                    file2: '',
+                    file3: ''
+                }
+            }, methods: {
+                axiosPost(){ // 更新資料 string MD5 php 
+                // acc == input的id / aaa == user填入的資料
+                if (this.productname == '') {
+                    alert("請輸入[商品名稱]");
+                    return false;
+                }
+                else if (this.productpage == "") {
+                    alert("請選擇[商品頁狀態]");
+                    return false;
+                }
+                else if (this.hide == '') {
+                    alert("請選擇[隱藏賣場]");
+                    return false;
+                }
+                else if (this.productprice == '') {
+                    alert("請輸入[商品價格]");
+                    return false;
+                }
+                else if (this.productdetail == '') {
+                    alert("請輸入[商品描述]");
+                    return false;
+                }
+                else if (this.productpic == '') {
+                    alert("請選擇[商品主圖]");
+                    return false;
+                }
+                else if (this.productnum == '') {
+                    alert("請輸入[商品數量]");
+                    return false;
+                }
+                else if (this.producttag == '') {
+                    alert("請選擇[商品分類]");
+                    return false;
+                }
+                else if (this.startdate == "") {
+                    alert("請選擇[商品開始銷售日]");
+                    return false;
+                }
+                else if (this.enddate == "") {
+                    alert("請選擇[商品結束銷售日]");
+                    return false;
+                }
+                else if (this.eventname == "") {
+                    alert("請選擇[商品所屬展場]");
+                    return false;
+                }
+                else if (this.productinfo1 == "") {
+                    alert("請輸入[產品資料名稱]");
+                    return false;
+                }
+                else if (this.productinfo2 == "") {
+                    alert("請輸入[產品資料規格]");
+                    return false;
+                }
+                else if (this.productinfo3 == "") {
+                    alert("請輸入[產品資料特色]");
+                    return false;
+                }
+                else{
+                    // const string = `mainphoto=${this.mainphoto}&productname=${this.productname}&start=${this.startdate}&end=${this.enddate}&productpage=${this.productpage}&productprice=${this.productprice}&hide=${this.hide}&event=${this.event}&eventnum=${this.eventnum}&productstyle=${this.productstyle}& producttag=${this. producttag}&etransport=${this.transport}&productnum=${this.productnum}&productdetail=${this.productdetail}`;
+                    // axios.post("../../php/backend/product-create.php", string)
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/product-create.php',
+                    responseType:'json',
+                    data: {
+                        productpic: this.productpic,
+                        productname: this.productname,
+                        startdate: this.startdate,
+                        enddate: this.enddate,
+                        productpage: this.productpage,
+                        productprice: this.productprice,
+                        hide: this.hide,
+                        eventname: this.eventname,
+                        productnum: this.productnum,
+                        productdetail: this.productdetail,
+                        producttype: this.producttype,
+                        productinfo1: this.productinfo1,
+                        productinfo2: this.productinfo2,
+                        productinfo3: this.productinfo3,
+                    }
+                    }).then(res => {
+                        // console.log("test");
+                        this.newid = res.data;
+
+                        // 尺寸存入
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-spec1.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productspec1: this.productspec1,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-spec2.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productspec2: this.productspec2,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-spec3.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productspec3: this.productspec3,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        // 子圖存入
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-pic1.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productpic1: this.productpic1,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-pic2.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productpic2: this.productpic2,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-pic3.php',
+                        responseType:'json',
+                        data: {
+                            newid: this.newid,
+                            productpic3: this.productpic3,
+                        }
+                        }).then(res => {
+                        }).catch(err => {
+                            console.log(err);
+                            alert("上架失敗，請再次檢查資料");
+                        })
+
+                        
+                        this.newid = res.id;
+                        console.log(this.newid);
+                        swal({
+                            icon: "success",
+                            title: "添加成功",
+                            text: "您已成功添加一筆商品",
+                            buttons: {
+                            A: {
+                                text: "繼續新增商品",
+                                value: "./b-product-create.html",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "回商品管理頁面",
+                                visible: true,
+                                className:'BBB',
+                                value: "./b-product.html"
+                            }
+                            }
+                        }).then((value) => {
+                            location.assign(`${value}`)
+                        });
+                    // this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                        alert("上架失敗，請再次檢查資料");
+                    })
+
+                    // console.log(typeof this.newid);
+                    // let newid = Number(this.newid)
+                    // console.log(typeof newid);
+
+                    
+
+
+                    
+                    //主圖上傳
+                    let file = document.getElementById("productpic").files[0];
+
+                    this.file = file;
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-upload.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        }
+                    })
+
+
+                    // 子圖上傳
+                    let file1 = document.getElementById("productpic1").files[0];
+
+                    this.file1 = file1;
+                    let formData1 = new FormData();
+                    formData1.append('file', this.file1);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-upload.php',
+                        data: formData1,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        }
+                    })
+
+                    let file2 = document.getElementById("productpic2").files[0];
+
+                    this.file2 = file2;
+                    let formData2 = new FormData();
+                    formData2.append('file', this.file2);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-upload.php',
+                        data: formData2,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        }
+                    })
+
+                    let file3 = document.getElementById("productpic3").files[0];
+
+                    this.file3 = file3;
+                    let formData3 = new FormData();
+                    formData3.append('file', this.file3);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/product-create-upload.php',
+                        data: formData3,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        }
+                    })
+
+                    
+                }
+                   
+                },
+                checkimg(e){
+                    let pic = e.target.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productpic = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#mainpic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                },
+                checkpic1(e){
+                    let pic = e.target.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productpic1 = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#subpic1').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                },
+                checkpic2(e){
+                    let pic = e.target.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productpic2 = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#subpic2').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                },
+                checkpic3(e){
+                    let pic = e.target.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.productpic3 = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#subpic3').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                },
+            }, created() {
+
+                    axios.get("../../php/backend/product-create-expo.php").then(res => {
+                        this.dataList2 = res.data;
+                        // console.log(this.dataList[0].ID);
+                        console.log(this.dataList2);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios.get("../../php/backend/product-create-type.php").then(res => {
+                        this.dataList3 = res.data;
+                        // console.log(this.dataList[0].ID);
+                        console.log(this.dataList3);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+            }
+        }).mount("#product-create");
+    </script>
+</body>
+</html>

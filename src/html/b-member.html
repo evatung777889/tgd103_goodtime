@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: rgb(34, 145, 48);
+            transition: all 0.3s;
+        }
+        .BBB{
+            background-color: rgb(185, 45, 68);
+            transition: all 0.3s;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(25, 107, 36);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(141, 35, 52);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-member" id="member">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">會員查詢</p>
+                    <p class="gray-text">*以下欄位如留空則預設為全部</p>
+                    <div class="member_search-bar">
+                        <p style="font-weight: 800;
+                        letter-spacing: .2rem;">查詢條件</p>
+                        <ul>
+                            <li>
+                                <p>會員分類</p>
+                                <select name="member-kind" class="news-kind" v-model="memberkind" id="memberkind">
+                                    <option value="%" selected>會員權限選擇</option>
+                                    <option v-for="(memberkind, index) in dataList2"  :value="memberkind.ID">{{ memberkind.DESC }}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>會員狀態</p>
+                                <form action="" class="news-state">
+                                    <input type="radio" name="time-area" value="%" v-model="memberverify" id="memberverify1"><label class="time-area_label" for="memberverify1"> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="memberverify" id="memberverify2"><label class="time-area_label" for="memberverify2"> 開啟</label>
+                                    <input type="radio" name="time-area" value="2" v-model="memberverify" id="memberverify3"><label class="time-area_label" for="memberverify3"> 關閉</label>
+                                </form>
+                            </li>
+                            <li>
+                                <p>會員編號</p>
+                                <input type="text" class="long-input" id="memberid" v-model="memberid">
+                            </li>
+                            <li>
+                                <p>會員名稱</p>
+                                <input type="text" class="long-input" id="membername" v-model="membername">
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="search-btn" @click="axiosPost()">查詢</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="info-box">
+                                    <p>會員列表</p>
+                                    <ul>
+                                        <li class="first-title">
+                                            <div>
+                                                <div><h6>會員編號</h6></div>
+                                                <div><h6>會員名稱</h6></div>
+                                                <div><h6>權限代碼</h6></div>
+                                                <div><h6>會員狀態</h6></div>
+                                                <div><h6>聯絡郵箱</h6></div>
+                                                <div><h6>操作</h6></div>
+                                            </div> 
+                                        </li>
+                                        <li class="" v-for="(b_member, index) in dataList" :key="index">
+                                            <a :href="'b-member-detail.html?ID='+b_member.ID">
+                                                <div class="flex-box">
+                                                    <div><h6>{{ b_member.ID }}</h6></div>
+                                                    <div><h6>{{ b_member.USERNAME }}</h6></div>
+                                                    <div><h6>
+                                                        <!-- {{ b_member.FK_ROLE_ID }} -->
+                                                        <span v-for="verify, index) in arr2[index]" :key="index">{{ verify }}</span>
+                                                    </h6></div>
+                                                    <div><h6>
+                                                        <!-- <input type="radio" v-model="arr[index]" value="1" :id="b_member.ID + 'a'" :name=b_member.ID><label class="" :for="b_member.ID + 'a'">開啟</label>
+                                                        <br>
+                                                        <input type="radio" v-model="arr[index]" value="2" :id="b_member.ID + 'b'" :name=b_member.ID><label class="" :for="b_member.ID + 'b'">關閉</label> -->
+                                                        <span v-for="(status, index) in arr[index]" :key="index">{{ status }}</span>
+                                                    </h6></div>
+                                                    <div><h6>{{ b_member.EMAIL }}</h6></div>
+                                                    <div><h6>
+                                                        <button><i class="fa-solid fa-magnifying-glass"></i> 查看會員</button>
+                                                        <button @click="deleteitem" :value="b_member.ID"><i class="fa-solid fa-pen-nib"></i> 更改會員狀態</button>
+                                                    </h6></div>
+                                                </div>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        //掛載資料庫
+        const member = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList2: [],
+                    arr: [],
+                    arr2: [],
+                    memberkind: "%",
+                    memberverify: "1",
+                    memberid: "",
+                    membername: "",
+
+                    idvalue: ""
+                }
+            }, methods:{
+                axiosPost() {
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/membersearch.php',
+                    responseType:'json',
+                    data: {
+                        memberkind: this.memberkind,
+                        memberverify: this.memberverify,
+                        memberid: this.memberid,
+                        membername: this.membername,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        
+                        let mem_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.VERIFY == "1"){
+                                mem_arr.push("開啟")
+                            }else{
+                                mem_arr.push("關閉")
+                            }
+                        })
+
+                        this.arr = mem_arr;
+
+                        console.log(this.memberkind);
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                deleteitem(e){
+
+                    e.preventDefault();
+
+                    let idvalue = e.target.value;
+
+                    swal({
+                            icon: "warning",
+                            title: "更改會員狀態",
+                            text: "您確定要更改此會員狀態?",
+                            buttons: {
+                            A: {
+                                text: "開啟",
+                                value: "1",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "關閉",
+                                visible: true,
+                                className:'BBB',
+                                value: "2"
+                            }
+                            }
+                        });
+                        document.querySelector(".swal-button--A").onclick = function(e){
+                            axios({
+                            method: 'post',
+                            url: '../../php/backend/member-open.php',
+                            responseType:'json',
+                            data: {
+                                idvalue: idvalue,
+                            }
+                            }).then(res => {
+                                location.reload();
+                            }).catch(err => {
+                                console.log(err);
+                            });
+                        }
+                        document.querySelector(".swal-button--B").onclick = function(e){
+                            axios({
+                            method: 'post',
+                            url: '../../php/backend/member-close.php',
+                            responseType:'json',
+                            data: {
+                                idvalue: idvalue,
+                            }
+                            }).then(res => {
+                                location.reload();
+                            }).catch(err => {
+                                console.log(err);
+                            });
+                        }
+
+
+            // console.log(btnaaa);
+            // btnaaa.addEventListener('click', function(e){
+            //     console.log("aaa");
+            // });
+            // let btnbbb = document.getElementsByClassName("swal-button--BBB");
+            // btnaaa.addEventListener('click', function(e){
+            //     console.log("bbb");
+            // })
+            }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/member.php").then(res => {
+                        this.dataList = res.data;
+                        console.log(this.dataList);
+
+
+                        let mem_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.VERIFY == "1"){
+                                mem_arr.push("開啟")
+                            }else{
+                                mem_arr.push("關閉")
+                            }
+                        })
+                        // console.log(mem_arr);
+
+                        this.arr = mem_arr;
+
+                        let mem_arr2 = [];
+                        res.data.forEach((item, i) => {
+                            if(item.FK_ROLE_ID == "1"){
+                                mem_arr2.push("管理員")
+                            }else{
+                                mem_arr2.push("一般會員")
+                            }
+                        })
+                        // console.log(mem_arr);
+
+                        this.arr2 = mem_arr2;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios.get("../../php/backend/member-searchbar-fix.php").then(res => {
+                        this.dataList2 = res.data;
+                        // console.log(this.dataList[0].ID);
+                        console.log(this.dataList2);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+        }).mount("#member");
+    </script>
+</body>
+</html>

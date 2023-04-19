@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&family=Philosopher:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="/css/new.css" /> -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>最新消息 - 韶光文創園區</title>
+  </head>
+
+  <body>
+    <header id="header"></header>
+
+    <div id="news" class="warpper-news">
+      <!-- 麵包屑 -->
+      <ul class="breadcrumb">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="new.html">最新消息</a></li>
+      </ul>
+      <!-- 最新消息 -->
+      <div class="banner">
+        <div
+          class="banner__img"
+          style="background-image: url(../img/new/new.jpg)"
+        >
+          <div class="banner__textarea">
+            <div class="banner__eng">NEWS</div>
+            <div class="banner__zh">最新消息</div>
+          </div>
+        </div>
+      </div>
+      <!-- 公告區 -->
+      <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" @click="setStatus('園區公告')"/>
+        <label for="tab1">園區公告</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" @click="setStatus('展演資訊')"/>
+        <label for="tab2">展演資訊</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" @click="setStatus('其他消息')"/>
+        <label for="tab3">其他消息</label>
+      </div>
+
+      <div class="tab-panels">
+        <ul class="tab-panel">
+          <li v-for="(news,index) in currentList"  v-show="setPaginate(index)"><!-- v-show渲染該頁的畫面 -->
+            <a :href="'news_detail.html?ID='+news.ID">
+              <small>{{news.EDIT_DATE}} | {{news.DESC}}</small>
+              <h4>【{{news.DESC}}】{{news.TITLE}}</h4>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="pagination">
+        <a href="#" v-if="this.current == paginate_total" @click.prevent="current--"><</a>
+        <a href="#" class="btn btn-default" :class="{'-on': this.current == page_index}"
+          v-for="page_index in paginate_total" @click.prevent="updateCurrent(page_index)">
+          {{ page_index }}
+        </a>
+
+        <a href="#" v-if="this.current != paginate_total" @click.prevent="current++">></a>
+      </div>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/new.js"></script>
+    <script>
+      // header and footer
+      $(() => {
+        $("#header").load("topbar.html");
+        $("#footer").load("footer.html");
+      });
+    </script>
+  </body>
+</html>

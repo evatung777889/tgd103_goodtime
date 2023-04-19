@@ -1,0 +1,14 @@
+/* <textarea class="remark" 
+    placeholder="有什麼想告訴我們？" cols="30" rows="10"></textarea> */
+
+.remark{
+    width: 80%;
+    height: 100px;
+    outline: 0;
+    border: 1px solid $secondary5-color;
+    color: $secondary4-color;
+    padding: 5px;
+    border-radius: 3px;
+    resize: none;
+}
+

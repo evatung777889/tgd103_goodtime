@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>會員登入 - 韶光文創園區</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="log_in-wrapper">
+      <div class="log_in-bg">
+        <div class="log_in-login-box">
+          <h2>LOG IN</h2>
+          <h3>會員登入</h3>
+        </div>
+        <div class="log_in-login-content">
+          <div class="log_in-login-width">
+            <div class="ctrl-google" style="display: none;">
+              <!-- Google API -->
+              <!-- 控制資料相關的屬性 -->
+              <div
+                id="g_id_onload"
+                data-client_id="109499045878-l5n90dtu4ugrq6h6pte165v838tt10j8.apps.googleusercontent.com"
+                data-callback="handleCallback"
+              ></div>
+
+              <!-- 控制登入按鈕的顯示 -->
+              <div
+                class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left"
+              ></div>
+            </div>
+            <p class="log_in-or" style="display: none">or</p>
+            <div class="log_in-dotted-line">
+              <div id="log_in">
+                <div>
+                  <p>帳號</p>
+                  <input
+                    type="text"
+                    v-model="user_email"
+                    class="user_email"
+                    name="user_email"
+                    id="user_email"
+                  />
+                </div>
+                <div>
+                  <p>密碼</p>
+                  <input
+                    type="password"
+                    v-model="user_password"
+                    class="user_password"
+                    name="user_password"
+                    id="user_password"
+                  />
+                </div>
+                <div class="btn__ctn">
+                  <button id="goApplyForm" class="button" @click="textTosend">
+                    <span>會員登入</span>
+                  </button>
+
+                  <div class="log_in-last-line">
+                    <ul>
+                      <li>
+                        <a href="sign_up.html" class="log_in-signup"
+                          >註冊會員</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="./forgot-pwd.html"
+                          class="log_in-foreget-pwd"
+                          >忘記密碼</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/LogIn.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -1,2 +1,8 @@
++css/style.css
++css/style.css.map
++
+ /css/style.css
+-/css/style.css.map
+\ No newline at end of file
++/css/style.css.map
++
++./css/style.css
++./css/style.css.map
+\ No newline at end of file

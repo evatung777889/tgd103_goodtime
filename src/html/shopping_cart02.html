@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>填寫資料 - 韶光文創園區</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Ephesis&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header id="header"></header>
+
+    <main class="shopping__cart02__wrapper" id="checkout">
+        <!-- 上方進度條 -->
+        <div class="top">
+            <ul class="top__nav">
+                <li>
+                    <div class="top__nav__num num__now">1</div>
+                    <p class="text__now">購物車</p>
+                </li>
+
+                <li>
+                    <div class="top__nav__num num__now">2</div>
+                    <p class="text__now">填寫資料</p>
+                </li>
+
+                <li>
+                    <div class="top__nav__num">3</div>
+                    <p>訂單確認</p>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="cart__info">
+            <h1 class="subtitle">
+                <em>購物車</em>
+            </h1>
+
+            <!-- 導覽列 -->
+            <ul class="cart__info__nav">
+                <li>商品資料</li>
+                <li>單價</li>
+                <li>數量</li>
+                <li>小計</li>
+            </ul>
+
+            <!-- 商品明細 -->
+            <template v-if="itm!=[]" v-for="(prod, idx) in itm" :key="'prod'+idx">
+                <ul class="product__list">
+                    <li>
+                        <img :src="prod.MAIN_PHOTO" alt="">
+                    </li>
+                    <li>
+                        <h2>{{prod.PRODUCT_NAME}}</h2>
+                        <p>{{prod.SPEC}}</p>
+                    </li>
+                    <li>
+                        <h2>NT${{prod.PRICE}}</h2>
+                    </li>
+                    <li>
+                        <span class="none">數量：</span>
+                        <h2>{{prod.QTY}}</h2>
+                    </li>
+                    <li>
+                        <h2>NT${{prod.PRICE * prod.QTY}}</h2>
+                    </li>
+                </ul>
+            </template>
+            <template v-if="tkt!=[]" v-for="(pass, idx) in tkt" :key="'pass'+idx">
+                <ul class="product__list">
+                    <li>
+                        <img :src="pass.MAIN_PHOTO" alt="">
+                    </li>
+                    <li>
+                        <h2>{{pass.TITLE}}</h2>
+                        <p>{{ticketType(pass)}}</p>
+                    </li>
+                    <li>
+                        <h2>NT${{pass.EXPO_PRICE}}</h2>
+                    </li>
+                    <li>
+                        <span class="none">數量：</span>
+                        <h2>{{pass.QTY}}</h2>
+                    </li>
+                    <li>
+                        <h2>NT${{pass.EXPO_PRICE * pass.QTY}}</h2>
+                    </li>
+                </ul>
+            </template>
+            <!---------- 測試用 ----------------->
+
+            <!-- <ul class="product__list">
+                <li>
+                    <img src="./img/shopping_cart1_2.png" alt="">
+                </li>
+
+                <li>
+                    <h2>聖多諾黑</h2>
+                    <p>4吋</p>
+                </li>
+
+                <li>
+                    <h2>NT$600</h2>
+                </li>
+
+                <li>
+                    <span class="none">數量：</span>
+                    <h2>1</h2>
+                </li>
+
+                <li>
+                    <h2>NT$600</h2>
+                </li>
+
+            </ul> -->
+
+
+        </div>
+
+        <!-- 訂單資訊(總計) -->
+        <div class="summary">
+
+            <div class="subtotal">
+                <p>小計：</p>
+                <p>NT${{subtotal}}</p>
+            </div>
+
+            <div class="freight">
+                <p>運費：</p>
+                <p>NT$60</p>
+            </div>
+
+            <div class="total">
+                <p>合計：</p>
+                <p>NT${{subtotal +60}}</p>
+            </div>
+
+        </div>
+
+        <!-- 下方詳細資訊 -->
+        <section class="detail">
+
+            <!-- 左方資訊 -->
+            <div class="left">
+
+                <!------- 顧客資料 -------->
+                <h1 class="subtitle">
+                    <em>顧客資料</em>
+                </h1>
+
+                <ul class="name">
+                    <li>顧客姓名</li>
+                    <li class="member__info">{{member.USERNAME}}</li>
+                </ul>
+
+                <ul class="email">
+                    <li>電子信箱</li>
+                    <li class="member__info">{{member.EMAIL}}</li>
+                </ul>
+
+                <ul class="mobile">
+                    <li>聯絡電話</li>
+                    <li class="member__info">{{member.PHONE}}</li>
+                </ul>
+
+                <!-------- 訂單備註 -------->
+                <h1 class="subtitle">
+                    <em>訂單備註</em>
+                </h1>
+
+                <textarea class="remark" placeholder="有什麼想告訴我們？" cols="30" rows="10"></textarea>
+
+                <!-------- 訂購須知 -------->
+                <h1 class="subtitle">
+                    <em>訂購須知</em>
+                </h1>
+
+                <ul class="notice">
+                    <li>付款完成後才算訂單成立，最快取貨日為下單當天+４日</li>
+                    <li>訂單狀態／商品缺貨等通知皆會先以E-MAIL電子郵件通知</li>
+                    <li>黑貓宅配運送天數約1-2天，遇特殊節日無法選擇到貨日</li>
+                </ul>
+
+            </div>
+
+
+            <!-- 右方資訊 -->
+            <div class="right">
+
+                <!------- 送貨資料 -------->
+                <h1 class="subtitle">
+                    <em>送貨資料</em>
+                </h1>
+
+                <h2>已選擇的送貨方式<span>宅配</span></h2>
+
+                <label for="check">
+                    <input type="checkbox" class="check" id="check" @click="atCheck"
+                        :checked="buyName === member.USERNAME && buyTel === member.PHONE">收件人資料與顧客資料相同
+                </label>
+
+                <!-- 收件人名稱 -->
+                <div class="name">
+                    <h2>收件人名稱</h2>
+                    <input type="text" class="name" placeholder="收件人姓名" v-model="buyName">
+                    <p>請填入收件人真實姓名，以確保順利收件</p>
+                </div>
+
+
+                <!-- 收件人電話 -->
+                <div class="phone">
+                    <h2>收件人電話號碼</h2>
+                    <input type="text" class="phone" placeholder="收件人電話" v-model="buyTel">
+                </div>
+
+
+                <!-- 到貨時間 -->
+                <div class="time">
+                    <h2>到貨時間</h2>
+                    <p class="time__text">
+                        指定到貨日四天前須告知要取消訂單，<br>
+                        四天內，則不受理取消/更改訂單。
+                    </p>
+
+                    <input type="date" class="date" placeholder="YYYY/MM/DD">
+                </div>
+
+                <!---------------------------->
+                <h1 class="subtitle">
+                    <em>付款資料</em>
+                </h1>
+
+                <ul class="credit">
+                    <li>
+                        <h2>付款方式</h2>
+                        <select class="pay">
+                            <option value="">信用卡(VISA/Master/JCB)</option>
+                        </select>
+                    </li>
+
+                    <!-- <li>
+                        <input type="text" placeholder="卡號">
+                    </li>
+
+                    <li>
+                        <input type="text" placeholder="持卡人姓名">
+                    </li>
+
+                    <li>
+                        <input type="text" placeholder="有效期(MM/YY)">
+                    </li>
+
+                    <li>
+                        <input type="text" placeholder="安全碼">
+                    </li> -->
+
+                </ul>
+
+                <!-- 提交訂單按鈕 -->
+                <div class="btn__ctn">
+                    <div href="shopping_cart03.html">
+                        <button id="goApplyForm" class="button" @click="checkout">
+                            <span>提交訂單</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+
+
+    </main>
+
+
+    <footer id="footer"></footer>
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        // header & footer
+        $(() => {
+            $("#header").load("topbar.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/checkout.js"></script>
+</body>
+
+</html>

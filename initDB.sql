@@ -1,0 +1,355 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PRODUCT_TYPE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`PRODUCT_TYPE` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '商品類型編號',
+  `NAME` VARCHAR(45) NOT NULL COMMENT '商品類型名稱',
+  `DESC` VARCHAR(100) NULL COMMENT '商品類型描述',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`SUPPLIER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`SUPPLIER` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '供應商編號',
+  `NAME` VARCHAR(45) NOT NULL COMMENT '供應商名稱',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PAGE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`PAGE` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '頁面編號',
+  `TYPE` VARCHAR(45) NOT NULL COMMENT '頁面類型',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PRODUCT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`PRODUCT` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '商品編號',
+  `NAME` VARCHAR(100) NOT NULL COMMENT '商品名稱',
+  `PERIOD` VARCHAR(35) NOT NULL COMMENT '銷售期間',
+  `STATUS` TINYINT(1) NOT NULL COMMENT '商品頁狀態',
+  `HIDE` TINYINT(1) NOT NULL COMMENT '隱藏賣場',
+  `PRICE` MEDIUMINT NOT NULL COMMENT '商品單價',
+  `DESC` JSON NULL COMMENT '商品描述',
+  `MAIN_PHOTO` JSON NULL COMMENT '商品主圖',
+  `STOCK_QTY` SMALLINT NOT NULL COMMENT '庫存數量',
+  `MAX_QTY` TINYINT NOT NULL COMMENT '最大下單數量',
+  `CREATE_DATE` TIMESTAMP NOT NULL COMMENT '商品新增日期',
+  `EDIT_DATE` TIMESTAMP NOT NULL COMMENT '商品編輯日期',
+  `FK_PRODUCT_PAGE_ID` INT NOT NULL COMMENT 'FK_頁面編號',
+  `FK_SUPPLIER_ID` INT NULL COMMENT 'FK_供應商編號',
+  `FK_PRODUCT_TYPE_ID` INT NOT NULL COMMENT 'FK_商品類型編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_PAGE_ID_idx` (`FK_PRODUCT_TYPE_ID` ASC) VISIBLE,
+  INDEX `FK_SUPPLIER_ID_idx` (`FK_SUPPLIER_ID` ASC) VISIBLE,
+  INDEX `FK_PAGE_ID_idx1` (`FK_PRODUCT_PAGE_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_PRODUCT_TYPE_ID`
+    FOREIGN KEY (`FK_PRODUCT_TYPE_ID`)
+    REFERENCES `mydb`.`PRODUCT_TYPE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_SUPPLIER_ID`
+    FOREIGN KEY (`FK_SUPPLIER_ID`)
+    REFERENCES `mydb`.`SUPPLIER` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PRODUCT_PAGE_ID`
+    FOREIGN KEY (`FK_PRODUCT_PAGE_ID`)
+    REFERENCES `mydb`.`PAGE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ADDRESS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`ADDRESS` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '地址編號',
+  `ZIP` VARCHAR(5) NOT NULL,
+  `REGION` VARCHAR(45) NOT NULL COMMENT '省市',
+  `DISTRICT` VARCHAR(45) NOT NULL COMMENT '區域',
+  `LOCATION` VARCHAR(256) NOT NULL COMMENT '詳細地址',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ROLE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`ROLE` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `DESC` VARCHAR(45) NOT NULL COMMENT '權限描述',
+  `INDEX` VARCHAR(45) NOT NULL COMMENT '後台首頁',
+  `INDEX_LEVEL` TINYINT NOT NULL COMMENT '首頁權限',
+  `OVERVIEW` VARCHAR(45) NOT NULL COMMENT '後台銷售狀況',
+  `OVERVIEW_LEVEL` TINYINT NOT NULL COMMENT '銷售概況權限',
+  `PO` VARCHAR(45) NOT NULL COMMENT '後台訂單頁',
+  `PO_LEVEL` TINYINT NOT NULL COMMENT '訂單頁權限',
+  `PRODUCT` VARCHAR(45) NOT NULL COMMENT '後台商品頁',
+  `PRODUCT_LEVEL` TINYINT NOT NULL COMMENT '商品頁權限',
+  `INFO` VARCHAR(45) NOT NULL COMMENT '後台消息頁',
+  `INFO_LEVEL` TINYINT NOT NULL COMMENT '消息頁權限',
+  `RENTAL` VARCHAR(45) NOT NULL COMMENT '後台場地頁',
+  `RENTAL_LEVEL` TINYINT NOT NULL COMMENT '埸地頁權限',
+  `MEMBER` VARCHAR(45) NOT NULL COMMENT '後台會員頁',
+  `MEMBER_LEVEL` TINYINT NOT NULL COMMENT '會員頁權限',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`MEMBER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`MEMBER` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '會員編號',
+  `USERNAME` VARCHAR(100) NOT NULL COMMENT '會員名稱',
+  `EMAIL` VARCHAR(100) NOT NULL COMMENT '會員電郵',
+  `PASSWORD` VARCHAR(45) NOT NULL COMMENT '會員密碼',
+  `PHONE` VARCHAR(10) NOT NULL COMMENT '會員電話',
+  `VERIFY` TINYINT(1) NOT NULL COMMENT '會員狀態',
+  `FK_ADDRESS_ID` INT NOT NULL COMMENT '會員地址編號',
+  `FK_ROLE_ID` INT NOT NULL COMMENT '會員權限代碼',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_ADDRESS_ID_idx` (`FK_ADDRESS_ID` ASC) VISIBLE,
+  INDEX `FK_ROLE_ID_idx` (`FK_ROLE_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_ADDRESS_ID`
+    FOREIGN KEY (`FK_ADDRESS_ID`)
+    REFERENCES `mydb`.`ADDRESS` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ROLE_ID`
+    FOREIGN KEY (`FK_ROLE_ID`)
+    REFERENCES `mydb`.`ROLE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`INFO_TYPE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`INFO_TYPE` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '消息類型',
+  `DESC` VARCHAR(100) NOT NULL COMMENT '消息類型描述',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`INFO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`INFO` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '消息編號',
+  `TITLE` VARCHAR(100) NOT NULL COMMENT '消息標題',
+  `CONTENT` JSON NULL COMMENT '消息內文',
+  `MAIN_PHOTO` JSON NULL COMMENT '消息主圖',
+  `PERIOD` VARCHAR(35) NOT NULL COMMENT '公告期間',
+  `STATUS` TINYINT(1) NOT NULL COMMENT '消息頁狀態',
+  `CREATE_DATE` TIMESTAMP NOT NULL COMMENT '新增日期',
+  `EDIT_DATE` TIMESTAMP NOT NULL COMMENT '最後編輯日期',
+  `FK_INFO_PAGE_ID` INT NOT NULL COMMENT 'FK_消息頁編號',
+  `FK_INFO_TYPE_ID` INT NOT NULL COMMENT 'FK_消息頁類型編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_PAGE_ID_idx` (`FK_INFO_PAGE_ID` ASC) VISIBLE,
+  INDEX `FK_INFO_TYPE_ID_idx` (`FK_INFO_TYPE_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_INFO_PAGE_ID`
+    FOREIGN KEY (`FK_INFO_PAGE_ID`)
+    REFERENCES `mydb`.`PAGE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_INFO_TYPE_ID`
+    FOREIGN KEY (`FK_INFO_TYPE_ID`)
+    REFERENCES `mydb`.`INFO_TYPE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`LOCATION`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`LOCATION` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '場地編號',
+  `NAME` VARCHAR(45) NOT NULL COMMENT '場地名稱',
+  `PRICE` MEDIUMINT NOT NULL COMMENT '出租訂價',
+  `DESC` JSON NOT NULL COMMENT '場地描述',
+  `DEVICE` VARCHAR(256) NOT NULL COMMENT '場地設備',
+  `RULE` VARCHAR(256) NOT NULL COMMENT '場地規範',
+  `AREA` VARCHAR(128) NOT NULL COMMENT '場地空間',
+  `MAIN_PHOTO` JSON NOT NULL COMMENT '場地主圖',
+  `LOCATED` VARCHAR(64) NOT NULL COMMENT '場地位置',
+  `STATUS` TINYINT(1) NOT NULL COMMENT '開放預約狀態',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`BOOKING`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`BOOKING` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '預約編號',
+  `PRICE` MEDIUMINT NOT NULL COMMENT '單價',
+  `STATUS` TINYINT NOT NULL COMMENT '預約狀態',
+  `STATUS_DATE` TIMESTAMP NOT NULL COMMENT '預約狀態更新日期',
+  `STATUS_REASON` VARCHAR(128) NOT NULL COMMENT '預約狀態原因',
+  `START_DATE` DATE NOT NULL COMMENT '開始使用日期',
+  `END_DATE` DATE NOT NULL COMMENT '最後使用日期',
+  `BOOKING_NOTE` VARCHAR(256) NULL COMMENT '預約備註',
+  `CS_BOOKING_NOTE` VARCHAR(256) NULL COMMENT '客服預約備註',
+  `CREATE_DATE` TIMESTAMP NOT NULL COMMENT '下單日期',
+  `FK_BOOKING_MEMBER_ID` INT NOT NULL COMMENT 'FK_會員編號',
+  `FK_LOCATION_ID` INT NOT NULL COMMENT 'FK_場地編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_MEMBER_ID_idx` (`FK_BOOKING_MEMBER_ID` ASC) VISIBLE,
+  INDEX `FK_LOCATION_ID_idx` (`FK_LOCATION_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_BOOKING_MEMBER_ID`
+    FOREIGN KEY (`FK_BOOKING_MEMBER_ID`)
+    REFERENCES `mydb`.`MEMBER` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_LOCATION_ID`
+    FOREIGN KEY (`FK_LOCATION_ID`)
+    REFERENCES `mydb`.`LOCATION` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`PO` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '主單編號',
+  `AMOUNT` MEDIUMINT NOT NULL COMMENT '總金額',
+  `FREIGHT` SMALLINT NOT NULL COMMENT '運費',
+  `ETD` DATE NOT NULL,
+  `SHIP_DATE` DATE NULL,
+  `BL` VARCHAR(45) NULL,
+  `STATUS` TINYINT NOT NULL,
+  `STATUS_DATE` TIMESTAMP NOT NULL,
+  `STATUS_REASON` VARCHAR(128) NULL,
+  `PO_NOTE` VARCHAR(256) NULL,
+  `CS_PO_NOTE` VARCHAR(256) NULL,
+  `CREATE_DATE` TIMESTAMP NOT NULL,
+  `FK_PO_MEMBER_ID` INT NOT NULL COMMENT 'FK_會員編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_MEMBER_ID_idx` (`FK_PO_MEMBER_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_PO_MEMBER_ID`
+    FOREIGN KEY (`FK_PO_MEMBER_ID`)
+    REFERENCES `mydb`.`MEMBER` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PO_DETAIL`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`PO_DETAIL` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '訂單編號',
+  `ETD` DATE NOT NULL COMMENT '預計出貨日',
+  `SHIP_DATE` DATE NULL COMMENT '實際出貨日',
+  `BL` VARCHAR(45) NULL COMMENT '物流單號',
+  `STATUS` TINYINT NOT NULL COMMENT '訂單狀態',
+  `STATUS_DATE` TIMESTAMP NOT NULL COMMENT '訂單狀態更新日期',
+  `STATUS_REASON` VARCHAR(128) NULL COMMENT '訂單狀態原因',
+  `PO_NOTE` VARCHAR(256) NULL COMMENT '訂單備註',
+  `CS_PO_NOTE` VARCHAR(256) NULL COMMENT '客服訂單備註',
+  `CREATE_DATE` TIMESTAMP NOT NULL COMMENT '下單日期',
+  `FK_PO_DETAIL_PRODUCT_ID` INT NOT NULL COMMENT 'FK_商品編號',
+  `UNIT_PRICE` MEDIUMINT NOT NULL COMMENT '單價',
+  `QTY` TINYINT NOT NULL COMMENT '下單數量',
+  `FK_PO_DETAIL_PO_ID` INT NOT NULL COMMENT 'FK_訂單_訂單編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_PRODUCT_ID_idx` (`FK_PO_DETAIL_PRODUCT_ID` ASC) VISIBLE,
+  INDEX `FK_PO_ID_idx` (`FK_PO_DETAIL_PO_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_PO_DETAIL_PRODUCT_ID`
+    FOREIGN KEY (`FK_PO_DETAIL_PRODUCT_ID`)
+    REFERENCES `mydb`.`PRODUCT` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PO_DETAIL_PO_ID`
+    FOREIGN KEY (`FK_PO_DETAIL_PO_ID`)
+    REFERENCES `mydb`.`PO` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`CART`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`CART` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT '購物車編號',
+  `QTY` SMALLINT NOT NULL COMMENT '數量',
+  `CART_DATE` TIMESTAMP NOT NULL COMMENT '加入購物車日期',
+  `FK_CART_MEMBER_ID` INT NOT NULL COMMENT '會員編號',
+  `FK_CART_PRODUCT_ID` INT NOT NULL COMMENT '商品編號',
+  PRIMARY KEY (`ID`),
+  INDEX `FK_MEMBER_ID_idx` (`FK_CART_MEMBER_ID` ASC) VISIBLE,
+  INDEX `FK_PRODUCT_ID_idx` (`FK_CART_PRODUCT_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_CART_MEMBER_ID`
+    FOREIGN KEY (`FK_CART_MEMBER_ID`)
+    REFERENCES `mydb`.`MEMBER` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_CART_PRODUCT_ID`
+    FOREIGN KEY (`FK_CART_PRODUCT_ID`)
+    REFERENCES `mydb`.`PRODUCT` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`EXPO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`EXPO` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `TITLE` VARCHAR(128) NOT NULL,
+  `CONTENT` JSON NULL,
+  `MAIN_PHOTO` JSON NULL,
+  `FK_EXPO_PAGE_ID` INT NOT NULL,
+  `START_DATE` DATE NOT NULL,
+  `END_DATE` DATE NOT NULL,
+  `CREATE_DATE` TIMESTAMP NOT NULL,
+  `EDIT_DATE` TIMESTAMP NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `FK_PAGE_ID_idx` (`FK_EXPO_PAGE_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_EXPO_PAGE_ID`
+    FOREIGN KEY (`FK_EXPO_PAGE_ID`)
+    REFERENCES `mydb`.`PAGE` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

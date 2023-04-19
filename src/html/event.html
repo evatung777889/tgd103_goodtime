@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&family=Philosopher:ital@1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>展演活動 - 韶光文創園區</title>
+  <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <header id="header"></header>
+
+  <div class="warpper-event-all">
+    <!-- 麵包屑 -->
+    <ul class="breadcrumb">
+      <li><a href="./index.html">首頁</a></li>
+      <li><a href="./event.html">展演活動</a></li>
+    </ul>
+
+    <!-- 輪播圖 -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <a href="#" class="swiper-slide" style="background-image: url(../img/event/event-main1.png)"></a>
+        <a href="#" class="swiper-slide" style="background-image: url(../img/event/event-main2.png)"></a>
+        <a href="#" class="swiper-slide" style="background-image: url(../img/event/event-main3.png)"></a>
+        <a href="#" class="swiper-slide" style="background-image: url(../img/event/event-main4.png)"></a>
+        <a href="#" class="swiper-slide" style="background-image: url(../img/event/event-main5.png)"></a>
+      </div>
+      <div class="swiper-button-next">
+        <i class="fa-solid fa-circle-arrow-right"></i>
+      </div>
+      <div class="swiper-button-prev">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- 展演活動 -->
+    <div class="banner">
+      <div class="">
+        <div class="banner__textarea">
+          <div class="banner__eng">EXHIBITION &<br />EVENT</div>
+          <div class="banner__zh">展演活動</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 展演區 -->
+    <div class="exhibition-event" id="eventApp">
+      <template v-for="(event, idx) in eventList" :key="'evt'+idx" v-show="setPaginate(index)">
+        <ul class="eventshow">
+          <li>
+            <a :href="'./event_detail.html?eid=' + event.ID">
+              <img :src="event.MAIN_PHOTO" alt="" />
+              <p>{{event.TAG1}}</p>
+              <p>{{event.TAG2}}</p>
+              <h6>{{event.TITLE}}</h6>
+              <p>{{event.START_DATE}} - {{event.END_DATE}}</p>
+              <p>11:00AM - 7:00PM</p>
+            </a>
+          </li>
+        </ul>
+      </template>
+    
+        <!-- <ul class="eventshow-2">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event2.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《國際婚紗展》2023台北國際婚紗展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-3">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event3.png" alt="" />
+            <p>吉卜力特展</p>
+            <p>波妞造型手做麻糬</p>
+            <h6>《崖下的波妞》十周年特展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-4">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event4.png" alt="" />
+            <p>吉卜力特展</p>
+            <p>台灣限定週邊</p>
+            <h6>《新海城》童話特展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-5">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event5.png" alt="" />
+            <p>插畫特展</p>
+            <p>台灣限定週邊絲巾</p>
+            <h6>《ヒグチユウコ》台灣限定特展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-6">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event6.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《再見梵谷》光影體驗展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-7">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event7.png" alt="" />
+            <p>國際電玩展</p>
+            <p>插畫明信片</p>
+            <h6>《Game Show》台北國際電玩展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-8">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event8.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《諸神黃昏》北歐神話特展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-9">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event9.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《流體藝術》暈染雙人流體畫展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-10">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event10.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《名窯瓷器》琺瑯彩瓷特展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-11">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event11.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《微縮人生》微型展的奇幻世界</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="eventshow-12">
+        <li>
+          <a href="./event_detail.html">
+            <img src="../img/event/event12.png" alt="" />
+            <p>插畫特展</p>
+            <p>插畫明信片</p>
+            <h6>《美食饗味》2023台灣國際美食展</h6>
+            <p>2022.12.16 - 12.31</p>
+            <p>11:00AM - 7:00PM</p>
+          </a>
+        </li>
+      </ul>  -->
+  
+    </div>
+
+    <!-- 按紐 -->
+    <!-- <div id="pagination">
+      <a href="#" v-if="this.current == paginate_total" @click.prevent="current--"><</a>
+      <a href="#" class="btn btn-default" :class="{'-on': this.current == page_index}"
+        v-for="page_index in paginate_total" @click.prevent="updateCurrent(page_index)">
+        {{ page_index }}
+      </a>
+
+      <a href="#" v-if="this.current != paginate_total" @click.prevent="current++">></a>
+    </div> -->
+  </div>
+
+  <footer id="footer"></footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <!-- Initialize Swiper輪播 -->
+  <script>
+    const swiper = new Swiper(".mySwiper", {
+      cssMode: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      mousewheel: true,
+      keyboard: true,
+      autoplay: true,
+    });
+
+    $(() => {
+      //   topbar footer
+      $("#header").load("topbar.html");
+      $("#footer").load("footer.html");
+    });
+
+
+
+  </script>
+  <script src="../js/vue.global.js"></script>
+  <script src="../js/axios.min.js"></script>
+  <script src="../js/event.js"></script>
+</body>
+
+</html>

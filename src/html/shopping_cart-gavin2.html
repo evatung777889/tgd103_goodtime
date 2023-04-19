@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車 - 韶光文創園區</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Ephesis&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <header id="header"></header>
+
+    <main id="shoppingCart1" class="shopping__cart01__wrapper">
+
+        <!-- 上方進度條 -->
+        <div class="top">
+            <ul class="top__nav">
+                <li>
+                    <div class="top__nav__num num__now">1</div>
+                    <p class="text__now">購物車</p>
+                </li>
+
+                <li>
+                    <div class="top__nav__num">2</div>
+                    <p>填寫資料</p>
+                </li>
+
+                <li>
+                    <div class="top__nav__num">3</div>
+                    <p>訂單確認</p>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- 購物車資料 -->
+        <div class="cart__info">
+            <h1 class="subtitle">
+                <em>購物車</em>
+            </h1>
+
+            <!-- 導覽列 -->
+            <ul class="cart__info__nav">
+                <li><input type="checkbox" class="select__all" v-model="selectAll" @change="atSelectAll"></li>
+                <li>商品資料</li>
+                <li>單價</li>
+                <li>數量</li>
+                <li>小計</li>
+            </ul>
+
+            <!-- 商品明細 -->
+            <ul class="product__list" v-for="(product, idx) of productList" :key="product.id">
+                <li>
+                    <input type="checkbox" class="select__item" v-model="cartList" :value="product"
+                        @change="isSelectAll">
+                </li>
+                <li>
+                    <img src="../img/shopping_cart/01.jpg" alt="">
+                </li>
+
+                <li>
+                    <h2>{{product.name}}</h2>
+                    <p>{{product.spec}}</p>
+                </li>
+
+                <li>
+                    <!-- 單價 !-->
+                    <h2>NT$
+                        <span class="price_val">{{product.price}}</span>
+                    </h2>
+                </li>
+
+                <li>
+                    <div class="input__box">
+                        <button class='qtyminus qtyplus' @click="product.qty--" :disabled="product.qty===1">-</button>
+                        <input type='text' name='quantity' :value='product.qty' class='qty'>
+                        <button class='qtyplus' @click="product.qty++"
+                            :disabled="product.qty === product.max_qty">+</button>
+                    </div>
+
+                </li>
+
+                <li>
+                    <!-- 小計 !-->
+                    <h2 class="cost">NT$
+                        <span class="cost__val">{{product.qty * product.price}}</span>
+                    </h2>
+                </li>
+
+                <li>
+                    <button class='qtyplus' @click="atDelete(idx, product.id)">
+                        <i class="fa-solid fa-xmark"></i></button>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- 送貨和訂單資訊 -->
+        <section class="delivery__sum">
+
+            <!-- 送貨方式 -->
+            <div class="delivery">
+
+                <h1 class="subtitle">
+                    <em>選擇送貨方式</em>
+                </h1>
+
+                <ul>
+                    <li>
+                        <p>送貨方式</p>
+                        <select name="" id="" class="method">
+                            <option value="">宅配</option>
+                        </select>
+                    </li>
+
+                    <li>
+                        <p>送貨地址</p>
+                        <input type="text" class="address" placeholder="請填寫詳細購買人地址：路/巷/弄/樓">
+                    </li>
+
+                </ul>
+
+
+            </div>
+
+            <!-- 訂單資訊(總計) -->
+            <div class="summary">
+                <h1 class="subtitle">
+                    <em>訂單資訊</em>
+                </h1>
+
+                <div class="subtotal">
+                    <p>小計：</p>
+                    <p>NT${{totalAmount}}</p>
+                </div>
+
+                <div class="freight">
+                    <p>運費：</p>
+                    <p>NT${{freight}}</p>
+                </div>
+
+                <div class="total">
+                    <p>合計：</p>
+                    <p>NT${{totalAmount + freight}}</p>
+                </div>
+
+                <div class="btn__ctn">
+                    <a href="shopping_cart02.html">
+                        <button id="goApplyForm" class="button">
+                            <span>前往結帳</span>
+                        </button>
+                    </a>
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+
+
+    <footer id="footer"></footer>
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        header & footer
+        $(() => {
+            $("#header").load("topbar.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/shopping-cart.js"></script>
+</body>
+
+</html>

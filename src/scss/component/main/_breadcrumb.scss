@@ -1,0 +1,37 @@
+/**
+<ul class="breadcrumb">
+    <li><a href="#">首頁</a></li>
+    <li><a href="#">場地租借</a></li>
+</ul>
+*/
+
+.breadcrumb {
+    display: flex;
+    min-width: 100%;
+    padding: 10px 2%;
+    position: relative;
+    z-index: 1;
+    // box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 50%);
+
+    li {
+        &:nth-child(even) {
+            &::before {
+                content: "";
+                height: .6rem;
+                border-left: solid 1px $font-color;
+                display: inline-block;
+                margin: 0 .5rem;
+            }
+
+            a {
+                color: $lakeGreen-color;
+            }
+        }
+    }
+
+    a {
+        font-size: $small;
+        line-height: 18px;
+        color: $font-color;
+    }
+}

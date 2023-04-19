@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>場地管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: rgb(34, 145, 48);
+            transition: all 0.3s;
+        }
+        .BBB{
+            background-color: rgb(185, 45, 68);
+            transition: all 0.3s;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(25, 107, 36);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(141, 35, 52);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-rental" id="rental">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="info-box">
+                        <p>場地列表</p>
+                        <ul>
+                            <li class="first-title">
+                                <div>
+                                    <div><h6>場地主圖<br>場地編號</h6></div>
+                                    <div><h6>場地名稱<br>場地概述</h6></div>
+                                    <div><h6>場地位置</h6></div>
+                                    <div><h6>開放預約狀態</h6></div>
+                                    <div><h6>單日定價</h6></div>
+                                    <div><h6>操作</h6></div>
+                                </div> 
+                            </li>
+                            <li class="" v-for="(b_rental, index) in dataList" :key="index">
+                                <a :href="'b-rental-detail.html?ID='+b_rental.ID">
+                                    <div class="flex-box">
+                                        <div><div class="fakeimg" style="overflow: hidden;"><img :src="b_rental.MAIN_PHOTO" alt="" style="width: 100%;"></div><h6>{{ b_rental.ID }}</h6></div>
+                                        <div><h6>{{ b_rental.NAME }}<br>{{ b_rental.DESC }}</h6></div>
+                                        <div><h6>{{ b_rental.LOCATED }}</h6></div>
+                                        <div><h6>
+                                            <!-- <input type="radio" v-model="mark[index]" value="y" :id="b_rental.ID + 'y'" :name=b_rental.ID><label class="" :for="b_rental.ID + 'y'">開啟</label>
+                                            <br>
+                                            <input type="radio" v-model="mark[index]" value="n" :id="b_rental.ID + 'n'" :name=b_rental.ID><label class="" :for="b_rental.ID + 'n'">關閉</label> -->
+                                            <span v-for="(status, index) in mark[index]" :key="index">{{ status }}</span>
+                                        </h6></div>
+                                        <div><h6>{{ b_rental.PRICE }}</h6></div>
+                                        <div>
+                                            <button><i class="fa-solid fa-pen-nib"></i> 編輯場地</button>
+                                            <button @click="deleteitem" :value="b_rental.ID"><i class="fa-solid fa-warehouse"></i> 修改預約狀態</button>
+                                        </div>
+                                    </div>
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        //掛載資料庫
+        const rental = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    mark: [],
+
+                    idvalue: ""
+                }
+            }, methods:{
+                deleteitem(e){
+
+                e.preventDefault();
+
+                let idvalue = e.target.value;
+
+                    swal({
+                            icon: "warning",
+                            title: "更改場地預約狀態",
+                            text: "您確定要更改此場地預約狀態嗎?",
+                            buttons: {
+                            A: {
+                                text: "開放",
+                                value: "1",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "暫停開放",
+                                visible: true,
+                                className:'BBB',
+                                value: "2"
+                            }
+                            }
+                        });
+                    document.querySelector(".swal-button--A").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/location-open.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                    document.querySelector(".swal-button--B").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/location-close.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/location.php").then(res => {
+                        this.dataList = res.data;
+                        console.log(this.dataList[0].ID);
+
+                        let mark_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mark_arr.push("開放預約")
+                            }else{
+                                mark_arr.push("暫停預約")
+                            }
+                        })
+                        console.log(mark_arr);
+
+                        this.mark = mark_arr;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+        }).mount("#rental");
+    </script>
+</body>
+</html>

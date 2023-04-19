@@ -1,0 +1,404 @@
+.shops__detail__wrapper{
+    font-family: $our-font;
+    width: 80%;
+    margin: 0 auto;
+
+    // @include rwd(428px){
+    //     width: 85%;
+    // }
+
+    // ==== 麵包屑 ====
+    .crumb{
+        margin-top: 80px;
+
+        li{
+            &::before {
+                content: "";
+                height: .6rem;
+                border-left: solid 1px $font-color;
+                display: inline-block;
+                margin: 0 .5rem;
+            }
+
+            &:first-child:before{
+                content: "";
+                display: none;
+            }
+
+            a{
+                color: $secondary4-color;
+            }
+
+            &:last-child a{
+                color: $spotlight-color;
+            }
+        }
+
+    }
+
+    // ==== banner大圖 ====
+    .shops__detail__banner{
+        img{
+            width: 100%;
+        }
+    }
+
+    // ==== 主要內容 ====
+    section{
+        display: flex;
+        // outline: 1px solid red;
+
+        @include rwd(690px){
+            flex-direction: column;
+        }
+
+        // ==== 左方區塊 ====
+        .section__left{
+            // outline: 1px solid blue;
+            flex-grow: .9;
+
+            h1{
+                font-size: $h3;
+                color: $primary1-color;
+                line-height: 1.6;
+                margin: 20px 0 20px 0;
+
+                @include rwd(1024px){
+                    font-size: $h4;
+                }
+
+                @include rwd(690px){
+                    font-size: $h5;
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+
+            }
+
+            img{
+                width: 90%;
+                display: block;
+                // margin: 0 auto;
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 0 auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+            }
+
+            p{
+                color: $secondary4-color;
+                font-size: $p;
+                line-height: 2;
+                margin: 5%;
+                margin-left: 0;
+
+                @include rwd(768px){
+                    font-size: 14px;
+                    width: 90%;
+                }
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+            }
+
+            .left__pics{
+                display: flex;
+                justify-content: space-between;
+                width: 90%;
+                // outline: 1px solid red;
+                // margin: 0 auto;
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+
+                div{
+                    // margin-right: 2%;
+                    width: 31.666%;
+
+                    img{
+                        width: 100%;
+                    }
+                }
+
+            }
+
+            h2{
+                color: $primary1-color;
+                font-size: $h6;
+                line-height: 1.6;
+                margin: 5%;
+                margin-left: 0;
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+            }
+
+            ul.spec{     
+                // outline: 1px solid red;
+                width: 90%;
+                margin-top: 10px;
+                padding-left: 3%;
+                list-style-type: '▴';  
+                color: $secondary4-color;
+
+                @include rwd(690px){
+                    font-size: 14px;
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+
+                li{
+                    line-height: 2;  
+
+                    @include rwd(768px){
+                        font-size: 14px;
+                    }
+                }
+
+            }
+        }
+
+        // ==== 右方區塊 ====
+        .section__right{
+            // outline: 1px solid blue;
+            flex-grow: 1;
+
+            h2{
+                color: $primary1-color;
+                font-size: $h6;
+                line-height: 1.6;
+                margin-top: 18%;
+                margin-left: 10%;
+                margin-right: 5%;
+                padding-bottom: 2%;
+                border-bottom: 1px solid $secondary5-color;
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+            }
+
+            // ==== 文字 ====
+            ul.text{
+                margin: 5%;
+                padding-left: 5%;
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                    padding: 0;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+
+                li{
+                    // border: 1px solid red;
+                    display: flex;
+                    margin-bottom: 20px;
+                    line-height: 1.6;
+
+                    color: $secondary4-color;
+
+                    @include rwd(690px){
+                        // width: 80%;
+
+                    }
+
+                    h3{
+                        // border: 1px solid blue;
+                        flex-basis: 25%;
+                        font-size: $p;
+                        // margin-right: 5%;
+                        color: $secondary5-color;
+
+                        @include rwd(1024px){
+                            flex-basis: 30%;
+                        }
+
+                        @include rwd(833px){
+                            flex-basis: 35%;
+                        }
+
+                        @include rwd(768px){
+                            font-size: 14px;
+                            flex-basis: 40%;
+                        }
+
+                        @include rwd(690px){
+                            flex-basis: 20%;
+                        }
+
+                        @include rwd(428px){
+                            font-size: $small;
+                            flex-basis: 30%;
+                        }
+
+                    }
+
+                    h4{
+                        // border: 1px solid red;
+                        flex-basis: 75%;
+                        padding-left: 2%;
+                        font-size: $p;
+
+                        @include rwd(1024px){
+                            flex-basis: 70%;
+                        }
+
+                        @include rwd(833px){
+                            flex-basis: 65%;
+                        }
+
+                        @include rwd(768px){
+                            font-size: 14px;
+                            flex-basis: 60%;
+                        }
+
+                        @include rwd(690px){
+                            flex-basis: 80%;
+                        }
+
+                        @include rwd(428px){
+                            font-size: $small;
+                            flex-basis: 70%;
+                        }
+
+
+                        a{
+                            color: $primary1-color;
+                            transition: .3s;
+
+                            &:hover{  
+                                color: $primary2-color;
+                            }
+                        }
+                    }
+
+                    &:last-child{
+                        padding-bottom: 5%;
+                        border-bottom: 1px solid $secondary5-color;
+                    }
+
+                }
+
+            }
+
+            // ==== icon ====
+            .icon{
+                // border: 1px solid purple;
+                margin-left: 5%;
+                width: 100%;
+
+                @include rwd(833px){
+                    font-size: 14px;
+                }
+
+                @include rwd(690px){
+                    width: 80%;
+                    margin: 3% auto;
+                }
+
+                @include rwd(428px){
+                    width: 85%;
+                }
+
+
+
+                li{
+                    display: flex;
+                    padding: 5%;
+
+                    @include rwd(690px){
+                        padding: 3%;
+                    }
+
+                    div{
+                        flex-grow: 1;
+                    }
+
+                    .material-symbols-outlined{
+                        color: $primary1-color;
+                        font-size: $h3;
+                        vertical-align: middle;
+
+                        @include rwd(833px){
+                            font-size: $h4;
+                        }
+                    }
+
+                    span + span{ // 文字
+                        color: $secondary4-color;
+                        font-size: $p;
+                        line-height: 32px;
+                        margin-left: 5%;
+                        letter-spacing: 3px;
+
+                        @include rwd(833px){
+                            font-size: 14px;
+                        }
+
+                        @include rwd(690px){
+                            font-size: $p;
+                        }
+
+                        @include rwd(428px){
+                            font-size: 14px;
+                        }
+
+                    }
+
+                    &:last-child div:last-child{
+                        padding-left: 1%;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,906 @@
+$width_768: 768px;
+$width_980: 980px;
+
+@mixin rwd($breakpoint) {
+    @media all and (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin width_768() {
+    @media all and (max-width: $width_768) {
+        @content;
+    }
+}
+
+@mixin width_980() {
+    @media all and (max-width: $width_980) {
+        @content;
+    }
+}
+
+main.FAQ {
+    width: calc(100vw - 112px);
+    margin: 0 auto;
+    padding-top: 80px;
+
+
+    @include rwd(428px) {
+        width: auto;
+    }
+
+    .breadcrumb {
+        display: flex;
+        min-width: 100%;
+        padding: 10px 2%;
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        // box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 50%);
+
+        li {
+            &:nth-child(even) {
+                &::before {
+                    content: "";
+                    height: .6rem;
+                    border-left: solid 1px $font-color;
+                    display: inline-block;
+                    margin: 0 .5rem;
+                }
+
+                a {
+                    color: $lakeGreen-color;
+                }
+            }
+        }
+
+        a {
+            font-size: $small;
+            line-height: 18px;
+            color: $font-color;
+        }
+    }
+
+    .wrapper {
+        width: auto;
+    }
+
+    .banner {
+        position: relative;
+
+
+        .banner__img,
+        .banner-img {
+            background-image: url("../img/faq/faq__banner.jpg");
+            height: 450px;
+            background-position: 15% center;
+            box-shadow: inset 0 0 0 1000px rgb(0 0 0 / 35%);
+            background-repeat: no-repeat;
+
+            @include width_980 {
+                height: 300px;
+            }
+
+            @include rwd(768px) {
+                background-image: url("../img/faq/faq__banner_rwd768.jpg");
+                height: 300px;
+            }
+
+            @include rwd(428px) {
+                background-image: url("../img/faq/faq__banner_rwd428.jpg");
+                height: 200px;
+            }
+        }
+
+        .banner__textarea,
+        .banner-textarea {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(256, 256, 256, .7);
+        }
+
+        .banner__eng,
+        .banner-eng {
+            font-size: $h1;
+            font-weight: bold;
+            color: $brown-color;
+            letter-spacing: .8rem;
+            padding: 2.2rem 4.2rem 2rem;
+
+            @include width_980 {
+                font-size: 28px;
+                padding: 1.2rem 3.2rem 1rem;
+            }
+
+            @include rwd(450px) {
+                font-size: 22px;
+                padding: 1.2rem 1.2rem 1rem;
+            }
+
+            @include rwd(428px) {
+                font-size: 20px;
+                padding: 1.2rem 2.2rem 0rem;
+            }
+        }
+
+        .banner__zh,
+        .banner-zh {
+            &::before {
+                content: "";
+                // 黑色底線長度調整
+                width: 11vw;
+                border-bottom: solid 3px $font-color;
+                display: inline-block;
+                margin-right: 2.8rem;
+
+                @include rwd(768px) {
+                    margin-right: 0.8rem;
+                    margin-left: 40px;
+                }
+
+            }
+
+            font-size: $h3;
+            font-weight: bold;
+            color: $carmel-color;
+            padding-bottom: 2rem;
+            display: block;
+            padding-left: 10vw;
+            padding-right: 4.2rem;
+            letter-spacing: .68rem;
+
+            @include width_980 {
+
+                font-size: 28px;
+                padding-bottom: 1.5rem;
+                padding-left: 4vw;
+                padding-right: 3.2rem;
+            }
+
+            @include rwd(450px) {
+                font-size: 22px;
+                padding-left: 1vw;
+                padding-right: 1.2rem;
+            }
+
+            @include rwd(428px) {
+                font-size: 20px;
+                padding-bottom: 1rem;
+            }
+        }
+
+    }
+
+    div.navTab__faq {
+        display: grid;
+        // grid-template-columns:repeat(3,minmax(0px, 1fr));
+        // grid-template-rows: 1fr;
+
+        @include rwd(850px) {
+            display: block;
+        }
+    }
+
+    div.navTab__faq__left {
+        position: relative;
+    }
+
+    div.navTab__faq__right {
+        grid-column: 2 / 4;
+    }
+
+    section.nav-tab {
+        position: sticky;
+        top: 150px; //調整左側nav
+        margin-top: 85px;
+
+        @include rwd(850px) {
+            margin-top: 10px;
+        }
+
+        @include rwd(428px) {
+            margin-top: 0;
+        }
+
+        aside.side-nav {
+
+            width: 280px;
+
+            @include rwd(850px) {
+                width: auto;
+            }
+
+            nav.nav-bg {
+                padding: 2rem 2rem 2rem;
+                height: fit-content;
+                background: #EEEEEE;
+                box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
+                margin-left: 40px;
+
+                @include rwd(850px) {
+                    padding: 0;
+                    background: none;
+                    box-shadow: none;
+                    margin: 0;
+
+                    &::after {
+                        content: "";
+                        width: 90%;
+                        border-top: solid 3px $font-color;
+                        display: inline-block;
+                        margin: 1% 0 0 5%;
+
+                        @include rwd(428px) {
+                            margin: 0% 0 0 3%;
+                        }
+
+                    }
+
+                    ul.nav-ctn {
+                        display: flex;
+                        padding-left: 10px;
+
+                        @include rwd(850px) {
+                            padding-left: 45px;
+                        }
+
+                        @include rwd(788px) {
+                            padding-left: 0;
+                        }
+
+                        @include rwd(428px) {
+                            padding-right: 15px;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-block {
+        cursor: pointer;
+
+        @include rwd(850px) {
+            margin: 0px 6%;
+            padding-left: 5px;
+        }
+
+        @include rwd(788px) {
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        @include rwd(428px) {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        &::before {
+            content: "";
+            width: 10rem;
+            border-top: solid 3px $font-color;
+            display: inline-block;
+            margin: 25px 0;
+
+            @include rwd(850px) {
+                width: 0;
+            }
+        }
+
+        div {
+            padding: 5px 0 5px 10px;
+
+            @include rwd(850px) {
+                padding: 5px 10px;
+            }
+
+            &:hover {
+                background-color: #f6e6cf;
+            }
+        }        
+
+        .title-eng {
+            font-size: $h5;
+            color: $brown-color;
+
+            @include rwd(566px) {
+                font-size: 16px;
+            }
+
+            @include rwd(460px) {
+                font-size: 13px;
+            }
+        }
+
+        .title-zh {
+            padding-top: .3rem;
+            font-size: $h6;
+            color: $carmel-color;
+
+            @include rwd(566px) {
+                font-size: 16px;
+            }
+
+            @include rwd(460px) {
+                font-size: 13px;
+            }
+        }
+    }
+
+    section.ticket__out {
+
+        h3.ticket__smallTitle {
+            margin-left: 4.2rem;
+            font-size: $h1;
+            color: $sub-gray-color;
+            font-weight: 700;
+            letter-spacing: 5px;
+            top: 0;
+            right: 0;
+            margin-top: 80px;
+
+            @include width_980 {
+                font-size: 38px;
+                margin-left: 3.8rem;
+            }
+
+            @include rwd(566px) {
+                font-size: 32px;
+            }
+            
+            @include rwd(515px) {
+                margin-left: 1rem;
+            }
+            @include rwd(428px) {
+                font-size: 28px;
+                margin-left: 1.8rem;
+            }
+        }
+
+        div.ticket {
+            background-color: rgba(217, 217, 217, .6);
+            padding-bottom: 50px;
+            padding-left: 35px;
+            max-width: 90%;
+            margin: 0 auto;
+            padding-right: 40px;
+
+            @include rwd(516px) {
+                max-width: 100%;
+                padding-left: 15px;
+                padding-right: 20px;
+
+            }
+
+            @include rwd(428px) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        div.container {
+            padding-top: 30px;
+
+            h5 {
+                font-size: $h5;
+                margin-bottom: 30px;
+
+                @include width_980 {
+                    font-size: 20px;
+                }
+
+                @include rwd(566px) {
+                    font-size: 18px;
+                }
+
+                @include rwd(428px) {
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+
+        .faq-drawer {
+            margin-bottom: 30px;
+
+            p {
+                padding: 20px;
+                background-color: rgba(255, 255, 255, .6);
+
+                @include rwd(566px) {
+                    font-size: 14px;
+                }
+
+            }
+
+            div.faq-drawer__content ul {
+                padding: 20px 20px 20px 30px;
+                background-color: rgba(255, 255, 255, .6);
+                list-style: auto;
+
+                @include width_980 {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .faq-drawer__content-wrapper {
+            font-size: $p;
+            max-height: 0px;
+            overflow: hidden;
+            transition: 0.25s ease-in-out;
+            line-height: 2;
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+        }
+
+        .faq-drawer__title {
+            background-color: $brown-color;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 1.25em;
+            font-weight: 700;
+            line-height: 2;
+            position: relative;
+            margin-bottom: 0;
+            transition: all 0.25s ease-out;
+            padding-left: 15px;
+
+            @include width_980 {
+                font-size: 16px;
+            }
+
+            @include rwd(566px) {
+                font-size: 14px;
+            }
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+
+            &::after {
+                border-style: solid;
+                border-width: 1px 1px 0 0;
+                content: " ";
+                display: inline-block;
+                float: right;
+                height: 10px;
+                left: -25px;
+                position: relative;
+                right: 20px;
+                top: 11px;
+                transform: rotate(135deg);
+                transition: 0.35s ease-in-out;
+                vertical-align: top;
+                width: 10px;
+
+                @include width_980 {
+                    top: 8px;
+                }
+
+                @include rwd(566px) {
+                    top: 6px;
+                }
+
+                @include rwd(428px) {
+                    width: 7px;
+                    height: 7px;
+                    left: -13px;
+                    top: 6px;
+                }
+            }
+
+            &:hover {
+                background-color: $carmel-color;
+            }
+
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title+.faq-drawer__content-wrapper {
+            max-height: 350px;
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title::after {
+            transform: rotate(-45deg);
+            transition: 0.25s ease-in-out;
+            top: 17px;
+
+            @include width_980 {
+                top: 13px;
+            }
+
+            @include rwd(428px) {
+                top: 9px;
+            }
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+
+    section.Venue_Rental__out {
+
+        h3.Venue_Rental__smallTitle {
+            margin-left: 4.2rem;
+            font-size: $h1;
+            color: $sub-gray-color;
+            font-weight: 700;
+            letter-spacing: 5px;
+            top: 0;
+            right: 0;
+            margin-top: 80px;
+
+            @include width_980 {
+                font-size: 38px;
+                margin-left: 3.8rem;
+            }
+
+            @include rwd(566px) {
+                font-size: 32px;
+            }
+
+            @include rwd(515px) {
+                margin-left: 1rem;
+            }
+
+            @include rwd(428px) {
+                font-size: 28px;
+                margin-left: 1.8rem;
+            }
+        }
+
+        div.Venue_Rental {
+            background-color: rgba(217, 217, 217, .6);
+            padding-bottom: 50px;
+            padding-left: 35px;
+            max-width: 90%;
+            margin: 0 auto;
+            padding-right: 40px;
+
+            @include rwd(516px) {
+                max-width: 100%;
+                padding-left: 15px;
+                padding-right: 20px;
+
+            }
+
+            @include rwd(428px) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        div.container {
+            padding-top: 30px;
+
+            h5 {
+                font-size: $h5;
+                margin-bottom: 30px;
+
+                @include width_980 {
+                    font-size: 20px;
+                }
+
+                @include rwd(566px) {
+                    font-size: 18px;
+                }
+
+                @include rwd(428px) {
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+
+        .faq-drawer {
+            margin-bottom: 30px;
+
+            p {
+                padding: 20px;
+                background-color: rgba(255, 255, 255, .6);
+
+                @include rwd(566px) {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .faq-drawer__content-wrapper {
+            font-size: $p;
+            max-height: 0px;
+            overflow: hidden;
+            transition: 0.25s ease-in-out;
+            line-height: 2;
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+        }
+
+        .faq-drawer__title {
+            background-color: $brown-color;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 1.25em;
+            font-weight: 700;
+            line-height: 2;
+            position: relative;
+            margin-bottom: 0;
+            transition: all 0.25s ease-out;
+            padding-left: 15px;
+
+            @include width_980 {
+                font-size: 16px;
+            }
+
+            @include rwd(566px) {
+                font-size: 14px;
+            }
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+
+            &::after {
+                border-style: solid;
+                border-width: 1px 1px 0 0;
+                content: " ";
+                display: inline-block;
+                float: right;
+                height: 10px;
+                left: -25px;
+                position: relative;
+                right: 20px;
+                top: 11px;
+                transform: rotate(135deg);
+                transition: 0.35s ease-in-out;
+                vertical-align: top;
+                width: 10px;
+
+                @include width_980 {
+                    top: 8px;
+                }
+
+                @include rwd(566px) {
+                    top: 6px;
+                }
+
+                @include rwd(428px) {
+                    width: 7px;
+                    height: 7px;
+                    left: -13px;
+                    top: 6px;
+                }
+            }
+
+            &:hover {
+                background-color: $carmel-color;
+            }
+
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title+.faq-drawer__content-wrapper {
+            max-height: 350px;
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title::after {
+            transform: rotate(-45deg);
+            transition: 0.25s ease-in-out;
+            top: 17px;
+
+            @include width_980 {
+                top: 13px;
+            }
+
+            @include rwd(428px) {
+                top: 9px;
+            }
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+
+    section.Product__out {
+
+        h3.Product__smallTitle {
+            margin-left: 4.2rem;
+            font-size: $h1;
+            color: $sub-gray-color;
+            font-weight: 700;
+            letter-spacing: 5px;
+            top: 0;
+            right: 0;
+            margin-top: 80px;
+
+            @include width_980 {
+                font-size: 38px;
+                margin-left: 3.8rem;
+            }
+
+            @include rwd(566px) {
+                font-size: 32px;
+            }
+
+            @include rwd(515px) {
+                margin-left: 1rem;
+            }
+
+            @include rwd(428px) {
+                font-size: 28px;
+                margin-left: 1.8rem;
+            }
+        }
+
+        div.Product {
+            background-color: rgba(217, 217, 217, .6);
+            padding-bottom: 50px;
+            padding-left: 35px;
+            max-width: 90%;
+            margin: 0 auto;
+            padding-right: 40px;
+
+            @include rwd(516px) {
+                max-width: 100%;
+                padding-left: 15px;
+                padding-right: 20px;
+
+            }
+
+            @include rwd(428px) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        div.container {
+            padding-top: 30px;
+
+            h5 {
+                font-size: $h5;
+                margin-bottom: 30px;
+
+                @include width_980 {
+                    font-size: 20px;
+                }
+
+                @include rwd(566px) {
+                    font-size: 18px;
+                }
+
+                @include rwd(428px) {
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+
+
+        .faq-drawer {
+            margin-bottom: 30px;
+
+            p {
+                padding: 20px;
+                background-color: rgba(255, 255, 255, .6);
+
+                @include rwd(566px) {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .faq-drawer__content-wrapper {
+            font-size: $p;
+            max-height: 0px;
+            overflow: hidden;
+            transition: 0.25s ease-in-out;
+            line-height: 2;
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+
+            ul {
+                list-style: circle;
+            }
+        }
+
+        .faq-drawer__title {
+            background-color: $brown-color;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 1.25em;
+            font-weight: 700;
+            line-height: 2;
+            position: relative;
+            margin-bottom: 0;
+            transition: all 0.25s ease-out;
+            padding-left: 15px;
+
+            @include width_980 {
+                font-size: 16px;
+            }
+
+            @include rwd(566px) {
+                font-size: 14px;
+            }
+
+            @include rwd(428px) {
+                font-size: 12px;
+            }
+
+            &::after {
+                border-style: solid;
+                border-width: 1px 1px 0 0;
+                content: " ";
+                display: inline-block;
+                float: right;
+                height: 10px;
+                left: -25px;
+                position: relative;
+                right: 20px;
+                top: 11px;
+                transform: rotate(135deg);
+                transition: 0.35s ease-in-out;
+                vertical-align: top;
+                width: 10px;
+
+                @include width_980 {
+                    top: 8px;
+                }
+
+                @include rwd(566px) {
+                    top: 6px;
+                }
+
+                @include rwd(428px) {
+                    width: 7px;
+                    height: 7px;
+                    left: -13px;
+                    top: 6px;
+                }
+            }
+
+            &:hover {
+                background-color: $carmel-color;
+            }
+
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title+.faq-drawer__content-wrapper {
+            max-height: 350px;
+        }
+
+        .faq-drawer__trigger:checked+.faq-drawer__title::after {
+            transform: rotate(-45deg);
+            transition: 0.25s ease-in-out;
+            top: 17px;
+
+            @include width_980 {
+                top: 13px;
+            }
+
+            @include rwd(428px) {
+                top: 9px;
+            }
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+
+
+}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-index" id="b-index">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="info-box1">
+                        <p>商店動態</p>
+                        <ul>
+                            <li>
+                                <h6>今日商城瀏覽數</h6>
+                                <h5 id="date"></h5>
+                            </li>
+                            <li>
+                                <h6>總銷售金額</h6>
+                                <h5 id="totalmoney">0元</h5>
+                            </li>
+                            <li>
+                                <h6>總訂單數量</h6>
+                                <h5 id="ponum"></h5>
+                            </li>
+                            <li>
+                                <h6>平均每筆訂單金額</h6>
+                                <h5 id="advmoney">0元</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="info-box2">
+                        <p>商品數</p>
+                        <ul>
+                            <li>
+                                <h6>全部</h6>
+                                <h5 id="allsale"></h5>
+                            </li>
+                            <li>
+                                <h6>開賣中</h6>
+                                <h5 id="onsale"></h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="info-box3">
+                        <p>Top10熱賣商品</p>
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <div><h6>名次</h6></div>
+                                    <div><h6>商品編號</h6></div>
+                                    <div class="add-w"><h6>商品名稱</h6></div>
+                                    <div><h6>庫存數量</h6></div>
+                                    <div><h6>商品價格</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item0.ID" v-for="(item0, index) in arr0" :key="index">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>{{ item0.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item0.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item0.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item0.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item1.ID" v-for="(item1, index) in arr1" :key="index">
+                                    <div><h6>2</h6></div>
+                                    <div><h6>{{ item1.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item1.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item1.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item1.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item2.ID" v-for="(item2, index) in arr2" :key="index">
+                                    <div><h6>3</h6></div>
+                                    <div><h6>{{ item2.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item2.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item2.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item2.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item3.ID" v-for="(item3, index) in arr3" :key="index">
+                                    <div><h6>4</h6></div>
+                                    <div><h6>{{ item3.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item3.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item3.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item3.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item4.ID" v-for="(item4, index) in arr4" :key="index">
+                                    <div><h6>5</h6></div>
+                                    <div><h6>{{ item4.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item4.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item4.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item4.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item2.ID" v-for="(item5, index) in arr5" :key="index">
+                                    <div><h6>6</h6></div>
+                                    <div><h6>{{ item5.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item5.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item5.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item5.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item6.ID" v-for="(item6, index) in arr6" :key="index">
+                                    <div><h6>7</h6></div>
+                                    <div><h6>{{ item6.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item2.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item6.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item6.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item7.ID" v-for="(item7, index) in arr7" :key="index">
+                                    <div><h6>8</h6></div>
+                                    <div><h6>{{ item7.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item7.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item7.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item7.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item8.ID" v-for="(item8, index) in arr8" :key="index">
+                                    <div><h6>9</h6></div>
+                                    <div><h6>{{ item8.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item8.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item8.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item8.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                            <li >
+                                <a :href="'b-product-detail.html?ID='+item9.ID" v-for="(item9, index) in arr9" :key="index">
+                                    <div><h6>10</h6></div>
+                                    <div><h6>{{ item9.ID }}</h6></div>
+                                    <div class="add-w"><h6>{{ item9.PRODUCT_NAME }}</h6></div>
+                                    <div><h6>{{ item9.STOCK_QTY }}</h6></div>
+                                    <div><h6>{{ item9.PRICE }}</h6></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const newcreate = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList1: [],
+                    dataList2: [],
+                    dataList3: [],
+                    dataList4: [],
+                    dataList5: [],
+                    maindataList: [],
+                    itemdataList: [],
+
+                    arr0:[],
+                    arr1:[],
+                    arr2:[],
+                    arr3:[],
+                    arr4:[],
+                    arr5:[],
+                    arr6:[],
+                    arr7:[],
+                    arr8:[],
+                    arr9:[],
+
+                    onsale:"",
+                    qty: "",
+                    price:"",
+
+                    no1: 1,
+                    no2: 2,
+                    no3: 3,
+                    no4: 4,
+                    no5: 5,
+                    no6: 6,
+                    no7: 7,
+                    no8: 8,
+                    no9: 9,
+                    no10: 10,
+                    noList:[]
+                }
+            },methods: {
+                timeset(){
+
+                }
+
+            },created() {
+                axios({
+                    method: 'get',
+                    url: '../../php/backend/datecount.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                        let counter = 0;
+                        for (let i = 0; i < this.dataList.length; i++){
+                            if(this.dataList[i]) counter++;
+                        }
+                        console.log(counter);
+                        document.getElementById("date").textContent = counter + "次"
+
+                    }).catch(err => {
+                        console.log(err);
+                });
+
+                axios({
+                    method: 'get',
+                    url: '../../php/backend/product.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList2 = res.data;
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                        let counter = 0;
+                        for (let i = 0; i < this.dataList2.length; i++){
+                            if(this.dataList2[i].STATUS == '1') counter++;
+                        }
+                        console.log(counter);
+                        document.getElementById("onsale").textContent = counter + "件"
+
+                    }).catch(err => {
+                        console.log(err);
+                });
+
+                axios({
+                    method: 'get',
+                    url: '../../php/backend/product2.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList1 = res.data;
+                        console.log(res.data);
+                        // console.log(this.idarr);
+                        // console.log(this.dataList);
+                        let counter = 0;
+                        for (let i = 0; i < this.dataList1.length; i++){
+                            if(this.dataList1[i]) counter++;
+                        }
+                        console.log(counter);
+                        document.getElementById("allsale").textContent = counter + "件"
+
+                    }).catch(err => {
+                        console.log(err);
+                });
+
+                // axios({
+                //     method: 'get',
+                //     url: '../../php/backend/cartcount.php',
+                //     responseType:'json',
+                //     }).then(res => {
+                //         this.dataList3 = res.data;
+                //         console.log(res.data);
+                //         // console.log(this.idarr);
+                //         // console.log(this.dataList);
+                //         let counter = 0;
+                //         for (let i = 0; i < this.dataList3.length; i++){
+                //             if(this.dataList3[i]) counter++;
+                //         }
+                //         console.log(counter);
+                //         document.getElementById("ponum").textContent = counter + "筆"
+
+                //     }).catch(err => {
+                //         console.log(err);
+                // });
+
+                axios({
+                    method: 'get',
+                    url: '../../php/backend/allmoney.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList4 = res.data;
+                        console.log(this.dataList4);
+
+                        let total = 0
+                        for (let i = 0; i < this.dataList4.length; i++){
+
+                            let qty = parseInt(this.dataList4[i].QTY ) 
+                            let price = parseInt(this.dataList4[i].PRICE ) 
+                            console.log(this.dataList4[i])
+                            console.log('qty:',qty)
+                            console.log('price:',price)
+                            console.log('total',qty* price)
+                            total += qty * price
+
+                            document.getElementById("totalmoney").textContent = total + "元"
+                        }
+
+                        let counter = 0;
+                        for (let i = 0; i < this.dataList4.length; i++){
+                            if(this.dataList4[i]) counter++;
+                        }
+                            
+
+
+                        console.log(total)
+                        console.log(counter)
+                        // console.log(total / counter)
+                        document.getElementById("advmoney").textContent = (total / counter) + "元"
+                        document.getElementById("ponum").textContent = counter + "筆"
+                        // console.log(counter);
+                        // document.getElementById("ponum").textContent = counter + "筆"
+
+                    }).catch(err => {
+                        // console.log(err);
+                });
+
+                axios({
+                    method: 'get',
+                    url: '../../php/backend/hotitem.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.maindataList = res.data;
+                        // console.log(this.maindataList);
+                        this.maindataList.forEach((pid, idx) =>{
+                            this.noList[idx] = this.maindataList[idx].PID
+                        })
+                        console.log(this.noList);
+                        // this.no1 = this.maindataList[0].PID;
+                        // this.no2 = this.maindataList[1].PID;
+                        // this.no3 = this.maindataList[2].PID;
+                        // this.no4 = this.maindataList[3].PID;
+                        // this.no5 = this.maindataList[4].PID;
+                        // this.no6 = this.maindataList[5].PID;
+                        // this.no7 = this.maindataList[6].PID;
+                        // this.no8 = this.maindataList[7].PID;
+                        // this.no9 = this.maindataList[8].PID;
+                        // this.no10 = this.maindataList[9].PID;
+                        // console.log(this.no2);
+                        axios({
+                            method: 'post',
+                            url: '../../php/backend/gethotitem.php',
+                            responseType:'json',
+                            data: {...this.noList
+                                // no1: this.no1,
+                                // no2: this.no2,
+                                // no3: this.no3,
+                                // no4: this.no4,
+                                // no5: this.no5,
+                                // no6: this.no6,
+                                // no7: this.no7,
+                                // no8: this.no8,
+                                // no9: this.no9,
+                                // no10: this.no10,
+                            }
+                            }).then(res => {
+                                this.itemdataList = res.data;
+                                console.log(res.data);
+
+                                this.dataList5 = res.data;
+                                this.arr0 = this.dataList5[0];
+                                this.arr1 = this.dataList5[1];
+                                this.arr2 = this.dataList5[2];
+                                this.arr3 = this.dataList5[3];
+                                this.arr4 = this.dataList5[4];
+                                this.arr5 = this.dataList5[5];
+                                this.arr6 = this.dataList5[6];
+                                this.arr7 = this.dataList5[7];
+                                this.arr8 = this.dataList5[8];
+                                this.arr9 = this.dataList5[9];
+
+                                console.log(this.arr1);
+
+                                // let counter = 0;
+                                // for (let i = 0; i < this.dataList5.length; i++){
+                                //     if(this.dataList5[i]) counter++;
+                                // }
+                                // console.log(counter);
+                                // document.getElementById("noo").textContent = counter
+
+                            }).catch(err => {
+                                console.log(err);
+                        });
+
+                    }).catch(err => {
+                        console.log("[hot item php]",err);
+                });
+
+            }
+        }).mount("#b-index");
+    </script>
+</body>
+</html>

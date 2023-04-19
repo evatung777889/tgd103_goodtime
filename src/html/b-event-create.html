@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>展覽查詢</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="expo-create">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="item-name">新增展覽</p>
+                    <div class="b-detail_infobox">
+                        <ul>
+                            <li>
+                                <p>展覽主圖</p>
+                                <input type="file" accept=".png, .jpg, .jpeg" id="expopic"></input>
+                                <img id="mainpic" src="../img/default/default.jpg" alt="" >
+                                <button class="change-btn hidebtn" @click="checkimg">確認與預覽圖片</button>
+                            </li>
+                            <li>
+                                <p>消息頁編號</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>消息編號</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>展覽標題</p>
+                                <input type="text" class="long-input" id="exponame" v-model="exponame" maxlength="128">
+                            </li>
+                            <li>
+                                <p>展覽內文</p>
+                                <textarea class="large-textarea" id="expocontent" v-model="expocontent" maxlength="256"></textarea>
+                            </li>
+                            <li>
+                                <p>展覽期間</p>
+                                <input type="date" id="start" name="trip-start" min="2020-01-01" max="2050-12-31" class="timeform"  v-model="expostart">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="end" name="trip-start" min="2020-01-01" max="2050-12-31" class="timeform"  v-model="expoend">
+                            </li>
+                            <li>
+                                <p>展覽頁狀態</p>
+                                <input type="radio" v-model="expostatus" name="expostatus" value="1" id="expostatus1"></input>
+                                <label class="time-area_label" for="expostatus1">開啟</label>
+                                <input type="radio" v-model="expostatus" name="expostatus" value="2" id="expostatus2"></input>
+                                <label class="time-area_label" for="expostatus2">關閉</label>
+                            </li>
+                            <li>
+                                <p>新增日期</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>最後編輯日期</p>
+                                <p>系統自動生成</p>
+                            </li>
+                            <li>
+                                <p>成人價格</p>
+                                <input type="text" class="long-input" id="adultprice" v-model="adultprice" maxlength="5">
+                            </li>
+                            <li>
+                                <p>優惠價格</p>
+                                <input type="text" class="long-input" id="concprice" v-model="concprice" maxlength="5">
+                            </li>
+                            <li>
+                                <p>團體價格</p>
+                                <input type="text" class="long-input" id="groupprice" v-model="groupprice" maxlength="5">
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn" @click="axiosPost()">發布</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const expocreate = Vue.createApp({
+            data() {
+                return {
+                    exponame:"",
+                    expocontent:"",
+                    expostart:"",
+                    expoend:"",
+                    expostatus:"",
+                    adultprice:"",
+                    concprice:"",
+                    groupprice:"",
+                    expopic:"",
+                    dataList: [],
+
+                    file: ""
+                }
+            }, methods: {
+                axiosPost(){
+                if (this.exponame == '') {
+                    alert("請輸入[展覽標題]");
+                    return false;
+                }
+                else if (this.expocontent == "") {
+                    alert("請輸入[展覽內文]");
+                    return false;
+                }
+                else if (this.expostart == '') {
+                    alert("請選擇[展覽開始日]");
+                    return false;
+                }
+                else if (this.expoend == '') {
+                    alert("請選擇[展覽結束日]");
+                    return false;
+                }
+                else if (this.expostatus == '') {
+                    alert("請選擇[展覽狀態]");
+                    return false;
+                }
+                else if (this.adultprice == '') {
+                    alert("請輸入[成人票價]");
+                    return false;
+                }
+                else if (this.concprice == '') {
+                    alert("請輸入[優惠票價]");
+                    return false;
+                }
+                else if (this.groupprice == '') {
+                    alert("請輸入[團體票價]");
+                    return false;
+                }
+                else if (this.expopic == '') {
+                    alert("請選擇[展覽圖片]");
+                    return false;
+                }
+                else{
+                    const string = `exponame=${this.exponame}&expocontent=${this.expocontent}&expostart=${this.expostart}&expoend=${this.expoend}&expostatus=${this.expostatus}&adultprice=${this.adultprice}&concprice=${this.concprice}&groupprice=${this.groupprice}&expopic=${this.expopic}`;
+                    axios.post("../../php/backend/expo-create.php", string).then(res => {
+                        console.log(res);
+                        swal({
+                            icon: "success",
+                            title: "添加成功",
+                            text: "您已成功添加一筆展覽",
+                            buttons: {
+                            A: {
+                                text: "繼續新增展覽",
+                                value: "./b-event-create.html",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "回展覽管理頁面",
+                                visible: true,
+                                className:'BBB',
+                                value: "./b-event.html"
+                            }
+                            }
+                        }).then((value) => {
+                            location.assign(`${value}`)
+                        });
+                    // this.dataList = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                        alert("發布失敗，請再次檢查資料");
+                    })
+
+
+                    let file = document.getElementById("expopic").files[0];
+
+                    // console.log(file)
+
+                    this.file = file;
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios({
+                        method: 'post',
+                        url: '../../php/backend/expo-create-upload.php',
+                        data: formData,
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Authorization': localStorage.getItem("authorization")
+                        }
+                    }) 
+                }          
+                },
+                checkimg(e){
+                    let pic = e.target.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.expopic = picbox;
+                    // console.log(this.productpic);
+
+                    let picfile = e.target.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#mainpic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+                },
+
+            },created() {
+            }
+        }).mount("#expo-create");
+    </script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="../js/index.js"></script>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+  <!-- 月曆 -->
+  <!-- jQuery-->
+  <!-- Moment.js v2.20.0 -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+  <!-- FullCalendar v3.8.1 -->
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css" rel="stylesheet"  /> -->
+  <!-- <link rel="stylesheet" href="../css/fullcalendar.css"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>  
+  <link rel="stylesheet" href="../css/style.css">
+  <title>首頁 - 韶光文創園區</title>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="top-area_shadowbox" id="viewcounter"></div>
+    <div class="top-area">
+      <div class="logo-box">
+        <a href="index.html">
+          <img src="../img/logo/logo2.png" alt="">
+        </a>
+      </div>
+        <ul class="topbar-btn-group" id="topbar-btn-group">
+          <li><a href="about.html">關於韶光</a></li>
+          <li><a href="new.html">最新消息</a></li>
+          <li><a href="event.html">展演活動</a></li>
+          <li><a href="rental.html">場地租借</a></li>
+          <li><a href="shops.html">風格好店</a></li>
+          <li><a href="store.html">文創商城</a></li>
+          <li><a href="faq.html">常見問題</a></li>
+        </ul>
+       <!------------------------------------手機板ICON------------------------------------------->
+       <component class="member-icon-box-out">
+        <div class="dividing-line"></div>
+        <div class="member-icon-box-2" id="member-icon-box-2">
+          <a class="head" href="javaScript:0" @click="log_phone"
+            ><i id="member-icon-2" class="fa-solid fa-user member-icon-2"></i
+          ></a>
+          <ul id="ul" class="ul">
+            <li class="li"><a href="memberCenter.html">交易查詢</a></li>
+            <li class="li"><a href="memberCenter.html">會員資料</a></li>
+            <li class="li">
+              <a href="javaScript:0" @click="logOut">會員登出</a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu-icon-box" id="menu-icon-box">
+          <a>
+            <i class="fa-solid fa-bars"></i>
+          </a>
+        </div>
+
+        <!------------------------------------網頁板ICON------------------------------------------->
+
+        <div
+          class="member-icon-box"
+          v-bind:style="styleObject"
+          @mouseenter="mouseenter"
+          @mouseleave="mouseleave"
+        >
+          <a class="head" href="javaScript:0" @click="log"
+            ><i class="fa-solid fa-user member-icon"></i
+          ></a>
+          <ul>
+            <li><a href="memberCenter.html">交易查詢</a></li>
+            <li><a href="memberCenter.html">會員資料</a></li>
+            <li><a href="javaScript:0" @click="logOut">會員登出</a></li>
+          </ul>
+        </div>
+      </component>
+        <div class="cart-icon-box">
+          <a href="shopping_cart01.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+      </div>
+    </div>
+    <div class="left-area">
+      <p>FOLLOW US</p>
+      <div class="social-btn-group">
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+        <a
+          href="https://www.youtube.com/watch?v=vt78cMAgCDI&ab_channel=CHTHONIC%E9%96%83%E9%9D%88%E6%98%A0%E5%83%8F%E9%A4%A8"><i
+            class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="right-area">
+      <div class="cart-icon-box">
+        <a href="shopping_cart-gavin2.html">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+      </div>
+      <ul class="anchor-box">
+        <li><a href="#" id="a-g" data-scroll="anchor0" class="a-g scrollDetectorJS">G</a></li>
+        <li><a id="a-news" href="#anchor1" data-scroll="anchor1" class="a-news scrollDetectorJS">N</a></li>
+        <li><a id="a-events" href="#anchor2" data-scroll="anchor2" class="a-events scrollDetectorJS">E</a></li>
+        <li><a id="a-about" href="#anchor3" data-scroll="anchor3" class="a-aboutus scrollDetectorJS">A</a></li>
+        <li><a id="a-shops" href="#anchor4" data-scroll="anchor4" class="a-shops scrollDetectorJS">S</a></li>
+        <div class="hide-box"></div>
+      </ul>
+      <a href="" id="backToTop">
+        <p>← BACK TO TOP</p>
+      </a>
+    </div>
+  </header>
+  <div class="index-wrapper" id="slider">
+    <div id="anchor0" class="carousel">
+      <div class="owl-one owl-carousel owl-theme" >
+        <div class="item" v-for="(slider, index) of dataList['slider']" >
+          <a :href="'http://tibamef2e.com/tgd103/g3/goodtime/dist/html/event_detail.html?eid='+ slider.ID">
+            <h1>{{index+1}}</h1>
+            <img :src="slider.MAIN_PHOTO"/>
+            <p class="desc">{{slider.CONTENT}}</p>
+          </a>
+        </div>
+      <!-- </template> -->
+        <!-- <div class="item">
+          <a href="http://localhost/tgd103_g3_goodtime/src/html/event_detail.html?eid=5">
+            <h1>2</h1>
+            <img src="../img/index/bannerimg2.jpg" alt="" />
+            <p class="desc"></p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="http://localhost/tgd103_g3_goodtime/src/html/event_detail.html?eid=2">
+            <h1>3</h1>
+            <img src="../img/index/bannerimg3.jpg" alt="" />
+            <p class="desc"></p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="http://localhost/tgd103_g3_goodtime/src/html/event_detail.html?eid=4">
+            <h1>4</h1>
+            <img src="../img/index/bannerimg4.jpg" alt="" />
+            <p class="desc"></p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="http://localhost/tgd103_g3_goodtime/src/html/event_detail.html?eid=8">
+            <h1>5</h1>
+            <img src="../img/index/bannerimg5.jpg" alt="" />
+            <p class="desc"></p>
+          </a>
+        </div> -->
+      </div>
+      <img class="index-subtract" src="../img/index/Subtract.png" alt="" />
+      <h4>體會悠閒的傭懶午後<br />&emsp;&emsp;享受美好的黃金時光</h4>
+      <div class="index-vediobox">
+        <div class="index-vediobox-title">韶光形象影片公開中！</div>
+        <h5>Play Movie</h5>
+        <a href="https://www.youtube.com/watch?v=U0TXIXTzJEY&ab_channel=YugoKanno-Topic">
+          <img src="../img/index/videologo.png" alt="" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="index-news" id="anchor1">
+    <div class="title">
+      <h2 class="title-1">NEWS</h2>
+      <h2 class="title-2">最新消息</h2>
+    </div>
+    <div class="index-content-wrap">
+      <!-- start -->
+      <div class="content" v-for="(news, index) of dataList['news']" >
+        <div class="date-info">
+          <div class="date">{{ news.EDIT_DATE }}</div>
+          <div class="info">{{ news.DESC }}</div>
+        </div>
+        <a :href="'news_detail.html?ID='+news.ID">
+          <div class="announcement">
+            {{ news.TITLE }}<span class="material-symbols-outlined">arrow_forward_ios</span>
+          </div>
+        </a>
+      </div>
+      <!-- end -->
+      <!-- <div class="content">
+        <div class="date-info">
+          <div class="date">2022-11-29</div>
+          <div class="info">展演資訊</div>
+        </div>
+        <a href="news_detail.html">
+          <div class="announcement">
+            【園區公告】假日休館假日休館假日休館假日休館<span class="material-symbols-outlined">arrow_forward_ios</span>
+          </div>
+        </a>
+      </div>-->
+    </div>
+  </div>
+  <div id="anchor2" class="index-calendar">
+    <div class="title">
+      <h3 class="title-1">EVENT CALENDAR</h3>
+      <h3 class="title-2">精彩活動</h3>
+    </div>
+    <div id="example" class="example"></div>
+  </div>
+  <div class="index-aboutus" id="anchor3">
+    <div class="aboutus-left">
+      <img src="../img/index/Aboutus.jpg" alt="">
+    </div>
+    <div class="aboutus-right">
+      <div class="title">
+        <h3 class="title-1">ABOUT US</h3>
+        <h3 class="title-2">關於韶光</h3>
+      </div>
+      <p>韶光文創園區創立的初衷<br>
+        來自一份「溫暖」的心意<br>
+        希望來此的遊客能體會單純美好的幸福<br>
+        並在駐足的過程中<br>
+        創造只屬於自己的溫馨時光與回憶</p>
+      <div class="wrapper primary-ctn">
+        <div class="btn-primary">
+            <a href="./about.html">
+                <div class="btn-text">
+                    <p>View More</p>
+                </div>
+                <div class="btn-circle"></div>
+                <div class="btn-line"></div>
+                <div class="btn-arrow"></div>
+                <span class="btn-inner"></span>
+            </a>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="index-shops" id="anchor4">
+    <div class="title">
+      <h3 class="title-1">SHOPS</h3>
+      <h3 class="title-2">風格好店</h3>  
+    </div>
+    <div class="owl-two owl-carousel">
+      <div class="item">
+        <div>
+          <a href="shops_detail.html">
+            <img src="../img/index/shop1.png" alt="" />
+            <h4>洋桔梗甜點工作室</h4>
+            <p>
+              甜點總是扮演著愛、甜蜜、慶祝和療傷的角色。
+              希望我的甜點可以帶給每一位滿滿幸福！
+            </p>
+            <div class="more">More</div>
+          </a>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <a href="shops_detail.html">
+            <img src="../img/index/shop2.png" alt="" />
+            <h4>焙可先生</h4>
+            <p>
+              堅持每日現做與獨家醃料製作， 遵循傳統的味道，
+              開啟一天中最重要的一餐！
+            </p>
+            <div class="more">More</div>
+          </a>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <a href="shops_detail.html">
+            <img src="../img/index/shop3.png" alt="" />
+            <h4>品茶吧</h4>
+            <p>
+              品茶吧，希望能夠為喜好喝茶以及愛好茶文化的人們，
+              提供一個舒適的品茶空間。
+            </p>
+            <div class="more">More</div>
+          </a>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <a href="shops_detail.html">
+            <img src="../img/index/shop4.png" alt="" />
+            <h4>薏杯茶</h4>
+            <p>
+              人與茶的邂逅，是前世今生。
+              珍惜與人相處之時，也珍惜品茶的好時光。
+            </p>
+            <div class="more">More</div>
+          </a>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <a href="shops_detail.html">
+            <img src="../img/index/shop5.png" alt="" />
+            <h4>Dacquoise</h4>
+            <p>
+              職人的嚴致堅持，
+              從精選食材開始用心斟搭配，
+              為能夠純粹品味達克瓦茲的獨特風味。
+            </p>
+            <div class="more">More</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer"></div>
+  
+  <script>
+
+    //限制字數
+
+    const desc = document.querySelectorAll('.desc');
+
+    // if (window.screen.width <= 430) {
+    //   for (var i = 0; i < news_data.length; i++) {
+    //     desc[i].innerHTML = news_data[i].substring(0, 45) + '...';
+    //   }
+    // }
+
+    // if (window.screen.width > 430) {
+    //   for (var i = 0; i < this.slider.length; i++) {
+    //     desc[i].innerHTML = news_data[i].substring(0, 90) + '...';
+    //   }
+    // }
+
+    //Back To Top
+    const backToTop = document.getElementById('backToTop');
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    })
+ 
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+  <script src="../js/vue.global.js"></script>
+  <script>
+
+  //渲染輪播
+  const slider = Vue.createApp({
+    data() {
+      return {
+          dataList: []
+      }
+    },  
+    beforeCreate() {
+        // 查詢資料
+        axios.get("../../php/frontend/index.php")
+        .then(res => {
+          this.dataList = {...res.data};
+          console.log(this.dataList['slider'].length);
+
+          const desc = document.querySelectorAll('.desc');
+
+        
+            if (window.screen.width > 430) {
+              for (var i = 0; i < this.dataList['slider'].length; i++) {
+                console.log(this.dataList['slider'][i].CONTENT);
+                this.dataList['slider'][i].CONTENT = this.dataList['slider'][i].CONTENT.substring(0, 85) + '...';
+              }
+            }
+          
+            // 輪播
+            $(document).ready(function () {
+              $('.owl-one').owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                center: true,
+                loop: true,
+                margin: 30,
+                mouseDrag: false,
+                touchDrag: false,
+                nav: true,
+                navText: [
+                  prvIcon,
+                  nextIcon
+                ],
+                responsive: {
+                  0: {
+                    items: 1.1,
+                    margin: 5
+                  },
+                  768: {
+                    items: 2,
+                    margin: 5
+                  },
+                  1000: {
+                    items: 2.2,
+                  }
+                }
+              });
+              $('.owl-two').owlCarousel({
+                items: 3,
+                loop: true,
+                center: true,
+                margin: 30,
+                autoplayHoverPause: true,
+                // startPosition: 0,
+                merge: true,
+                nav: true,
+                mouseDrag: false,
+                touchDrag: false,
+                navText: [
+                  prvIcon,
+                  shopNextIcon
+                ],
+                responsive: {
+                  0: {
+                    items: 1,
+                    margin: 10
+                  },
+                  400: {
+                    items: 1
+                  },
+                  500: {
+                    items: 2
+                  },
+                  770: {
+                    items: 3
+                  },
+                  1242: {
+                    items: 3.5,
+                    margin: 10
+                  }
+                }
+              });
+          })
+        }).catch(err => {
+          console.log(err);
+        });
+    }
+  }).mount("#slider");
+
+  //渲染news & calendar
+  const index = Vue.createApp({
+    data() {
+      return {
+          dataList: [],
+          event:[]
+      }
+    }, 
+    methods:{
+      create_calendar(){
+        $( "#example" ).fullCalendar({
+          header: { // 頂部排版
+              left: "prev,next today",
+              center: "prev,title,next",
+              right: "month,basicWeek,basicDay"
+          },
+          // defaultDate: "2023-01-10", 
+          weekends: true,
+          editable: false,  // 啟動拖曳調整日期
+          eventBackgroundColor: "#C09351", 
+          eventBorderColor:"#C09351",
+          validRange: function(nowDate) {
+            return {
+              start: '2023-02-01',
+              end:'2023-12-20'
+            };
+          },
+          events: this.events
+          // [ // 事件
+          //     { // 事件(包含跨日開始時間、結束時間)
+          //         title: "《流體藝術》暈染雙人流體畫展",
+          //         start: "2023-01-07",
+          //         end: "2023-01-10",
+          //         url: "https://tibamef2e.com/tgd103/g3/dist_2/html/event_detail.html",
+          //        color: black
+        //        }
+          // ]
+        });
+      }
+    }, 
+    beforeCreate() {
+        // 查詢資料
+        axios.get("../../php/frontend/index.php")
+        .then(res => {
+          this.dataList = {...res.data};
+          console.log(this.dataList);
+          this.events=JSON.parse(JSON.stringify(this.dataList.calendar));
+          this.create_calendar()
+        }).catch(err => {
+          console.log(err);
+        });
+    }
+  }).mount("#anchor1");
+
+  // 輪播
+  // $(document).ready(function () {
+  //     $('.owl-one').owlCarousel({
+  //       autoplay: true,
+  //       autoplayTimeout: 4000,
+  //       autoplayHoverPause: true,
+  //       center: true,
+  //       loop: true,
+  //       margin: 30,
+  //       mouseDrag: false,
+  //       touchDrag: false,
+  //       nav: true,
+  //       navText: [
+  //         prvIcon,
+  //         nextIcon
+  //       ],
+  //       responsive: {
+  //         0: {
+  //           items: 1.1,
+  //           margin: 5
+  //         },
+  //         768: {
+  //           items: 2,
+  //           margin: 5
+  //         },
+  //         1000: {
+  //           items: 2.2,
+  //         }
+  //       }
+  //     });
+  //     $('.owl-two').owlCarousel({
+  //       items: 3,
+  //       loop: true,
+  //       center: true,
+  //       margin: 30,
+  //       autoplayHoverPause: true,
+  //       // startPosition: 0,
+  //       merge: true,
+  //       nav: true,
+  //       mouseDrag: false,
+  //       touchDrag: false,
+  //       navText: [
+  //         prvIcon,
+  //         shopNextIcon
+  //       ],
+  //       responsive: {
+  //         0: {
+  //           items: 1,
+  //           margin: 10
+  //         },
+  //         400: {
+  //           items: 1
+  //         },
+  //         500: {
+  //           items: 2
+  //         },
+  //         770: {
+  //           items: 3
+  //         },
+  //         1242: {
+  //           items: 3.5,
+  //           margin: 10
+  //         }
+  //       }
+  //     });
+  // })
+
+ const indexApp = Vue.createApp({
+  data() {
+    return {
+      login: "0", //出現
+      styleObject: {
+        right: "-98px",
+        height: "50px",
+      },
+    };
+  },
+  mounted() {
+    // console.log("aaaaa");
+    this.login = sessionStorage.getItem("login");
+  },
+  methods: {
+    // 进入元素
+    mouseenter() {
+      // console.log("mouseenter",this.login);
+      if (this.login === "1") {
+        this.styleObject.right = "0px";
+        this.styleObject.height = "125px";
+      }
+    },
+    // 离开元素
+    mouseleave() {
+      //   console.log("mouseleave");
+      this.styleObject.right = "-98px";
+      this.styleObject.height = "50px";
+    },
+    log() {
+      if (sessionStorage.getItem("login") === "1") {
+        window.location.href = "../html/memberCenter.html";
+      }else{
+        window.location.href = "../html/log_in.html";
+      }
+    },
+    log_phone() {
+      if (sessionStorage.getItem("login") === "1") {
+        window.location.href = "#";
+      }else{
+        window.location.href = "../html/log_in.html";
+      }
+    },
+    logOut() {
+      sessionStorage.removeItem("login");
+      alert("登出成功");
+      window.location.href = "../html/log_in.html";
+    },
+  },
+}).mount(".member-icon-box-out");
+
+  const viewcounter = Vue.createApp({
+    data() {
+        return {
+        }
+    }, methods:{
+    }, created() {
+      // 記數
+      axios({
+          method: 'post',
+          url: '../../php/backend/viewcounter.php',
+          responseType:'json',
+          }).then(res => {
+            console.log("success");
+          }).catch(err => {
+            console.log(err);
+      });
+    }
+  }).mount("#viewcounter");
+</script>
+<script>
+//漢堡線控制
+let menuIcon = document.getElementById('menu-icon-box');
+let menu = document.getElementById('topbar-btn-group');
+
+menuIcon.addEventListener('click', function () {
+  document.getElementById('topbar-btn-group').classList.toggle("on");
+});
+
+//member-icon-2控制
+let memberIcon2 = document.getElementById('member-icon-2');
+memberIcon2.addEventListener('click',function(){
+document.getElementById('member-icon-box-2').classList.toggle("toggle");
+});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+@mixin rwd($breakpoint) {
+    @media all and (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+
+
+.warpper-news {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 80px;
+    font-family: $our-font;
+
+    // 麵包屑
+    .breadcrumb {
+        @include rwd(1080px) {
+            padding: 10px 6%;
+        }
+
+        @include rwd(768px) {
+            padding: 0px 8%;
+        }
+
+        @include rwd(540px) {
+            padding: 10px 10%;
+        }
+
+        @include rwd(428px) {
+            padding: 0px 10%;
+        }
+
+        @include rwd(414px) {
+            padding: 10px 14%;
+        }
+
+        @include rwd(376px) {
+            padding: 10px 6%;
+        }
+    }
+
+    /* 最新消息 */
+    .banner {
+        @include rwd(768px) {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        @include rwd(428px) {
+            width: 80%;
+        }
+    }
+
+    .banner .banner__textarea,
+    .banner .banner-textarea {
+        height: 50%;
+    }
+
+    .banner .banner__eng {
+
+        @include rwd(1024px) {
+            font-size: 40px;
+            padding: 2.2rem 4.2rem 2rem;
+        }
+
+        @include rwd(768px) {
+            font-size: 28px;
+            padding: 2rem 0.5rem 0rem;
+        }
+
+        @include rwd(428px) {
+            font-size: 20px;
+            padding: 0.5rem 0.5rem 0rem;
+            letter-spacing: 0.3rem;
+        }
+
+        @include rwd(376px) {
+            padding: 1rem 2.2rem 0.2rem;
+        }
+    }
+
+    .banner .banner__zh,
+    .banner .banner-zh {
+
+        @include rwd(1024px) {
+            font-size: 28px;
+            padding-left: 21vw;
+        }
+
+        @include rwd(912px) {
+            padding-right: 2.5rem;
+            font-size: 28px;
+            padding-left: 23vw;
+        }
+
+        @include rwd(820px) {
+            font-size: 28px;
+            padding-left: 25vw;
+        }
+
+        @include rwd(768px) {
+            font-size: 28px;
+            padding-left: 9vw;
+            padding-right: 0.5rem;
+        }
+
+        @include rwd(540px) {
+            font-size: 20px;
+            padding-right: 0rem;
+            padding-left: 31vw;
+        }
+
+        @include rwd(428px) {
+            font-size: 20px;
+            padding-left: 8vw;
+            letter-spacing: 0.3rem;
+        }
+    }
+
+    .banner .banner__zh::before,
+    .banner .banner-zh::before {
+
+        @include rwd(820px) {
+            width: 15vw;
+        }
+
+        @include rwd(768px) {
+            width: 12vw;
+            margin-right: 0.8rem;
+        }
+
+        @include rwd(428px) {
+            width: 10vw;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .banner__img {
+        background-image: url(/img/new/new.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @include rwd(1080px) {
+            background-size: contain;
+            background-position: center;
+        }
+    }
+
+    .banner .banner__img,
+    .banner .banner-img {
+        height: 25rem;
+        display: block;
+        margin: 0 auto;
+
+        @include rwd(1080px) {
+            height: 22rem;
+        }
+
+        @include rwd(1024px) {
+            height: 21rem;
+        }
+
+        @include rwd(912px) {
+            height: 19rem;
+        }
+
+        @include rwd(820px) {
+            height: 17rem;
+        }
+
+        @include rwd(768px) {
+            height: 13.7rem;
+        }
+
+        @include rwd(540px) {
+            height: 11rem;
+        }
+
+        @include rwd(428px) {
+            height: 7.2rem;
+        }
+
+        @include rwd(414px) {
+            height: 8rem;
+        }
+
+        @include rwd(376px) {
+            height: 7rem;
+        }
+    }
+
+
+
+
+
+    .tabset {
+        /* 公告區 */
+        max-width: 65em;
+        margin: 0 auto;
+        margin-top: 80px;
+        text-align: center;
+
+        @include rwd(768px) {
+            font-size: 14px;
+            margin-top: 25px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+        }
+    }
+
+    .tab-panels {
+        margin: 0 30px;
+
+        @include rwd(768px) {
+            font-size: 14px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+        }
+    }
+
+    .tabset>input[type="radio"] {
+        position: absolute;
+        left: -200vw;
+    }
+
+    .tabset>label {
+        position: relative;
+        display: inline-block;
+        padding: 15px 85px 25px;
+        border-bottom: 0;
+        cursor: pointer;
+        font-weight: 600;
+
+        @include rwd(540px) {
+            padding: 11px 25px 11px;
+        }
+
+        @include rwd(426px) {}
+
+    }
+
+    .tab-panels {
+        margin: 0px auto;
+        width: 80%;
+        font-weight: bold;
+
+        @include rwd(540px) {
+            width: 80%;
+        }
+
+    }
+
+    .tab-panels li {
+        margin: 20px 0;
+        padding-bottom: 20px;
+        padding-left: 30px;
+        line-height: 2.6;
+        border-bottom: 1px solid #ccc;
+
+        @include rwd(540px) {
+            margin: 15px 0;
+            padding-bottom: 15px;
+            line-height: 2;
+        }
+    }
+
+    .tab-panels .tab-panel li:hover h4 {
+        color: #618985;
+    }
+
+    .tab-panels .tab-panel li:hover small {
+        color: #618985;
+    }
+
+    .tabset>label::after {
+        content: "";
+        position: absolute;
+        left: 85px;
+        bottom: 20px;
+        width: 65px;
+        height: 4px;
+
+        @include rwd(768px) {
+            width: 58px;
+        }
+
+        @include rwd(428px) {
+            width: 50px;
+            left: 24px;
+            bottom: 6px;
+        }
+
+    }
+
+    .tabset>label:hover {
+        color: #618985;
+    }
+
+    .tabset>input:focus+label::after,
+    .tabset>input:checked+label::after {
+        background: #618985;
+    }
+
+    .tab-panels.tab-panel>li:hover {
+        color: #618985;
+    }
+
+    .tab-panels .tab-panel li a {
+        text-decoration: none;
+        letter-spacing: 1;
+    }
+
+    .tab-panel li small {
+        font-size: 12px;
+        color: #555555;
+        padding-left: 10px;
+        font-weight: normal;
+    }
+
+    .tab-panel li h4 {
+        font-size: 16px;
+        color: #261C0D;
+
+        @include rwd(768px) {
+            font-size: 14px;
+        }
+
+        @include rwd(428px) {
+            font-size: 12px;
+        }
+    }
+
+    #pagination {
+        /*-- 按紐 --*/
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    #pagination a {
+        border: 1px black solid;
+        width: 10px;
+        margin: 0 auto;
+        width: 17px;
+        text-align: center;
+        padding-left: 7px;
+        margin-left: 17px;
+        padding-right: 7px;
+        padding-bottom: 0.64px;
+
+        &:hover,
+        &.-on {
+            background-color: #261C0D;
+            color: white;
+        }
+
+    }
+
+}

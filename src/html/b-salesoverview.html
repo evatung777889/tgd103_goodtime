@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-salesoverview">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="info-box1">
+                        <p>即時銷售狀態</p>
+                        <ul>
+                            <li>
+                                <h6><i class="fa-solid fa-clone"></i>    今日訂單數</h6>
+                                <h5>2筆</h5>
+                            </li>
+                            <li>
+                                <h6><i class="fa-solid fa-coins"></i>    今日訂單總金額</h6>
+                                <h5>TWD$1,880</h5>
+                            </li>
+                            <li>
+                                <h6><i class="fa-solid fa-gift"></i>    總商品數</h6>
+                                <h5>178件</h5>
+                            </li>
+                            <li>
+                                <h6><i class="fa-solid fa-shop"></i>    零庫存商品數</h6>
+                                <h5>40件</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text">近期銷售數據</p>
+        <p class="gray-text">*所有最新數據均更新至當前時間的前一日</p>
+        <div class="switch-btn-group">
+            <div class="switch-btn">
+                <input type="radio" id="d1" name="switch" checked/>
+                <label class="btn btn-default" for="d1">前一日</label>
+            </div>
+            <div class="switch-btn">
+                <input type="radio" id="d2" name="switch"/>
+                <label class="btn btn-default" for="d2">前十日</label>
+            </div>
+        </div>
+        <p class="sub-text">銷售</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="info-box2">
+                        <p><i class="fa-solid fa-file-contract"></i> 總訂單數</p>
+                        <ul>
+                            <li>
+                                <h5>8筆</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-box2">
+                        <p><i class="fa-solid fa-cash-register"></i> 總訂單金額</p>
+                        <ul>
+                            <li>
+                                <h5>TWD$6,880</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-box2">
+                        <p><i class="fa-solid fa-money-bill"></i>  平均訂單金額</p>
+                        <ul>
+                            <li>
+                                <h5>TWD$860</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="sub-text">人流</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="info-box2">
+                                <p>總瀏覽數</p>
+                                <ul>
+                                    <li>
+                                        <h5>108次</h5>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="info-box3">
+                                <p>新註冊會員數</p>
+                                <ul>
+                                    <li>
+                                        <h5>8人</h5>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="info-box3">
+                                <p>實際交易人數</p>
+                                <ul>
+                                    <li>
+                                        <h5>8人</h5>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="info-box4">
+                        <p>總會員數</p>
+                        <h5>1880人</h5>
+                        <ul>
+                            <li><div class="color-box" style="background-color: blue;"></div><h6>首次購物人數</h6><h6 class="text-float">620人</h6></li>
+                            <li><div class="color-box" style="background-color:peru;"></div><h6>首次購物人數</h6><h6 class="text-float">180人</h6></li>
+                            <li><div class="color-box" style="background-color: grey;"></div><h6>首次購物人數</h6><h6 class="text-float">1080人</h6></li>
+                        </ul>
+                        <div class="pie-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="sub-text">暢銷排行</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="info-box5">
+                        <p>今日Top5熱賣商品</p>
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <div><h6>名次</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>商品名稱</h6></div>
+                                    <div><h6>銷售數量</h6></div>
+                                    <div><h6>銷售金額</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="b-product-detail.html">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div><h6>1</h6></div>
+                                    <div><h6>商品圖</h6></div>
+                                    <div class="add-w"><h6>滿版中筒襪 | 台灣原創設計襪子</h6></div>
+                                    <div><h6>8</h6></div>
+                                    <div><h6>$920</h6></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+    </script>
+</body>
+</html>

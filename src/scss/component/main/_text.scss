@@ -1,0 +1,13 @@
+/* 
+<input type="text" class="name" placeholder="收件人姓名">
+*/
+
+input.name{
+    outline: 0;
+    width: 90%;
+    height: 30px;
+    border: 1px solid $secondary5-color;
+    color: $secondary4-color;
+    padding-left: 5px;
+    border-radius: 3px;
+}

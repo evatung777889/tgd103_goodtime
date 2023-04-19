@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="top-area_shadowbox"></div>
+      <div class="top-area">
+        <div class="logo-box">
+          <a href="index.html">
+            <img src="../img/logo/logo2.png" alt="" />
+          </a>
+        </div>
+        <ul class="topbar-btn-group" id="topbar-btn-group">
+          <li><a href="about.html">關於韶光</a></li>
+          <li><a href="new.html">最新消息</a></li>
+          <li><a href="event.html">展演活動</a></li>
+          <li><a href="rental.html">場地租借</a></li>
+          <li><a href="shops.html">風格好店</a></li>
+          <li><a href="store.html">文創商城</a></li>
+          <li><a href="faq.html">常見問題</a></li>
+        </ul>
+        <!------------------------------------手機板ICON------------------------------------------->
+        <component class="member-icon-box-out">
+          <div class="dividing-line"></div>
+          <div class="member-icon-box-2" id="member-icon-box-2">
+            <a class="head" href="javaScript:0" @click="log_phone"
+              ><i id="member-icon-2" class="fa-solid fa-user member-icon-2"></i
+            ></a>
+            <ul id="ul" class="ul">
+              <li class="li"><a href="memberCenter.html">交易查詢</a></li>
+              <li class="li"><a href="memberCenter.html">會員資料</a></li>
+              <li class="li">
+                <a href="javaScript:0" @click="logOut">會員登出</a>
+              </li>
+            </ul>
+          </div>
+          <div class="menu-icon-box" id="menu-icon-box">
+            <a>
+              <i class="fa-solid fa-bars"></i>
+            </a>
+          </div>
+
+          <!------------------------------------網頁板ICON------------------------------------------->
+
+          <div
+            class="member-icon-box"
+            v-bind:style="styleObject"
+            @mouseenter="mouseenter"
+            @mouseleave="mouseleave"
+          >
+            <a class="head" href="javaScript:0" @click="log"
+              ><i class="fa-solid fa-user member-icon"></i
+            ></a>
+            <ul>
+              <li><a href="memberCenter.html">交易查詢</a></li>
+              <li><a href="memberCenter.html">會員資料</a></li>
+              <li><a href="javaScript:0" @click="logOut">會員登出</a></li>
+            </ul>
+          </div>
+        </component>
+        <div class="cart-icon-box">
+          <a href="shopping_cart01.html">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+        </div>
+      </div>
+      <div class="left-area">
+        <p>FOLLOW US</p>
+        <div class="social-btn-group">
+          <a href="https://www.instagram.com/"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a href="https://www.facebook.com/"
+            ><i class="fa-brands fa-facebook"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/watch?v=vt78cMAgCDI&ab_channel=CHTHONIC%E9%96%83%E9%9D%88%E6%98%A0%E5%83%8F%E9%A4%A8"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+      <div class="right-area">
+        <div class="cart-icon-box">
+          <a href="shopping_cart01.html">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+        </div>
+        <a href="" id="backToTop">
+          <p>← BACK TO TOP</p>
+        </a>
+      </div>
+    </header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/top-bar.js"></script>
+    <script>
+      //漢堡線控制
+      let menuIcon = document.getElementById("menu-icon-box");
+      let menu = document.getElementById("topbar-btn-group");
+
+      menuIcon.addEventListener("click", function () {
+        document.getElementById("topbar-btn-group").classList.toggle("on");
+      });
+
+      //Back To Top
+      const backToTop = document.getElementById("backToTop");
+      backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      //member-icon-2控制
+      let memberIcon2 = document.getElementById("member-icon-2");
+      memberIcon2.addEventListener("click", function () {
+        document.getElementById("member-icon-box-2").classList.toggle("toggle");
+      });
+    </script>
+  </body>
+</html>

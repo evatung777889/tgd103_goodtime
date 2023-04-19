@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>忘記密碼 - 韶光文創園區</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="forgot-pwd-wrapper">
+      <div class="forgot-pwd-bg">
+        <!-- 文字標題 -->
+        <div class="banner">
+          <div class="banner__textarea">
+              <div class="banner__eng">Forgot<br>
+                                       Password</div>
+              <div class="banner__zh">忘記密碼</div>
+          </div>
+        </div>
+        <!-- 主內容 -->
+        <div class="forgot-pwd-content">
+          <div class="forgot-pwd-width">
+            <div class="forgot-pwd-line">
+              <div id="forgot-pwd">
+                <div class="send_email">
+                  <!-- 電子信箱 -->
+                  <input
+                    type="text"
+                    v-model="user_email"
+                    class="user_email"
+                    name="user_email"
+                    id="user_email"
+                    placeholder="請輸入您的電子信箱"
+                  />
+                  <!-- 取得驗證碼按鈕 -->
+                  <input
+                    type="button"
+                    class="btn_s_default"
+                    value="送出"
+                    @click="emailConfirm"
+                    :disabled="isDisabl"
+                  />
+                </div>
+                <!-- 驗證碼 -->
+                <div>
+                  <input
+                    type="text"
+                    v-model="user_verify"
+                    class="user_verify"
+                    name="user_verify"
+                    id="user_verify"
+                    placeholder="請輸入您的驗證碼"
+                  />
+                </div>
+                <!-- 輸入新密碼 -->
+                <div>
+                  <input
+                    type="text"
+                    v-model="user_pwd"
+                    class="user_pwd"
+                    name="user_pwd"
+                    id="user_pwd"
+                    placeholder="請輸入您的新密碼"
+                  />
+                </div>
+                <!-- 再次輸入新密碼 -->
+                <div>
+                  <input
+                    type="password"
+                    v-model="user_repwd"
+                    class="user_repwd"
+                    name="user_repwd"
+                    id="user_repwd"
+                    placeholder="請再次輸入您的新密碼"
+                  />
+                </div>
+                <!-- 確認送出按鈕 -->
+                <div class="btn__ctn">
+                  <button id="goApplyForm" class="button" @click="correct">
+                    <span>確認</span>
+                  </button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer"></div>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+    <script src="../js/forgot-Pwd.js"></script>
+    <script>
+      $(() => {
+        $("#header").load("topbar.html");
+        $("#footer").load("footer.html");
+      });
+    </script>
+  </body>
+</html>

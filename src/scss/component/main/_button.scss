@@ -1,0 +1,59 @@
+/**
+<div class="btn__ctn">
+    <button id="goApplyForm" class="button">
+        <span>開始申請</span>
+    </button>
+</div>
+*/
+.btn__ctn,
+.btn-ctn {
+    width: fit-content;
+    margin: 0 auto;
+
+    .button {
+        font-size: $h6;
+        margin-top: 40px;
+        padding: 20px 75px 20px 90px;
+        outline: 0;
+        border: solid .8px $brown-color;
+        background-color: $brown-color;
+        border-radius: 3px;
+        letter-spacing: 15px;
+        transition: all 0.3s;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            transition: all .3s;
+            transform: scaleX(0);
+            background-color: #fff;
+            transform-origin: 0% 50%;
+        }
+
+        span {
+            color: #fff;
+            position: relative;
+            z-index: 3;
+        }
+
+        &:hover {
+
+            span {
+                color: $brown-color;
+            }
+
+            &::before {
+                background-color: #fff;
+                transform: scaleX(1);
+            }
+        }
+
+
+    }
+}

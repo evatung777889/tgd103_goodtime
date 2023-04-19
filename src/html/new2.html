@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&family=Philosopher:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="/css/new.css" /> -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>NEW</title>
+  </head>
+
+  <body>
+    <header id="header"></header>
+
+    <div id="news" class="warpper-news">
+      <!-- 麵包屑 -->
+      <nav class="bread-news">
+        <ol>
+          <li><a href="#">首頁</a></li>
+          <li><a href="#">最新消息</a></li>
+        </ol>
+      </nav>
+      <!-- 最新消息 -->
+      <article class="introduce new-bg">
+        <ul>
+          <li class="new-font">NEWS</li>
+          <li class="new-font1">最新消息</li>
+        </ul>
+      </article>
+      <!-- 公告區 -->
+      <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" @click="setStatus('園區公告')"/>
+        <label for="tab1" :class="{'-active':status_filter === '園區公告'}">園區公告</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" @click="setStatus('展演資訊')"/>
+        <label for="tab2">展演資訊</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" @click="setStatus('其他消息')"/>
+        <label for="tab3">其他消息</label>
+      </div>
+
+      <div>
+      <div class="tab-panels" v-for="news in currentList"> 
+          <ul class="tab-panel">
+            <li>
+              <a :href="news.url">
+                <small>{{news.time}} | {{news.universe}}</small>
+                <h4>【{{news.universe}}】{{news.message}}</h4>
+              </a>
+            </li>
+          </ul>
+      </div>
+    </div>
+      <!-- <div id="paginator_block">
+        <the-paginator
+          total-items="20"
+          items-per-page="5"
+          current-page="5"
+        ></the-paginator>
+      </div> -->
+      <!-- <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        <li class="page-ctn"><a class="page-num" href="#">1</a></li>
+        <li class="page-ctn"><a class="page-num" href="#">2</a></li>
+        <li class="page-ctn"><a class="page-num" href="#">3</a></li>
+        <li class="page-ctn">
+          <a class="page-num" href="#">
+            <span aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </nav> -->
+    <div id="pagination">
+      <a href="#" class="btn btn-default" v-for="page_index in paginate_total" 
+      @click.prevent="updateCurrent(page_index + 1)">
+        {{ page_index + 1 }}
+      </a>
+    </div>
+    </div>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/new.js"></script>
+    <script>
+      // header and footer
+      $(() => {
+        $("#header").load("topbar.html");
+        $("#footer").load("footer.html");
+      });
+
+    </script>
+  </body>
+</html>

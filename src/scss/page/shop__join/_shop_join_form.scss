@@ -1,0 +1,385 @@
+$width_428: 428px;
+$width_768: 768px;
+
+@mixin width_428() {
+    @media all and (max-width: $width_428) {
+        @content;
+    }
+}
+
+@mixin width_768() {
+    @media all and (max-width: $width_768) {
+        @content;
+    }
+}
+
+.wrapper {
+    font-family: $our-font;
+}
+
+main.shops__Join__form {
+    max-width: calc(100vw - 120px);
+    margin: 0 auto;
+
+    @include width_428 {
+        max-width: 82vw;
+    }
+}
+
+.shops__Join__form {
+
+    button.file_upload {
+        margin-left: 15px;
+    }
+    
+    .breadcrumb {
+        display: flex;
+        margin: 80px 0 20px 0px;
+
+
+        li a {
+            text-decoration: none;
+            color: $font-color;
+            line-height: 2;
+            letter-spacing: 2px;
+        }
+
+        .breadcrumb__a a {
+            &::after {
+                content: "";
+                height: 14px;
+                border-left: solid 1px black;
+                margin: 0 5px;
+
+            }
+        }
+
+        .breadcrumb__b a {
+            color: $lakeGreen-color
+        }
+    }
+
+    ul.banner {
+        height: 500px;
+        margin: 0 auto;
+        display: flex;
+
+
+        @include width_768 {
+            height: 300px;
+        }
+
+        @include width_428 {
+            height: 200px;
+        }
+
+        li {
+            background-position: center center;
+            background-size: cover;
+            transition: .5s;
+
+            &:hover {
+                flex-grow: 6;
+            }
+        }
+    }
+
+    li.item1 {
+        background-image: url("../img/shops__Join__form/shops__Join__form_1.png");
+        flex-grow: 3;
+
+        @include width_768 {
+            background-image: url("../img/shops__Join__form/shops__Join__form_rwd768.jpg");
+            height: 300px;
+        }
+
+        @include width_428 {
+            background-image: url("../img/shops__Join__form/shops__Join__form_rwd428.jpg");
+            height: 200px;
+        }
+    }
+
+    .banner li.item2 {
+        background-image: url("../img/shops__Join__form/shops__Join__form_2.png");
+        flex-grow: 1;
+        background-position: left center;
+
+        @include width_768 {
+            height: 300px;
+            display: none;
+
+        }
+    }
+
+    .join__application__title {
+        margin: 50px 80px 100px;
+
+        @include width_768 {
+            margin: 60px 0 60px;
+        }
+
+
+        div.join__application__title__eng {
+            font-size: $h4;
+            color: $brown-color;
+            font-weight: bold;
+            line-height: 1.6;
+
+            @include width_768 {
+                font-size: 22px;
+
+            }
+        }
+
+        div.join__application__title__zh {
+            font-size: $h5;
+            color: $carmel-color;
+            position: relative;
+            display: block;
+            margin-left: 220px;
+            font-weight: bold;
+
+            @include width_768 {
+                font-size: 20px;
+                margin-left: 169px;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 49%;
+                left: -15%;
+                background: #533C1B;
+                width: 14%;
+                height: 2px;
+
+                @include width_768 {
+                    left: -27%;
+                    width: 25%;
+                }
+            }
+        }
+    }
+
+    .Join__form {
+
+        max-width: fit-content;
+        margin: 0 auto;
+
+        div.shop__name__out,
+        div.name__out,
+        div.phone__out,
+        div.email__out {
+            display: flex;
+        }
+
+        .shop__name__out label,
+        .name__out label,
+        .phone__out label,
+        .email__out label {
+            min-width: 115px;
+
+            @include width_768 {
+                font-size: 14px;
+            }
+
+        }
+
+        input.shop__name,
+        input.name,
+        input.phone,
+        input.email {
+            width: 500px;
+            height: 30px;
+            border-color: #878787;
+            border-bottom: solid;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 1px;
+            border-left-width: 0px;
+            outline: 0;
+            font-size: $p;
+        }
+
+        input.shop__name,
+        input.name,
+        input.phone,
+        input.email,
+        textarea.Opinion__text {
+            &:focus {
+                border-color: $brown-color;
+                box-shadow: 0px 1.5px 0px $brown-color;
+            }
+        }
+
+        div.file-box__out {
+            position: relative;
+        }
+
+        input {
+            margin-bottom: 50px;
+            outline: none;
+        }
+
+        label {
+            letter-spacing: 1px;
+            padding-top: 9px;
+
+            @include width_768 {
+                font-size: 14px;
+            }
+        }
+
+        div.shopstay__time {
+            display: flex;
+
+            P {
+                @include width_768 {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        div.shopstay__time__1,
+        div.shopstay__time__2,
+        div.shopstay__time__3 {
+            margin-left: 19px;
+        }
+
+        .file-box__out {
+            background-color: rgb(239, 239, 239);
+            width: 65%;
+            height: 60px;
+
+            @include width_768 {
+                width: 100%;
+            }
+        }
+    }
+
+    div.file-box {
+        max-width: 58%;
+        padding-top: 14px;
+        padding-left: 16px;
+    }
+
+    /*檔案名稱*/
+    .file-box input.filename {
+        width: 140%;
+        height: 30px;
+        padding-left: 8px;
+
+        background-color: #ffffff;
+        border: none;
+        border-radius: 5px;
+
+        color: #666666;
+
+    }
+
+    /*選取檔案按鈕*/
+    input.button {
+        width: 82px;
+        height: 30px;
+        padding-left: 13px;
+
+        background-color: $brown-color;
+        border: 0;
+        border-radius: 0 5px 5px 0;
+
+        position: absolute;
+        top: 14px;
+        right: 5%;
+
+        color: #ffffff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /*隱藏原按鈕*/
+    input.file {
+        width: 100%;
+        height: 60px;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        filter: alpha(opacity=0);
+        opacity: 0;
+
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    p.Opinion {
+        margin: 50px auto 20px;
+
+        @include width_768 {
+            font-size: 14px;
+        }
+    }
+
+    textarea.Opinion__text {
+        width: 600px;
+        resize: none;
+
+        @include width_768 {
+            width: 100%;
+        }
+
+    }
+
+    .btn__ctn,
+    .btn-ctn {
+        width: fit-content;
+        margin: 0 auto;
+
+        .button {
+            font-size: $h6;
+            margin-top: 40px;
+            padding: 20px 75px 20px 90px;
+            outline: 0;
+            border: solid .8px $brown-color;
+            background-color: $brown-color;
+            border-radius: 3px;
+            letter-spacing: 15px;
+            transition: all 0.3s;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                transition: all .3s;
+                transform: scaleX(0);
+                background-color: #fff;
+                transform-origin: 0% 50%;
+            }
+
+            span {
+                color: #fff;
+                position: relative;
+                z-index: 3;
+            }
+
+            &:hover {
+
+                span {
+                    color: $brown-color;
+                }
+
+                &::before {
+                    background-color: #fff;
+                    transform: scaleX(1);
+                }
+            }
+
+
+        }
+    }
+}

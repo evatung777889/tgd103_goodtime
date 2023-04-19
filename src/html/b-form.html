@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .b-form{
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            min-width: 1280px;
+            padding-top: 20px;
+        }
+        .contactus-btn,.rentalform-btn,.shopsform-btn{
+            background-color: #333;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin: 0 auto;
+            margin-top: 60px;
+            width: 300px;
+            height: 80px;
+            transition: all 0.3s;
+            box-shadow: 0 0 0px #ccc;
+        }
+        .contactus-btn:hover,.rentalform-btn:hover,.shopsform-btn:hover{
+            box-shadow: 0 0 20px #666;
+        }
+        .the_a{
+            text-decoration: none;
+            text-align: center;
+            line-height: 80px;
+            color: #fff;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .the_a:hover{
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-form" id="">
+        <div class="contactus-btn">
+            <a href="b-contactus.html" class="the_a">一般回饋</a>
+        </div>
+        <div class="rentalform-btn">
+            <a href="b-rentalform.html" class="the_a">場地申請表</a>
+        </div>
+        <div class="shopsform-btn">
+            <a href="b-shopsform.html" class="the_a">進駐申請表</a>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+    </script>
+</body>
+</html>

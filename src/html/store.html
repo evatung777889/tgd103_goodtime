@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>文創商城 - 韶光文創園區</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Ephesis&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <header id="header"></header>
+
+    <main class="store__wrapper" id="store">
+
+        <!-- 麵包屑 -->
+        <div class="crumb">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">首頁</a></li>
+                <li><a href="./store.html">文創商城</a></li>
+            </ul>
+        </div>
+
+        <!-- banner輪播 -->
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../img/store/store_banner01.jpg"></div>
+                <div class="swiper-slide"><img src="../img/store/store_banner02.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="../img/store/store_banner03.jpg" alt=""></div>
+            </div>
+
+            <!-- 上下頁按鈕 -->
+            <div class="swiper-button-next">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+            </div>
+            <div class="swiper-button-prev">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+            </div>
+            <!-- 點點頁數 -->
+            <div class="swiper-pagination"></div>
+
+        </div>
+
+
+
+        <!-- 文字標題 -->
+        <div class="banner">
+            <div class="banner__textarea">
+                <div class="banner__eng">STORE</div>
+                <div class="banner__zh">文創商城</div>
+            </div>
+        </div>
+        </div>
+
+        <!-- 商品導覽列 -->
+        <nav class="product__nav">
+
+            <div class="tab" id="navbar">
+                <button class="tablinks" id="all" @click="all()">所有類別</button>
+                <button class="tablinks" id="events_only" @click="filter('展覽限定')">展覽商品</button>
+                <!-- change -->
+                <select id="event-type" data-filter="event" class="filter-event filter form-control" @change="type(i)">
+                    <option value="1">所有商品</option>
+                    <option value="文創商品">文創商品</option>
+                    <option value="韶光限定">韶光限定</option>
+                    <option value="日本畫展">日本畫展</option>
+                    <option value="《Lindsayooo》新興插畫家展">《Lindsayooo》新興插畫家展</option>
+                </select>
+            </div>
+
+        </nav>
+
+        <!-- 商品陳列區 -->
+        <div class="product__display results" id="parent">
+            <ul id="products">
+
+                <li class="events" v-for="(store, i) in storeList" :key="store.ID">
+                    <a :href="'./product_detail_01.html?pid=' + store.ID">
+                        <div class="shop__pic">
+                            <img :src="store.MAIN_PHOTO" alt="" />
+                            <div class="shop__type">{{store.TAG1}}</div>
+                            <!-- <div class="countdown">倒數3天</div> -->
+                        </div>
+
+                        <div class="shop__text">
+                            <small>{{store.TAG2}}</small>
+                            <h6>{{store.PRODUCT_NAME}}</h6>
+                            <h6>${{store.PRICE}}</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store02.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>自訂款迷你保溫瓶</h6>
+                            <h6>$590</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store03.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展 </small>
+                            <h6>畫家限定簽名</h6>
+                            <h6>$5,600</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store04.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展 </small>
+                            <h6>蒙娜麗莎貓貓掛畫</h6>
+                            <h6>$960</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store05.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展</small>
+                            <h6>貓貓洗頭掛畫</h6>
+                            <h6>$900</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store06.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>格魯特時鐘</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store07.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>惡夢去去捕夢網</h6>
+                            <h6>$450</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store08.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展</small>
+                            <h6>手繪限量明信片組</h6>
+                            <h6>$990</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store09.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>《Lindsayooo》新興插畫家展</small>
+                            <h6>手繪限量明信片</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store10.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>《ヒグチユウコ》台灣限定特展</small>
+                            <h6>限量手繪絲巾</h6>
+                            <h6>$1,600</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store11.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展</small>
+                            <h6>水彩風手繪小卡組</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store12.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>自訂手工餐盤</h6>
+                            <h6>$700</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store13.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>限定手繡毛巾</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store14.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>文青手帳本</h6>
+                            <h6>$400</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store15.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>創作者御用顏料</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store16.jpg" alt="">
+                            <div class="shop__type">韶光限定</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>韶光限定</small>
+                            <h6>DIY毛線聖誕樹</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="events">
+                    <a href="#">
+                        <div class="shop__pic">
+                            <img src="../img/store/store17.jpg" alt="">
+                            <div class="shop__type">展覽限定</div>
+                            <div class="countdown">倒數3天</div>
+                        </div>
+                        <div class="shop__text">
+                            <small>日本畫展</small>
+                            <h6>山形實木杯墊</h6>
+                            <h6>$560</h6>
+                        </div>
+                    </a>
+                </li> -->
+
+                <!-- </ul> -->
+        </div>
+
+
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- <script src="../js/store_select.js"></script>
+    <script src="../js/store_filter.js"></script> -->
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/store.js"></script>
+
+    <script>
+        // header & footer
+        $(() => {
+            $("#header").load("topbar.html");
+            $("#footer").load("footer.html");
+        });
+
+        // Initialize Swiper輪播
+        var swiper = new Swiper(".mySwiper", {
+            cssMode: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            mousewheel: true,
+            keyboard: true,
+            autoplay: true
+        });
+
+
+    </script>
+
+</body>
+
+</html>

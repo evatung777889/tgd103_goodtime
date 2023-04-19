@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-po" id="po">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text">訂單查詢</p>
+                    <p class="gray-text">*以下欄位如留空則預設為全部</p>
+                    <div class="search-bar">
+                        <p style="font-weight: 800;
+                        letter-spacing: .2rem;">查詢條件</p>
+                        <ul>     
+                            <li>
+                                <p>下單日期</p>
+                                <input type="date" id="starttime"  min="2020-01-01" max="2050-12-31" class="timeform" v-model="starttime">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="endtime"   min="2020-01-01" max="2050-12-31" class="timeform" v-model="endtime">
+                            </li>
+                            <li>
+                                <p>預計出貨日</p>
+                                <input type="date" id="starttime"  min="2020-01-01" max="2050-12-31" class="timeform" v-model="starttime2">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="endtime"   min="2020-01-01" max="2050-12-31" class="timeform" v-model="endtime2">
+                            </li>
+                            <li>
+                                <p>主單號碼</p>
+                                <input type="text" class="long-input" id="mainid" v-model="mainid">
+                            </li>
+                            <li>
+                                <p>訂單號碼</p>
+                                <input type="text" class="long-input" id="podid" v-model="podid">
+                            </li>
+                            <li>
+                                <p>會員名稱</p>
+                                <input type="text" class="long-input" id="membername" v-model="membername">
+                            </li>
+                            <li>
+                                <p>訂單狀態</p>
+                                <form action="" class="po-confirm">
+                                    <input type="radio" name="time-area" value="%" v-model="status" id="status1"><label class="time-area_label" for="status1"> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="status" id="status2"><label class="time-area_label" for="status2"> 訂單已確認</label>
+                                    <input type="radio" name="time-area" value="2" v-model="status" id="status3"><label class="time-area_label" for="status3"> 訂單未確認</label>
+                                </form>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="search-btn" @click="axiosPost()">查詢</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="info-box">
+                                    <p>訂單列表</p>
+                                    <ul>
+                                        <li class="first-title">
+                                            <div>
+                                                <div><h6>子單號碼</h6></div>
+                                                <div><h6>預計出貨日<br>出貨單號<br>實際出貨日</h6></div>
+                                                <div><h6>下單日期<br>訂單狀態<br>訂單狀態更新日期<br>訂單狀態更新原因</h6></div>
+                                                <div><h6>商品編號<br>商品名稱<br>商品頁編號</h6></div>
+                                                <div><h6>下單數量<br>商品單價</h6></div>
+                                                <div><h6>會員編號<br>會員名稱</h6></div>
+                                                <div><h6>操作</h6></div>
+                                            </div> 
+                                        </li>
+                                        <li class="" v-for="(b_po, index) in dataList" :key="index">
+                                            <a :href="'b-po-detail.html?PODID='+b_po.PODID">
+                                                <div class="top-info">
+                                                    <h6>主單號碼︰{{ b_po.ID }}</h6>
+                                                    <h6>訂單總金額︰{{ b_po.QTY * b_po.PRICE + b_po.FREIGHT}}</h6>
+                                                    <h6>訂單號碼︰{{ b_po.PODID }}</h6>
+                                                    <h6>運費︰{{ b_po.FREIGHT }}</h6>
+                                                </div>
+                                                <div class="flex-box">
+                                                    <div><h6>{{ b_po.PODID }}</h6></div>
+                                                    <div><h6>{{ b_po.ETD }}<br>{{ b_po.BL }}<br>{{ b_po.SHIP_DATE }}</h6></div>
+                                                    <div><h6>{{ b_po.CREATE_DATE }}<br>
+                                                    <span v-for="status, index) in arr[index]" :key="index">{{ status }}</span>
+                                                    <br>{{ b_po.STATUS_DATE }}<br>{{ b_po.STATUS_REASON }}</h6></div>
+                                                    <div><h6>{{ b_po.PRODUCTID }}<br>{{ b_po.PRODUCT_NAME }}<br>{{ b_po.FK_PRODUCT_PAGE_ID }}</h6></div>
+                                                    <div><h6>{{ b_po.QTY }}<br>{{ b_po.PRICE }}</h6></div>
+                                                    <div><h6>{{ b_po.MEMBERID }}<br>{{ b_po.USERNAME }}</h6></div>
+                                                    <div><button>查看</button></div>
+                                                </div>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        const member = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList2: [],
+                    arr: [],
+                    mainid: "",
+                    podid: "",
+                    membername: "",
+                    status: "%",
+                    starttime: "2020-01-01",
+                    endtime: "2050-12-31",
+                    starttime2: "2020-01-01",
+                    endtime2: "2050-12-31"
+                }
+            }, methods:{
+                axiosPost() {
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/posearch.php',
+                    responseType:'json',
+                    data: {
+                        mainid: this.mainid,
+                        podid: this.podid,
+                        membername: this.membername,
+                        status: this.status,
+                        starttime: this.starttime,
+                        endtime: this.endtime,
+                        starttime2: this.starttime2,
+                        endtime2: this.endtime2,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        
+                        let mem_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mem_arr.push("訂單已確認")
+                            }else{
+                                mem_arr.push("訂單未確認")
+                            }
+                        })
+
+                        this.arr = mem_arr;
+
+                        console.log(this.memberkind);
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                axiosIDPost(e){
+                    e.preventDefault()
+                    
+                }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/po.php").then(res => {
+                        this.dataList = res.data;
+                        console.log(this.dataList);
+
+
+                        let mem_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mem_arr.push("訂單已確認")
+                            }else{
+                                mem_arr.push("訂單未確認")
+                            }
+                        })
+                        // console.log(mem_arr);
+
+                        this.arr = mem_arr;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+        }).mount("#po");
+    </script>
+</body>
+</html>

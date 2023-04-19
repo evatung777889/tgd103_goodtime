@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>場地申請表 - 韶光文創園區</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <body>
+      <div class="wrapper rental_join_form_wrapper">
+        <header id="header"></header>
+        <!--------------------麵包穴----------------------->
+        <div class="rental_form____breadcrumb">
+          <ul class="rental_join_form____breadcrumb">
+            <li><a href="./index.html">首頁</a></li>
+            <li><a href="./rental.html">場地租借</a></li>
+            <li><a href="./rental_join_form.html">場地申請表</a></li>
+          </ul>
+        </div>
+        <!--------------------banner圖片----------------------->
+        <div class="rental_join_form__banner">
+          <div class="banner__img">
+            <div class="banner__textarea">
+              <div class="banner__eng">RENTAL<br />APPLICATION</div>
+              <div class="banner__zh">場地申請表</div>
+            </div>
+          </div>
+        </div>
+        <main class="rental_join_form" id="rental_join_form">
+          <!----------------------表單區------------------------->
+            <section class="Join__form">
+              <div class="activity__name__out">
+                <label for="activity__name">活動名稱</label>
+                <input
+                  type="text"
+                  name="activity__name"
+                  class="activity__name"
+                  id="activity__name"
+                  v-model="activity__name"
+                /><br />
+              </div>
+              <div class="applicant__unit__out">
+                <label for="applicant__unit">申請單位</label>
+                <input
+                  type="text"
+                  name="applicant__unit"
+                  class="applicant__unit"
+                  id="applicant__unit"
+                  v-model="applicant__unit"
+                />
+              </div>
+              <div class="principal__name__out">
+                <label for="principal__name">負責人姓名</label>
+                <input
+                  type="text"
+                  name="principal__name"
+                  class="principal__name"
+                  id="principal__name"
+                  v-model="principal__name"
+                />
+              </div>
+              <!----------------------單位類別------------------------->
+              <div class="unit">
+                <div class="word">單位類別</div>
+                <div class="block">
+                  <div class="unit__1 unit__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="unit__radio"
+                      type="radio"
+                      id="unit__1"
+                      value="個人"
+                      v-model="unit__spacing"
+                    />
+                    <label for="unit__1">個人</label>
+                  </div>
+                  <div class="unit__2 unit__spacing unit__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="unit__radio"
+                      type="radio"
+                      id="unit__2"
+                      value="藝文團體"
+                      v-model="unit__spacing"
+                    />
+                    <label for="unit__2">藝文團體</label>
+                  </div>
+                  <div class="unit__3 unit__spacing unit__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="unit__radio"
+                      type="radio"
+                      id="unit__3"
+                      value="一般團體"
+                      v-model="unit__spacing"
+                    />
+                    <label for="unit__3">一般團體</label>
+                  </div>
+                  <div class="unit__4 unit__spacing unit__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="unit__radio"
+                      type="radio"
+                      id="unit__4"
+                      value="學校"
+                      v-model="unit__spacing"
+                    />
+                    <label for="unit__4">學校</label>
+                  </div>
+                  <div class="unit__5 unit__spacing unit__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="unit__radio"
+                      type="radio"
+                      id="unit__5"
+                      value="公部門"
+                      v-model="unit__spacing"
+                    />
+                    <label for="unit__5">公部門</label>
+                  </div>
+                </div>
+              </div>
+              <!----------------------上傳證件影本------------------------->
+              <label for="file__word" class="file__word">上傳證件影本</label
+              ><br /><br />
+              <div class="file-box__out">
+                <div class="file-box">
+                  <!--檔案名稱-->
+                  <input name="textfield" id="textfield" class="filename" />
+
+                  <!--上傳按鈕-->
+                  <input type="button" class="button" value="選取檔案 " />
+
+                  <!--原按鈕隱藏-->
+                  <input
+                    type="file"
+                    name="file"
+                    class="file"
+                    id="file"
+                    ref="aaa"
+                    onchange="document.getElementById('textfield').value=this.value"
+                  />
+                </div>
+              </div>
+              <!----------------------聯絡人姓名與電話------------------------->
+              <div class="Contact__name">
+                <label for="Contact__name">聯絡人姓名</label>
+                <input
+                  type="text"
+                  name="Contact__name"
+                  class="Contact__name"
+                  id="Contact__name"
+                  v-model="Contact__name"
+                />
+                <p id="checktext4"></p>
+                <p id="checktext_4"></p>
+              </div>
+              <div class="Contact__phone">
+                <label for="Contact__phone">聯絡人電話</label>
+                <input
+                  type="tel"
+                  name="Contact__phone"
+                  class="Contact__phone"
+                  maxlength="10"
+                  id="Contact__phone"
+                  v-model="Contact__phone"
+                />
+                <p id="checktext5"></p>
+                <p id="checktext_5"></p>
+              </div>
+              <!----------------------選擇場地------------------------->
+              <div class="place">
+                <div class="word">選擇場地</div>
+                <div class="block">
+                  <div class="place__1 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__1"
+                      value="A館"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__1">A館</label>
+                  </div>
+                  <div class="place__2 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__2"
+                      value="B館"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__2">B館</label>
+                  </div>
+                  <div class="place__3 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__3"
+                      value="C館"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__3">C館</label>
+                  </div>
+                  <div class="place__4 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__4"
+                      value="D館"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__4">D館</label>
+                  </div>
+                  <div class="place__5 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__5"
+                      value="E區(文創大街)"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__5">E區(文創大街)</label>
+                  </div>
+                  <div class="place__6 place__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="ContactGender"
+                      type="radio"
+                      id="place__6"
+                      value="周邊攤位"
+                      v-model="place__spacing"
+                    />
+                    <label for="place__6">周邊攤位</label>
+                  </div>
+                </div>
+              </div>
+              <!----------------------活動時間------------------------->
+              <div class="date_pick">
+                <div class="date_pick__from">
+                  <label for="date_pick__from">活動開始時間</label>
+                  <input
+                    type="date"
+                    id="date_pick__from"
+                    name="date_pick__from"
+                    v-model="date_pick__from"
+                  />
+                </div>
+                <div class="date_pick__to">
+                  <label for="date_pick__to">活動結束時間</label>
+                  <input
+                    type="date"
+                    id="date_pick__to"
+                    name="date_pick__to"
+                    v-model="date_pick__to"
+                  />
+                </div>
+              </div>
+              <!----------------------活動性質------------------------->
+              <div class="nature__activity">
+                <div class="word">活動性質</div>
+                <div class="block">
+                  <div class="nature__activity__1 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[i]"
+                      type="checkbox"
+                      id="nature__activity[0]"
+                      value="座談會/研討會"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[0]">座談會/研討會</label>
+                  </div>
+                  <div class="nature__activity__2 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[1]"
+                      value="個展/畢展"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[1]">個展/畢展</label>
+                  </div>
+                  <div class="nature__activity__3 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[2]"
+                      value="同人/社團活動"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[2]">同人/社團活動</label>
+                  </div>
+                  <div class="nature__activity__4 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[3]"
+                      value="大型展覽/聯展"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[3]">大型展覽/聯展</label>
+                  </div>
+                  <div class="nature__activity__5 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[4]"
+                      value="服裝/彩妝走秀"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[4]">服裝/彩妝走秀</label>
+                  </div>
+                  <div class="nature__activity__6 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[5]"
+                      value="園遊會/市集"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[5]">園遊會/市集</label>
+                  </div>
+                  <div class="nature__activity__7 nature__activity__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="nature__activity[]"
+                      type="checkbox"
+                      id="nature__activity[6]"
+                      value="其他"
+                      v-model="nature__activity"
+                    />
+                    <label for="nature__activity[6]">其他</label>
+                  </div>
+                </div>
+                <p id="checktext6"></p>
+              </div>
+              <!----------------------觀賞性質------------------------->
+              <div class="ornamental__nature">
+                <div class="word">觀賞性質</div>
+                <div class="block">
+                  <div
+                    class="ornamental__nature__1 ornamental__nature__spacing"
+                  >
+                    <input
+                      class="with-gap validate[required]"
+                      name="ornamental__nature"
+                      type="radio"
+                      id="ornamental__nature__1"
+                      value="不開放"
+                      v-model="ornamental__nature"
+                    />
+                    <label for="ornamental__nature__1">不開放</label>
+                  </div>
+                  <div
+                    class="ornamental__nature__2 ornamental__nature__spacing"
+                  >
+                    <input
+                      class="with-gap validate[required]"
+                      name="ornamental__nature"
+                      type="radio"
+                      id="ornamental__nature__2"
+                      value="自由入場"
+                      v-model="ornamental__nature"
+                    />
+                    <label for="ornamental__nature__2">自由入場</label>
+                  </div>
+                  <div
+                    class="ornamental__nature__3 ornamental__nature__spacing"
+                  >
+                    <input
+                      class="with-gap validate[required]"
+                      name="ornamental__nature"
+                      type="radio"
+                      id="ornamental__nature__3"
+                      value="索票/邀請函"
+                      v-model="ornamental__nature"
+                    />
+                    <label for="ornamental__nature__3">索票/邀請函</label>
+                  </div>
+                  <div
+                    class="ornamental__nature__4 ornamental__nature__spacing"
+                  >
+                    <input
+                      class="with-gap validate[required]"
+                      name="ornamental__nature"
+                      type="radio"
+                      id="ornamental__nature__4"
+                      value="售票"
+                      v-model="ornamental__nature"
+                    />
+                    <label for="ornamental__nature__4">售票</label>
+                  </div>
+                </div>
+              </div>
+              <!----------------------其他需求------------------------->
+              <div class="other__demands">
+                <div class="word">其他需求</div>
+                <div class="block">
+                  <div class="other__demands__1 other__demands__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="other__demands[]"
+                      type="checkbox"
+                      id="other__demands__1"
+                      value="代售門票"
+                      v-model="other__demands"
+                      @change="demands_change()"
+                      :disabled="other__demands.includes('無代售需求')"
+                    />
+                    <label for="other__demands__1">代售門票</label>
+                  </div>
+                  <div class="other__demands__2 other__demands__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="other__demands[]"
+                      type="checkbox"
+                      id="other__demands__2"
+                      value="代售周邊商品"
+                      v-model="other__demands"
+                      @change="demands_change()"
+
+                      :disabled="other__demands.includes('無代售需求')"
+                    />
+                    <label for="other__demands__2">代售周邊商品</label>
+                  </div>
+                  <div class="other__demands__3 other__demands__spacing">
+                    <input
+                      class="with-gap validate[required]"
+                      name="other__demands[]"
+                      type="checkbox"
+                      id="other__demands__3"
+                      value="無代售需求"
+                      @change="demands_change()"
+
+                      v-model="other__demands"
+                    />
+                    <label for="other__demands__3">無代售需求</label>
+                  </div>
+                </div>
+              </div>
+              <!----------------------意見回饋------------------------->
+              <div class="Opinion">
+                <p>意見回饋</p>
+                <textarea
+                  name="Opinion"
+                  id="Opinion"
+                  cols="30"
+                  rows="10"
+                  class="Opinion__text"
+                  v-model="Opinion"
+                ></textarea>
+              </div>
+              <div class="btn__ctn">
+                <button id="goApplyForm" class="button" @click="rentalTosend">
+                  <span>確認送出</span>
+                </button>
+              </div>
+            </section>
+        </main>
+      </div>
+
+      <!-- <script src="../js/form.js"></script> -->
+      <script src="../js/jquery-3.2.1.min.js"></script>
+      <script src="../js/vue.global.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+      <script src="../js/rental-joinForm.js"></script>
+      <script>
+        $(() => {
+          $("#header").load("topbar.html");
+          $("#footer").load("footer.html");
+        });
+      </script>
+
+    </body>
+  </body>
+</html>

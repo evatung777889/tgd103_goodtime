@@ -1,0 +1,50 @@
+h1,
+.xxl {
+    font-size: 64px;
+}
+
+h2,
+.xl {
+    font-size: 48px;
+}
+
+h3,
+.l {
+    font-size: 40px;
+}
+
+h4,
+.m {
+    font-size: 32px;
+}
+
+h5,
+.s {
+    font-size: 28px;
+}
+
+h6,
+.xs {
+    font-size: 24px;
+}
+
+p,
+.basic {
+    font-size: 16px;
+}
+
+small,
+.small {
+    font-size: $small
+}
+
+//* ---font-weight
+.fw4,
+.regular {
+    font-weight: 400;
+}
+
+.fw7,
+.bold {
+    font-weight: 700;
+}

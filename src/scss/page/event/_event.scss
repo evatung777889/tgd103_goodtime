@@ -1,0 +1,311 @@
+.warpper-event-all {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 80px;
+    font-family: $our-font;
+
+   
+        //麵包屑 
+    .breadcrumb{
+        
+        @include rwd(1024px){
+            padding: 10px 5%;
+        }
+        @include rwd(912px){
+            padding: 10px 6%;
+        }
+        @include rwd(820px){
+            padding: 10px 7%;
+        }
+        @include rwd(540px){
+            
+        }
+        @include rwd(428px){
+            
+        }
+        @include rwd(414px){
+           
+        }
+        @include rwd(376px){
+            
+        }
+    }     
+    .swiper {
+        //輪播圖
+        width: 90%;
+        height: 340px;
+        --swiper-navigation-size: 0;
+
+        @include rwd(768px){
+            width: 85%;
+            height: 280px;
+            }
+        @include rwd(428px){
+           height: 188px;
+        }
+    }
+
+    .swiper-slide {
+        display: flex;
+        // display: -webkit-box;
+        // display: -ms-flexbox;
+        // display: -webkit-flex;
+        // -webkit-box-pack: center;
+        // -ms-flex-pack: center;
+        // -webkit-justify-content: center;
+        // justify-content: center;
+        // -webkit-box-align: center;
+        // -ms-flex-align: center;
+        // -webkit-align-items: center;
+    }
+
+    .swiper-button-next {
+        margin-right: -5px;
+
+        i.fa-solid.fa-circle-arrow-right {
+            font-weight: 900;
+            color: #c09351;
+            font-size: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+    }
+
+    .swiper-button-prev {
+        margin-left: 5px;
+
+        @include rwd(768px){
+            margin-left: -5px;
+         }
+
+        i.fa-solid.fa-circle-arrow-left {
+            font-weight: 900;
+            color: #c09351;
+            font-size: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #C09351;
+    }
+
+    .swiper-wrapper{
+        // width: 90%;
+        // display: block;
+        // margin: 0 auto;
+    }
+    .swiper-slide{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: center;
+
+        @include rwd(1024px){
+            width: 85%;
+        }
+        @include rwd(820px){
+            
+        }
+        @include rwd(768px){
+            width: 85%;
+        }
+        @include rwd(428px){
+            
+        }
+        @include rwd(414px){
+           
+        }
+        @include rwd(376px){
+            
+        }
+    }
+
+    .banner {
+        position: static;
+
+        .banner__img {}
+
+        .banner__textarea {
+            position: static;
+            .banner__zh{
+                padding-left: 13vw;
+                
+                @include rwd(428px){
+                    font-size: 16px;
+                    letter-spacing: 0.3rem;
+                    padding-bottom: 3rem;
+                    }
+                   
+                &::before{
+                    @include rwd(428px){
+                        width: 25vw;
+                        margin-right: 0.5rem;
+                        }
+                }
+            }
+           
+            .banner__eng{
+                padding: 6.2rem 4.2rem 2rem;
+
+                @include rwd(768px){
+                    font-size: 22px;
+                    padding: 5.2rem 4.2rem 0rem;
+                 }
+
+                @include rwd(428px){
+                    font-size: 16px;
+                    letter-spacing: 0.2rem;
+                    padding: 3.2rem 2.6rem 0rem;
+                    line-height: 1.5;
+                    }
+                }
+            }
+        }
+        
+        
+    
+
+
+
+    .exhibition {
+        //展演活動
+        width: 40%;
+        margin: 40px;
+        font-weight: bold;
+        position: relative;
+        letter-spacing: 5px;
+
+        .exhib-1 {
+            font-size: $h1;
+            color: $brown-color;
+            letter-spacing: 5px;
+        }
+
+        .exhib-2 {
+            font-size: $h3;
+            color: #C09351;
+            text-align: right;
+
+            &::after {
+                position: absolute;
+                content: "";
+                left: 89px;
+                bottom: 9px;
+                width: 210px;
+                height: 3px;
+                background: $brown-color;
+            }
+        }
+    }
+
+
+.exhibition-event {
+    //展演區
+    line-height: 1.5;
+    margin: 95px 55px 5px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+    gap: 20px 22px;
+
+    @include rwd(768px){
+        margin: 50px 65px 5px;
+        grid-template-columns: repeat(2, minmax(0px, 1fr));
+     }
+    @include rwd(428px){
+        grid-template-columns: repeat(2, minmax(0px, 1fr));
+        margin: 0px 10px 0px;
+        gap: 20px 10px;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+
+    p {
+        font-size: $small;
+        color: gray;
+        width: 40%;
+        text-align: left;
+        padding-left: 5px;
+
+        @include rwd(428px){
+            font-size: 12px;
+            width: 100%;
+        }
+
+        &:nth-child(2) {
+            color: white;
+            background-color: $lakeGreen-color;
+            font-size: $p;
+            margin: 10px;
+            margin-left: revert;
+
+            @include rwd(768px){
+                font-size: 14px;
+                width: 40%;
+             }
+             @include rwd(428px){
+                font-size: 12px;
+                width: 40%;
+            }
+        }
+
+        &:nth-child(3) {
+            color: white;
+            font-size: $p;
+            background-color: $secondary2-color;
+
+            @include rwd(768px){
+                font-size: 14px;
+                width: 40%;
+             }
+             @include rwd(428px){
+                font-size: 12px;
+                width: 40%;
+            }
+        }
+    }
+
+    h6 {
+        font-size: 21px;
+        font-weight: bold;
+        color: $font-color;
+        margin-top: 30px;
+
+        @include rwd(768px){
+            font-size: 20px;
+        }
+        @include rwd(428px){
+            font-size: 12px;
+        }
+    }
+
+    
+    /*-- 按紐 --*/
+    #pagination {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    #pagination a {
+        border: 1px black solid;
+        width: 10px;
+        margin: 0 auto;
+        width: 17px;
+        text-align: center;
+        padding-left: 7px;
+        margin-left: 17px;
+        padding-right: 7px;
+        padding-bottom: 0.64px;
+
+        &:hover,
+        &.-on {
+            background-color: #261C0D;
+            color: white;
+        }
+
+    }
+}

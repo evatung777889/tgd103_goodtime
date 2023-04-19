@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .showbtn{
+            display: inline-block;
+        }
+        .hidebtn{
+            display: none !important; 
+        }
+        .hideselectbox{
+            opacity: 0;
+            visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-detail" id="member-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="item-name">會員明細</p>
+                    <div class="b-detail_infobox" v-for="(memberdetail, index) in dataList" :key="index">
+                        <ul>
+                            <li>
+                                <p>會員編號</p>
+                                <span>{{ memberdetail.ID }}</span>
+                            </li>
+                            <li>
+                                <p>會員名稱</p>
+                                <span>{{ memberdetail.USERNAME }}</span>
+                            </li>
+                            <li>
+                                <p>會員狀態</p>
+                                <input type="radio" v-model="memberverify" disabled name="memberverify" value="1" id="memberverify1"></input>
+                                <label class="time-area_label" for="memberverify1">開啟</label>
+                                <input type="radio" v-model="memberverify" disabled name="memberverify" value="2" id="memberverify2"></input>
+                                <label class="time-area_label" for="memberverify2">關閉</label>
+                                <button class="change-btn" @click="changeradio">更改</button>
+                                <button class="change-btn hidebtn" @click="hideradio">確認</button>
+                            </li>
+                            <li>
+                                <p>電郵信箱</p>
+                                <span>{{ memberdetail.EMAIL }}</span>
+                            </li>
+                            <li>
+                                <p>會員電話</p>
+                                <span>{{ memberdetail.PHONE }}</span>
+                            </li>
+                            <li>
+                                <p>會員地址</p>
+                                <span v-for="(memberdetailaddress, index) in dataList2" :key="index" style="display: block;">{{ memberdetailaddress.LOCATION }}</span>
+                            </li>
+                            <li>
+                                <p>會員密碼</p>
+                                <span>{{ memberdetail.PASSWORD }}</span>
+                            </li>
+                            <li>
+                                <p>權限代碼</p>
+                                <select name="memberkind" class="long-input" v-model="memberkind" id="memberkind" disabled>
+                                    <option v-for="(memberkind, index) in dataList3"  :value="memberkind.ID">{{ memberkind.DESC }}</option>
+                                </select>   
+                                <button class="change-btn" @click="change">更改</button>
+                                <button class="change-btn2 hidebtn" @click="hide">確認</button>
+                            </li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="big-btn" @click="submit">儲存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+        
+        const memberdetail = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList2: [],
+                    dataList3: [],
+                    idarr: "",
+
+                    memberverify: "",
+                    memberkind: ""
+                }
+            }, methods:{
+                geturl(){
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let getid = urlParams.get("ID");
+                    this.idarr = getid;
+                },
+                // wdata(){
+                //     console.log(this.dataList);
+                // },
+                change(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeradio(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                    }
+                    let input2 = changebtn.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                    }
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                changeimg(e){
+                    let changebtn = e.target;
+                    let input = changebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                        input.classList.remove("hideselectbox")
+                    }else{
+                    }
+
+                    let send = changebtn.nextSibling;
+                    // let btnstyle = send.style;
+                    // console.log(btnstyle);
+                    if(disabled){
+                        send.classList.toggle("hidebtn");
+                    }else{
+                    }
+                },
+                hide(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideradio(e){
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                    let input2 = hidebtn.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+                    let disabled2 = input2.disabled;
+                    if(disabled2){
+                        input2.removeAttribute('disabled');
+                    }else{
+                        input2.setAttribute('disabled','disabled');
+                    }
+                    // let li = changebtn.parentNode;
+                    // input.setAttribute('disabled','strId');
+                },
+                hideimg(e){
+                    let pic = e.target.previousSibling.previousSibling.previousSibling.files[0].name;
+                    let picbox = String(pic);
+                    this.newspic = picbox;
+                    // console.log(this.newspic);
+
+                    let picfile = e.target.previousSibling.previousSibling.previousSibling.files[0];
+                    // console.log(picfile);
+                    var reader = new FileReader;
+                    reader.onload = function(e) {
+                        $('#mainpic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(picfile);
+
+                    let hidebtn = e.target;
+                    hidebtn.classList.toggle("hidebtn");
+                    let input = hidebtn.previousSibling.previousSibling.previousSibling;
+                    let disabled = input.disabled;
+                    if(disabled){
+                        input.removeAttribute('disabled');
+                    }else{
+                        input.setAttribute('disabled','disabled');
+                    }
+                },
+                submit(){
+
+                    this.geturl();    
+
+                    // 資料庫product
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/member-detail-submit.php',
+                    responseType:'json',
+                    data: {
+                        memberverify: this.memberverify,
+                        memberkind: this.memberkind,
+
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    location.reload();
+                }
+            }, created(){
+
+                this.geturl();
+                
+                // 查詢資料
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/member-detail.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        this.memberverify = this.dataList[0].VERIFY;
+                        this.memberkind = this.dataList[0].FK_ROLE_ID;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/member-detail-address.php',
+                    responseType:'json',
+                    data: {
+                        id: this.idarr
+                    }
+                    }).then(res => {
+                        this.dataList2 = res.data;
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/member-detail-role.php',
+                    responseType:'json',
+                    }).then(res => {
+                        this.dataList3 = res.data;
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    
+            }
+        }).mount("#member-detail");
+    </script>
+</body>
+</html>

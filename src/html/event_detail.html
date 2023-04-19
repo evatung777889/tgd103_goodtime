@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>展演活動內容 - 韶光文創園區</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="event_detail-wrapper" id="eventDetail">
+      <!-- 麵包屑 -->
+      <ul class="breadcrumb">
+        <li class="breadcrumb__a"><a href="./index.html">首頁</a></li>
+        <li class="breadcrumb__a"><a href="./event.html">展演活動</a></li>
+        <li class="breadcrumb__b">
+          <a href="./event_detail.html">{{eventDetail.TITLE}}</a>
+        </li>
+      </ul>
+      <main>
+        <div class="event_detail-banner">
+          <img :src="eventDetail.BANNER_PHOTO" alt="" />
+        </div>
+        <div class="event_detail-main-content">
+          <div class="event_detail-main-content-left">
+            <h3>{{eventDetail.TITLE}}</h3>
+            <p>{{eventDetail.CONTENT}}</p>
+          </div>
+          <div class="event_detail-main-content-right">
+            <div class="event_detail-main-content-right-wrap" >
+              <div class="event_detail-price">NT${{price}}</div>
+              <div>票種</div>
+              <select
+                v-model="price"
+                name="ticket-type"
+                id="ticket-type"
+                class="event_detail-ticket-type"
+                @change="selectValue"
+              >
+                <option :value="eventDetail.ADULT_PRICE" selected>一般票</option>
+                <option :value="eventDetail.CONC_PRICE">學生票</option>
+                <option :value="eventDetail.GROUP_PRICE">團體票</option>
+              </select>
+
+              <div>數量</div>
+              <div class="event_detail-number-button">
+                <button class="qtyminus" @click="orderQty--" :disabled="orderQty===1">-</button>
+                <input type="text" name="quantity" :value="orderQty" class="qty" disabled/>
+                <button class="qtyplus" @click="orderQty++" :disabled="orderQty===20">+</button>
+              </div>
+              <!-- <div class="btn__ctn"> -->
+                <button id="goApplyForm" class="button" @click="passToCart">加入購物車</button>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </main>
+      <section class="event_detail-ticket-price">
+        <h3 class="subtitle">
+          <em>票務資訊</em>
+        </h3>
+        <ul>
+          <li>一般票{{eventDetail.ADULT_PRICE}}元</li>
+          <li>學生票{{eventDetail.CONC_PRICE}}元</li>
+          <li>團體票{{eventDetail.GROUP_PRICE}}元</li>
+        </ul>
+      </section>
+      <section class="event_detail-ticket-info">
+        <h3 class="subtitle">
+          <em>展覽資訊</em>
+        </h3>
+        <ul>
+          <li>展覽日期：{{eventDetail.START_DATE}}-{{eventDetail.END_DATE}}</li>
+          <li>展覽時間：週一至日11:00-19:00（17:30停止售票及入場）</li>
+          <li>展覽地點：韶光文創園區 {{eventDetail.FK_EXPO_LOCATION_ID}}館</li>
+          <li>主辦單位：AAA國際股份有限公司</li>
+          <li>合作夥伴：BBB股份有限公司、CCC企業有限公司</li>
+          <li>官方網站：https://AAA.com/</li>
+          <li>官方粉專：https://www.facebook.com/AAA</li>
+        </ul>
+      </section>
+      <section class="event_detail-attention">
+        <h3 class="subtitle">
+          <em>注意事項</em>
+        </h3>
+        <ol>
+          <li>
+            本票券為無記名之有價票券，未經主辦單位許可，禁止轉售，違者將追究法律責任。
+          </li>
+          <li>
+            本票券限單次入場，入場聯撕除後即無效；如遇遺失毀損恕不補發退換，請妥善保管。
+          </li>
+          <li>
+            入場參觀時，請遵守參觀規則、動線規劃、防疫措施及現場工作人員指示。
+          </li>
+          <li>
+            全展區禁止使用閃光燈、腳架及自拍棒等器材，部分展區不開放拍照攝影，請尊重覽智慧財產權及作品版權所有；且未經事先許可，不可自行拍攝商業照片或進行採訪。
+          </li>
+          <li>
+            全展區禁止攜帶食物、飲料、雨傘、寵物入場(導盲犬除外)；場內亦禁止飲食（含口香糖、檳榔等）及吸菸。
+          </li>
+          <li>場內無設置洗手間與垃圾桶，請至周邊使用後再行入場參觀。</li>
+          <li>
+            個人物品請自行妥善保管，場內不提供寄放服務，主辦單位不負責個人之財物損失。
+          </li>
+          <li>
+            為維護展場安全，嚴禁於展區內奔跑、嬉戲、破壞現場設備及攻擊工作人員，如發生傷損事宜須依法賠償。如有不當行為經規勸無效者，主辦單位有權要求離場不得有議，恕不補償或退還票券費用。
+          </li>
+          <li>
+            展場相關規定以現場公告為主，若有未盡事宜，主辦單位保留解釋之權利，得以隨時修正、補充之，並保有隨時修改及終止本活動之權利。
+          </li>
+        </ol>
+      </section>
+    </div>
+    <div id="footer"></div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.prod.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/event_detail.js"></script>
+    <script>
+      // 載入header & footer
+      $(() => {
+        $("#header").load("topbar.html");
+        $("#footer").load("footer.html");
+      });
+
+      // select price
+      // const RootComponent = {
+      //   data() {
+      //     return {
+            
+      //     };
+      //   },
+      // };
+
+      // console.log(RootComponent);
+      // Vue.createApp(RootComponent).mount("#my_app");
+
+    </script>
+  </body>
+</html>

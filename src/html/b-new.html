@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/b-grid.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .AAA{
+            background-color: rgb(34, 145, 48);
+            transition: all 0.3s;
+        }
+        .BBB{
+            background-color: rgb(185, 45, 68);
+            transition: all 0.3s;
+        }
+        .AAA:not([disabled]):hover{
+            background-color: rgb(25, 107, 36);
+        }
+        .BBB:not([disabled]):hover{
+            background-color: rgb(141, 35, 52);
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="b-news" id="new">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text" >消息查詢</p>
+                    <p class="gray-text">*以下欄位如留空則預設為全部</p>
+                    <div class="news_search-bar">
+                        <p style="font-weight: 800;
+                        letter-spacing: .2rem;">查詢條件</p>
+                        <ul>
+                            <li>
+                                <p>消息分類</p>
+                                <select name="news-kind" class="news-kind" v-model="newskind" id="newskind">
+                                    <option value="%" selected>消息種類選擇</option>
+                                    <option v-for="(newskind, index) in dataList2"  :value="newskind.ID">{{ newskind.DESC }}</option>
+                                </select>   
+                            </li>
+                            <li>
+                                <p>發布期間</p>
+                                <input type="date" id="newsstart"  min="2020-01-01" max="2050-12-31" class="timeform" v-model="newsstart">
+                                <i class="fa-solid fa-minus"></i>
+                                <input type="date" id="newsend"   min="2020-01-01" max="2050-12-31" class="timeform" v-model="newsend">
+                            </li>
+                            <li>
+                                <p>消息頁狀態</p>
+                                <form action="" class="po-confirm">
+                                    <input type="radio" name="time-area" value="%" v-model="newsstatus" id="newsstatus1" checked><label class="time-area_label" for="newsstatus1"> 不指定</label>
+                                    <input type="radio" name="time-area" value="1" v-model="newsstatus" id="newsstatus2"><label class="time-area_label" for="newsstatus2"> 刊登</label>
+                                    <input type="radio" name="time-area" value="2" v-model="newsstatus" id="newsstatus3"><label class="time-area_label" for="newsstatus3"> 下架</label>
+                                </form>
+                            </li>
+                            <li>
+                                <p>消息編號</p>
+                                <input type="text" class="long-input" id="newsid" v-model="newsid">
+                            </li>
+                            <li>
+                                <p>消息標題</p>
+                                <input type="text" class="long-input" id="newsname" v-model="newsname">
+                            </li>
+                            <!-- <li>
+                                <p>消息頁編號</p>
+                                <input type="text" class="long-input">
+                            </li> -->
+                        </ul>
+                        <div class="btn-group">
+                            <button class="search-btn" @click="axiosPost()">查詢</button>
+                            <button class="create-btn"><a href="b-new-create.html">新增</a></button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="info-box">
+                                    <p>消息列表</p>
+                                    <ul>
+                                        <li class="first-title">
+                                            <div>
+                                                <div><h6>消息主圖<br>消息頁編號</h6></div>
+                                                <div><h6>消息標題<br>消息編號</h6></div>
+                                                <div><h6>上架期間</h6></div>
+                                                <div><h6>消息頁狀態</h6></div>
+                                                <div><h6>最後編輯</h6></div>
+                                                <div><h6>操作</h6></div>
+                                            </div> 
+                                        </li>
+                                        <li class="" v-for="(b_new, index) in dataList" :key="index">
+                                            <a :href="'b-new-detail.html?ID='+b_new.ID">
+                                                <div class="flex-box">
+                                                    <div><div class="fakeimg" style="overflow: hidden;"><img :src="b_new.MAIN_PHOTO" alt="" style="width: 100%;"></div><h6>1</h6></div>
+                                                    <div><h6>{{ b_new.TITLE }}<br>{{ b_new.ID }}</h6></div>
+                                                    <div><h6>{{ b_new.START }}<br>|<br>{{ b_new.END }}</h6></div>
+                                                    <div><h6>
+                                                        <!-- <input type="radio" v-model="mark[index]" value="1" :id="b_new.ID + 'y'" :name="b_new.ID + 'name'"><label class="time-area_label" :for="b_new.ID + 'y'">刊登</label>
+                                                        <br>
+                                                        <input type="radio" v-model="mark[index]" value="2" :id="b_new.ID + 'n'" :name="b_new.ID + 'name'"><label class="time-area_label" :for="b_new.ID + 'n'">下架</label> -->
+                                                        <span v-for="status, index) in mark[index]" :key="index">{{ status }}</span>
+                                                    </h6></div>
+                                                    <div><h6>{{ b_new.EDIT_DATE }}</h6></div>
+                                                    <div><h6>
+                                                        <button><i class="fa-solid fa-pen-nib"></i> 編輯消息</button>
+                                                        <button @click="deleteitem" :value="b_new.ID"><i class="fa-solid fa-trash-can"></i> 更改消息狀態</button>
+                                                    </h6></div>
+                                                </div>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // 連接header
+        $(() => {
+            $("#header").load("./back-header.html");
+        });
+
+        //掛載資料庫
+        const news = Vue.createApp({
+            data() {
+                return {
+                    dataList: [],
+                    dataList2: [],
+                    mark: [],
+                    newsname: "",
+                    newsid: "",
+                    newsstatus: "%",
+                    newskind: "%",
+                    newsstart: "2020-01-01",
+                    newsend: "2050-12-31",
+
+                    idvalue: ""
+                }
+            }, methods:{
+                axiosPost() {
+
+                    axios({
+                    method: 'post',
+                    url: '../../php/backend/newsearch.php',
+                    responseType:'json',
+                    data: {
+                        newsname: this.newsname,
+                        newsid: this.newsid,
+                        newsstatus: this.newsstatus,
+                        newskind: this.newskind,
+                        newsstart: this.newsstart,
+                        newsend: this.newsend,
+                    }
+                    }).then(res => {
+                        this.dataList = res.data;
+                        console.log(res.data);
+                        
+                        let mark_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mark_arr.push("1")
+                            }else{
+                                mark_arr.push("2")
+                            }
+                        })
+                        console.log(mark_arr);
+
+                        this.mark = mark_arr;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                deleteitem(e){
+
+                    e.preventDefault();
+
+                    let idvalue = e.target.value;
+
+                    swal({
+                            icon: "warning",
+                            title: "更改消息狀態",
+                            text: "您確定要更改此消息狀態嗎?",
+                            buttons: {
+                            A: {
+                                text: "上架",
+                                value: "1",
+                                className:'AAA',
+                                visible: true,
+                            },
+                            B: {
+                                text: "下架",
+                                visible: true,
+                                className:'BBB',
+                                value: "2"
+                            }
+                            }
+                        });
+                    document.querySelector(".swal-button--A").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/new-open.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                    document.querySelector(".swal-button--B").onclick = function(e){
+                        axios({
+                        method: 'post',
+                        url: '../../php/backend/new-close.php',
+                        responseType:'json',
+                        data: {
+                            idvalue: idvalue,
+                        }
+                        }).then(res => {
+                            location.reload();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                }
+            }, created() {
+               // 查詢資料
+                    axios.get("../../php/backend/new.php").then(res => {
+                        this.dataList = res.data;
+                        console.log(this.dataList);
+
+                        let mark_arr = [];
+                        res.data.forEach((item, i) => {
+                            if(item.STATUS == "1"){
+                                mark_arr.push("刊登")
+                            }else{
+                                mark_arr.push("下架")
+                            }
+                        })
+                        console.log(mark_arr);
+
+                        this.mark = mark_arr;
+
+                    }).catch(err => {
+                        console.log(err);
+                    });
+
+                    axios.get("../../php/backend/new-searchbar-fix.php").then(res => {
+                        this.dataList2 = res.data;
+                        // console.log(this.dataList[0].ID);
+                        console.log(this.dataList2);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+        }).mount("#new");
+    </script>
+</body>
+</html>

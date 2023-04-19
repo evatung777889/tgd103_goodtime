@@ -1,0 +1,277 @@
+.b-product{
+    min-width: 1280px;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+.b-product p{
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-product h6{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-product h5{
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #333;
+}
+.b-product .text{
+    display: inline-block;
+    margin-left: 40px;
+    font-size: 20px;
+}
+.b-product .gray-text{
+    display: inline-block;
+    margin-left: 20px;
+    color: #666;
+    font-size: 20px;
+}
+.b-product .sub-text{
+    display: inline-block;
+    margin-left: 80px;
+    padding-left: 10px;
+    color: #333;
+    border-left: 4px solid #333;
+}
+.product_search-bar{
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
+    p{
+        width: 100px;
+        margin: 20px auto;
+        padding-top: 30px;
+        font-weight:800;
+    }
+    ul{
+        // margin-left: 20px;
+        // margin-bottom: 20px;
+        width: 60%;
+        margin-top: 20px;
+        margin-left: 30%;
+        margin-bottom: 40px;
+        height: 100%;
+        li{
+            margin: 20px auto;
+            height: 30px;
+            p{
+                display: inline-block;
+                padding-top: 0px;
+                margin-bottom: 10px;
+                font-weight:600;
+            }
+            .product-kind{
+                margin-left: 20px;
+                outline: #ccc solid 2px;
+                border: none;
+                border-radius: 2px;
+                width: 300px;
+                height: 20px;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.3s;
+                &:focus {
+                    outline: 2px solid rgb(17, 104, 145);
+                    border-radius: 2px;
+                }
+            }
+            form{
+                display: inline-block;
+                margin-left: 20px;
+                input:checked {
+                    background-color: rgb(146, 81, 81);
+                }
+            }
+            i{
+                margin-top: 5px;
+                margin-left: 20px;
+            }
+            .timeform{
+                border: none;
+                outline: 2px solid #fff;
+                transition: all 0.3s;
+                margin-left: 20px;
+                &:focus{
+                    outline: 2px solid #333;
+                    border-radius: 2px;
+                }
+            }
+            .long-input{
+                margin-left: 20px;
+                outline: #ccc solid 2px;
+                border: none;
+                border-radius: 2px;
+                width: 300px;
+                transition: all 0.3s;
+                &:focus{
+                    outline: 2px solid rgb(17, 104, 145);
+                    border-radius: 2px;
+                }
+            }
+            label{
+                margin-right: 20px;
+                font-weight: 600;
+            }
+            // input:focus {
+            //     outline: 2px solid #333;
+            //     border-radius: 2px;
+            // }
+        }
+
+    }
+    .btn-group{
+        position: relative;
+    }
+    .search-btn{
+        display: inline-block;
+        background-color: #333;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 2px;
+        margin-left: 46%; //置中問題?
+        margin-bottom: 40px;
+        transition: all 0.3s;
+        box-shadow: 0 0 0px #ccc;
+        &:hover{
+            box-shadow: 0 0 20px #ccc;
+        }
+    }
+    .create-btn{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 40px;
+        margin-right: 40px;
+        background-color: #fff;
+        border: none;
+        color: #333;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 2px;
+        border: 3px solid #333;
+        transition: all 0.3s;
+        box-shadow: 0 0 0px #ccc;
+        &:hover{
+            box-shadow: 0 0 20px #ccc;
+            border: 3px solid #333;
+        }
+        a{
+            display: block;
+            text-decoration: none;
+            color: #333;
+        }
+    }
+}
+.b-product .info-box{
+    background-color: #ccc;
+    margin-bottom: 60px;
+    p{
+        width: 100%;
+        padding: 10px 30px;
+        background-color: #333;
+        color: #fff;
+    }
+    ul{
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 30px;
+        .first-title{
+            display: flex;
+            width: 90%;
+            margin-left: 5%;
+            margin-bottom: 0px;
+            border: none;
+            background-color: #ccc;
+            height: 70px;
+            div{
+                display: flex;
+                width: 100%;
+                div{
+                    h6{
+                        width: 100%;
+                        line-height: 30px;
+                        text-align: center;
+                    }          
+                }
+                
+            }
+        }
+        li{
+            display: flex;
+            width: 90%;
+            height: 190px;
+            margin-left: 5%;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+            outline: 2px #333 solid;
+            &:first-child{
+                outline: 0px #333 solid;
+            }
+            a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-decoration: none;
+                .flex-box{
+                    display: flex;
+                    border-color: #ccc;
+                    height: 80px;
+                    width: 100%;
+                    .fakeimg{
+                        width: 80px;
+                        height: 80px;
+                        margin: 20px auto;
+                        border: none;
+                    }
+                    div{
+                        width: 15%;
+                        text-align: center;
+                        border: 1px solid #333;
+                        height: 190px;
+                        h6{
+                            height: 100%;
+                            line-height: 40px;
+                            padding: 5px;
+                        }
+                        input{
+                            margin-top: 10px;
+                        }
+                        button{
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: #ccc;
+                            padding: 8px 16px;
+                            margin: 0 auto;
+                            border: #ccc 2px solid;
+                            border-radius: 4px;
+                            background-color: #fff;
+                            margin-top: 10px;
+                            transition: all 0.3s;
+                            &:hover{
+                                border: #333 2px solid;
+                                color: #333;
+                            }
+                        }
+                        button:last-child:hover{
+                            border: #CD4B21 2px solid;
+                            color: #CD4B21;
+                        }
+                    }
+                }
+            }
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+}

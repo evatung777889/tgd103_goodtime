@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>焙可先生 - 韶光文創園區</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Ephesis&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+
+    <header id="header"></header>
+
+    <main class="shops__detail__wrapper">
+
+        <!-- 麵包屑 -->
+        <div class="crumb">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">首頁</a></li>
+                <li><a href="./shops.html">風格好店</a></li>
+                <li><a href="./shops_detail.html">焙可先生</a></li>
+            </ul>
+        </div>
+
+        <!-- banner大圖 -->
+        <div class="shops__detail__banner">
+            
+            <img src="../img/shops_detail/shops_detail_banner.jpg" alt="">
+        
+        </div>
+
+        <!-- 主要內容 -->
+        <section>
+
+            <!-- 左方區塊 -->
+            <div class="section__left">
+
+                <h1>焙可先生</h1>
+
+                <img src="../img/shops_detail/shops_detail_pic01.jpg" alt="">
+                <p>
+                    期望在繁忙的步調中，給家人最好的一餐<br>
+                    堅持每日現做，獨家自製醃料的新鮮食材遵循傳統的味道<br>
+                    加上創新料理的概念，以為了家人準備早餐的心情<br>
+                    開啟一天中最重要的一餐
+                </p>
+
+                <div class="left__pics">
+                    <div><img src="../img/shops_detail/shops_detail_pic02.jpg" alt=""></div>
+                    <div><img src="../img/shops_detail/shops_detail_pic03.jpg" alt=""></div>
+                    <div><img src="../img/shops_detail/shops_detail_pic04.jpg" alt=""></div>
+                </div>
+
+                <h2>店家特色</h2>
+
+                <ul class="spec">
+                    <li>獨家創意料理，平凡的配料透過不同的組合呈現出與眾不同的風味與口感</li>
+                    <li>精挑細選食材，只為了提供消費者最新鮮最爽口的味道</li>
+                    <li>可不可以這個不要？那個多一點？ 沒問題！我們只做你最喜歡的完美組合</li>
+                </ul>
+            </div>
+
+
+            <!-- 右方區塊 -->
+            <div class="section__right">
+
+                <h2>INFO</h2>
+            
+            <!-- 文字 -->
+                <ul class="text">
+                    <li>
+                        <h3>園區位置</h3>
+                        <h4>A館1F</h4>
+                    </li>
+
+                    <li>
+                        <h3>營業時間</h3>
+                        <h4>每日11:00-21:00</h4>
+                    </li>
+
+                    <li>
+                        <h3>官方網站</h3>
+                        <h4><a href="https://yuting33143.github.io/mrbakesandwich/">焙可先生三明治Mr. Bake Sandwich</a></h4>
+                    </li>
+                </ul>
+
+            <!-- icon -->
+                <ul class="icon">
+
+                    <li>
+                        <div>
+                            <!-- <i class="fa-solid fa-mug-saucer"></i> -->
+                            <span class="material-symbols-outlined">
+                                emoji_food_beverage
+                            </span>
+                            <span>下午茶</span>
+                        </div>
+
+                        <div>
+                            <!-- <i class="fa-solid fa-camera"></i> -->
+                            <span class="material-symbols-outlined">
+                                photo_camera
+                            </span>
+                            <span>可攝影</span>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div>
+                            <!-- <i class="fa-solid fa-wifi"></i> -->
+                            <span class="material-symbols-outlined">
+                                wifi
+                            </span>
+                            <span>Wi-Fi</span>
+                        </div>
+                    
+                        <div>
+                            <!-- <i class="fa-regular fa-credit-card"></i> -->
+                            <span class="material-symbols-outlined">
+                                credit_card
+                            </span>
+                            <span>可刷卡</span>
+                        </div>
+                    </li>
+
+                </ul>
+                
+            </div>
+
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer id="footer"></footer>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        // header & footer
+        $(() => {
+            $("#header").load("topbar.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+
+    
+</body>
+</html>
